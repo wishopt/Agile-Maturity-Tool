@@ -1,0 +1,36 @@
+{
+  "name": "agile-maturity-tool",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public --no-clear",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-json": "^5.0.2",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@tsconfig/svelte": "^2.0.1",
+    "eslint": "^8.37.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.0.0",
+    "svelte-check": "^2.10.3",
+    "tslib": "^2.0.0"
+  },
+  "dependencies": {
+    "chart.js": "^3.7.1",
+    "sirv-cli": "^2.0.0",
+    "svelte-csv": "^1.2.8",
+    "svelte-i18n": "^3.6.0"
+  }
+}
