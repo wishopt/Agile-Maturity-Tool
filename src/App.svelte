@@ -2,74 +2,57 @@
 
 	import { onMount } from 'svelte'
 	import { navOptions } from "./Nav.svelte"
-    import { inputData } from "./stores/userInput"
+	import { emptyUserData } from "./stores/constants"
+    import dataManager from './dataManager';
 
-	let input = $inputData
+	let userInput = $emptyUserData
     let selected = navOptions[0]
-
     let currentNav = 0
-
-    let inputLocalStorage
-
     let buttonText = "Next"
     let buttonHidden = false
 
     onMount(async () => {
-        inputLocalStorage = localStorage.getItem("input_en")
-
-        if (inputLocalStorage == null) {
-            console.log("localStorage empty")
-        } else {
-            input = JSON.parse(inputLocalStorage)
-        }
-		console.log(input)
+		try {
+			userInput = dataManager.loadFromLocalStorage("dataUserInput")
+		} catch (error) {
+			console.log(error)
+			userInput = $emptyUserData
+		}
     });	
 
 	function changeComponent(event) {
         let index = Number(event.target.id)
-
         buttonText = "Next"
-
         buttonHidden = false
-
         if (index == 2) {
             buttonHidden = true
         } 
-
         if (index < 3) {
             currentNav = index
             selected = navOptions[event.srcElement.id];
-        }
-        
+        }       
 	}
 
 </script>
 
 <main>
-
 	<h1>Agile Maturity Tool - Demo</h1>
-	
 	<div>
 		<ul>
 			{#each navOptions as option, componentId}
-				<li>
-					<button on:click={changeComponent} id={String(componentId)} role="tab">{option.page}</button>
-				</li>
+			<li>
+				<button on:click={changeComponent} id={String(componentId)} role="tab">{option.page}</button>
+			</li>
 			{/each}
 		</ul>
-
 		<div class="page">
 			<h2>{selected.page}</h2>
-			<svelte:component this={selected.component} input={input}/>
+			<svelte:component this={selected.component}/>
 		</div>
 	</div>
-
-    {#if !buttonHidden}
+    	{#if !buttonHidden}
         <button on:click={changeComponent} id={currentNav+1}>{buttonText}</button>
-    {/if}
-
-    
-
+    	{/if}
 </main>
 
 <style>
