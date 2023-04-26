@@ -1,15 +1,14 @@
 <script>
 
     import { onMount } from 'svelte'
-	import { CSVDownloader } from 'svelte-csv'
 	import { emptyUserInfo, emptyUserData } from "./stores/constants"
 	import EvaluationChart from './EvaluationChart.svelte'
-    import EvaluationDataTable from './EvaluationDataTable.svelte';
+    import EvaluationDataTable from './EvaluationDataTable.svelte'
+	import ExportButton from './ExportButton.svelte'
 	import dataManager from './dataManager'
 
 	let userInfo
-	let userInput	
-	let schlussfolgerung = { }
+	let userInput
 	let dividend
 	let divisor
 	let average
@@ -52,44 +51,11 @@
 		}
 	}
 
-	function prepareForCsvConversion(jsObject) {
-		let newObject = []
-		newObject.push({Capability: "", Bewertung: "", Begruendung: "", Firma: userInfo.company, Bereich: userInfo.department, Projekt: userInfo.project, Beschreibung: userInfo.description.replace(/(\r\n|\n|\r)/gm, ""), Dimension: "", Schlussfolgerung: ""})
-		for (const [keyDimension, valueCapability] of Object.entries(userInput)) {
-			for (const [keyCapability, capabilityValues] of Object.entries(valueCapability)) {
-				let capabilityData = {Capability: keyCapability, Bewertung: capabilityValues.value, Begruendung: capabilityValues.explanation.replace(/(\r\n|\n|\r)/gm, ""), Firma: "", Bereich: "", Projekt: "", Beschreibung: ""}
-				newObject.push(capabilityData)
-			}
-
-			let neueSchlussfolgerung = {Capability: "", Bewertung: "", Begruendung: "", Firma: "", Bereich: "", Projekt: "", Beschreibung: "", Dimension: keyDimension, Schlussfolgerung: schlussfolgerung.keyDimension}
-			newObject.push(neueSchlussfolgerung)
-
-		}
-
-		return newObject
-	}
-
-	function getCurrentDate() {
-		const date = new Date()
-
-		let day = date.getDate()
-		let month = date.getMonth() + 1
-		let year = date.getFullYear()
-
-		return `${year}${month}${day}`
-	}
-
 </script>
 
 <div id="auswertung">
 
-	<CSVDownloader
-	data={prepareForCsvConversion(userInput)}
-	type={'button'}
-	filename={`Export_Agile_Maturity_${getCurrentDate()}`}
-	bom={true}>
-	Export Results
-  	</CSVDownloader>
+	<ExportButton data={userInput}/>
 
 	{#each Object.entries(userInput) as [dimension, capabilites]}
 	
@@ -99,12 +65,6 @@
 
 	{/each}
 
-	<CSVDownloader
-	data={prepareForCsvConversion(userInput)}
-	type={'button'}
-	filename={`Export_Agile_Maturity_${getCurrentDate()}`}
-	bom={true}>
-	Export Results
-  	</CSVDownloader>
+	<ExportButton data={userInput}/>
 
 </div>
