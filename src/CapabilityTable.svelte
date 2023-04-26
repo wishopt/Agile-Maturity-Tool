@@ -4,10 +4,11 @@
     import TableRow from "./CapabilityTableRow.svelte"
 	import dataManager from "./dataManager";
 
-	let constants = $capabilityList
 	let numLevels = $levelAmount
 	let levelDescriptions = $levelDesc
 	let dimensionDescriptions = $dimensionDesc
+	let capabilities = $capabilityList
+	let reload = {}
 
 	let userInput
 	try {
@@ -19,13 +20,13 @@
 
 </script>
 
-{#each Object.entries(constants) as [dimension, capabilities]}
+{#each Object.entries(dimensionDescriptions) as [dimension, description]}
 <div class="capability_container">
 
 	<div class="titlebar">
 		<details class="col dimensionDescription">
 			<summary class="summary-level">{dimension}</summary>
-			{dimensionDescriptions[dimension]}
+			{description}
 		</details>
 	</div>
 
@@ -38,11 +39,14 @@
 			</details>
 		{/each}
 		<span class="col explanation" id="explanation">Explanation</span>
+		<span class="col relevant" id="relevant">Not relevant</span>
 	</div>
 
 	<div class="capabilities">
-		{#each Object.entries(capabilities) as [capabilityID, data]}
-		<TableRow capabilityID={capabilityID} data={data} dimension={dimension} userInput={userInput}/>
+		{#each Object.entries(capabilities) as [id, capability]}
+		{#if capability.dimension == dimension && !userInput[id].notRelevant}
+		<TableRow capabilityID={id} userInput={userInput} bind:reload/>
+		{/if}
 		{/each}
 	</div>
 

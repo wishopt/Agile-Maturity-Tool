@@ -1,40 +1,47 @@
 <script>
-	import dataManager from "./dataManager";
-	import { levelAmount } from "./stores/constants"
+	import dataManager from "./dataManager"
+	import { levelAmount, capabilityList } from "./stores/constants"
 
     export let capabilityID
-    export let data
-	export let dimension
 	export let userInput
+	export let reload
 
 	let levelArray = Array($levelAmount).fill().map((x,i) => i)
+	let capabilities = $capabilityList
 
     function updateInputData(event) {
 		let newValue = this.value
 		if (typeof newValue == "string") {
 			newValue = Number(newValue.replace(/(\r\n|\n|\r)/gm, " "))
 		}
-		userInput[dimension][capabilityID].value = newValue
+		userInput[capabilityID].isValue = newValue
 		dataManager.saveToLocalStorage("dataUserInput", userInput)	
+	}
+
+	function reloadParent() {
+		dataManager.saveToLocalStorage("dataUserInput", userInput)
+		reload = {}
 	}
 
 </script>
 
 <div class="row">
 	<details class="col">
-		<summary class="capability_title">{data.title} [{capabilityID}]</summary>
-		{data.description}
+		<summary class="capability_title">{capabilities[capabilityID].title} [{capabilityID}]</summary>
+		{capabilities[capabilityID].description}
 	</details>
 
 	{#each levelArray as i}
-	{#if i+1 == userInput[dimension][capabilityID].value}
+	{#if i+1 == userInput[capabilityID].isValue}
 	<input type="radio" class="col" checked={true}>
 	{:else}
 	<input type="radio" class="col" value={i+1} on:change={updateInputData}>
 	{/if}
 	{/each}
 
-	<textarea class="col" bind:value={userInput[dimension][capabilityID].explanation} on:change={dataManager.saveToLocalStorage("dataUserInput", userInput)}></textarea>
+	<textarea class="col" bind:value={userInput[capabilityID].explanation} on:change={dataManager.saveToLocalStorage("dataUserInput", userInput)}></textarea>
+
+	<input type="checkbox" bind:checked={userInput[capabilityID].notRelevant} on:change={reloadParent}>
 </div>
 
 
@@ -49,7 +56,7 @@
 
 	textarea {
 		flex: 3;
-		padding: 0;
+		padding: 0;	
 	}
 
 	.capability_title {
