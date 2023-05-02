@@ -53,7 +53,7 @@
 	
 		<div class="shouldValues">
 			{#each levelArray as i}
-			{#if i+1 == userInput[capabilityID].shoudlValue}
+			{#if i+1 == userInput[capabilityID].shouldValue}
 			<input type="radio" class="col should" name="should{capabilityID}" checked={true}>
 			{:else}
 			<input type="radio" class="col should" name="should{capabilityID}" value={i+1} on:change={updateShouldValue}>
