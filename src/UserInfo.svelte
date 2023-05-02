@@ -39,7 +39,7 @@
 		width: 30%;
 		margin: auto;
 		margin-top: 0.5em;
-		margin-bottom: 1em;
+		margin-bottom: 2em;
 	}
 
 </style>

@@ -31,24 +31,23 @@
         let transformedData = []
         let row = {}
         
-        for (const [dimension, capabilities] of Object.entries(data)) {
-            for (const [id, values] of Object.entries(capabilities)) {
-                try {
-                    row = {
-                    Dimension: `${dimension}`,
-                    Capability: `${capabilityInfo[dimension][id].title}`,
-                    Description: `${capabilityInfo[dimension][id].description}`,
-                    "Should Value": `${values["should-value"]}`,
-                    "Is Value": `${values["value"]}`,
-                    Relevance: `${values["relevance"]}`,
-                    Comments: `${values["explanation"]}`
+        for (const [id, capabilityData] of Object.entries(data)) {
+            try {
+                row = {
+                    ID: `${id}`,
+                    Dimension: `${capabilityInfo[id].dimension}`,
+                    Capability: `${capabilityInfo[id].title}`,
+                    Description: `${capabilityInfo[id].description}`,
+                    "Should Value": `${capabilityData.shouldValue}`,
+                    "Is Value": `${capabilityData.isValue}`,
+                    "Not Relevant": `${capabilityData.notRelevant}`,
+                    Comments: `${capabilityData.explanation}`
                 }
-                } catch (error) {
-                    console.log(error)
-                }
-                
-                transformedData.push(row)
+            } catch (error) {
+                console.log(error)
             }
+            
+            transformedData.push(row)
         }
 
         return transformedData

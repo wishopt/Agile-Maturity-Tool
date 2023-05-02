@@ -5,7 +5,11 @@
     import dataManager from './dataManager';
 
     export let dimension
-    export let averages
+    export let average
+	export let labels
+	export let isValues
+	export let shouldValues
+	export let images
 
     let ctx
 	let chart
@@ -22,10 +26,16 @@
 		data: { 
 			labels: Object.keys(userInput[dimension]),
 			datasets: [{
-				label: "",
-				backgroundColor: 'rgba(255, 99, 132, 0.2)',
-				borderColor: 'rgba(255, 99, 132, 0.6)',
-				data: Object.values(userInput["Strategy & Purpose"])
+					label: "is Value",
+					backgroundColor: 'rgba(255, 99, 132, 0.2)',
+					borderColor: 'rgba(255, 99, 132, 0.6)',
+					data: isValues
+				},
+				{
+					label: "should Value",
+					backgroundColor: 'rgba(15, 58, 128, 0.2)',
+					borderColor: 'rgba(15, 58, 128, 0.6)',
+					data: shouldValues
 				}],
 			},
 		options: {
@@ -38,7 +48,12 @@
 					max: 5,
 				}
 			},
-			maintainAspectRatio: false
+			maintainAspectRatio: false,
+			animation: {
+      			onComplete: function () {
+        			images[dimension] = chart.toBase64Image();
+      			},
+    		},
 		},
 	}
 

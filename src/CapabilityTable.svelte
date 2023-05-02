@@ -8,6 +8,7 @@
 	let numLevels = $levelAmount
 	let levelDescriptions = $levelDesc
 	let dimensionDescriptions = $dimensionDesc
+	let capabilities = $capabilityList
 
 	let userInput
 	try {
@@ -17,9 +18,12 @@
 		userInput = $emptyUserData
 	}
 
+
 </script>
 
-{#each Object.entries(constants) as [dimension, capabilities]}
+<p style="color:red;">Is = Red</p> <p style="color:blue;">Should = Blue</p>
+
+{#each Object.entries(dimensionDescriptions) as [dimension, description]}
 <div class="capability_container">
 
 	<div class="titlebar">
