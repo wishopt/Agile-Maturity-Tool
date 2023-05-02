@@ -7,6 +7,8 @@
 	import ExportButton from './ExportButton.svelte'
 	import dataManager from './dataManager'
 
+	export let appConfig
+
 	let userInfo
 	let userInput
 	let dividend
@@ -42,7 +44,7 @@
 	function getAverages() {
 		// TODO: fix function for new data structure
 		for (const dimension of Object.keys(dimensionDescriptions)) {
-			let values = getValues(dimension)
+			let values = getIsValues(dimension)
 			dividend = 0
 			divisor = values.length
 			average = 0
@@ -59,7 +61,7 @@
 		let array = []
 
 		for (const [id, capabilityData] of Object.entries(capabilites)) {
-			if (capabilityData.dimension == dimension) {
+			if (capabilityData.dimension == dimension && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
 				array.push(capabilityData.title)
 			}
 		}
@@ -69,12 +71,26 @@
 		return array
 	}
 
-	function getValues(dimension) {
+	function getIsValues(dimension) {
 		let array = []
 
 		for (const [id, capabilityData] of Object.entries(capabilites)) {
-			if (capabilityData.dimension == dimension) {
+			if (capabilityData.dimension == dimension && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
 				array.push(Number(userInput[id].isValue))
+			}
+		}
+
+		// apply filter
+
+		return array
+	}
+
+	function getShouldValues(dimension) {
+		let array = []
+
+		for (const [id, capabilityData] of Object.entries(capabilites)) {
+			if (capabilityData.dimension == dimension && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
+				array.push(Number(userInput[id].shouldValue))
 			}
 		}
 
@@ -91,12 +107,11 @@
 
 	{#each Object.keys(dimensionDescriptions) as dimension}
 	
-	<EvaluationChart dimension={dimension} labels={getLabels(dimension)} values={getValues(dimension)} average={averages[dimension]}/>
+	<EvaluationChart dimension={dimension} labels={getLabels(dimension)} isValues={getIsValues(dimension)} shouldValues={getShouldValues(dimension)} average={averages[dimension]}/>
 
 	<EvaluationDataTable dimension={dimension}/>
 
 	{/each}
 
 	<ExportButton data={userInput}/>
-
 </div>
