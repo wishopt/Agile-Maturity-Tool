@@ -1,8 +1,19 @@
 <script>
-    import { capabilityList } from "./stores/constants"
+    import { capabilityList, emptyUserData } from "./stores/constants"
+    import dataManager from "./dataManager";
 
-    export let capabilites
     export let dimension
+
+    let capabilities = $capabilityList
+    let userInput
+
+    try {
+		userInput = dataManager.loadFromLocalStorage("dataUserInput")
+	} catch (error) {
+		console.log(error)
+		userInfo = $emptyUserData
+	}
+
 </script>
 
 <table>
@@ -18,24 +29,25 @@
             Comment
         </th>
     </tr>
-{#each Object.entries(capabilites) as [capability_id, data]}
 
-        <tr>
-            <td class="middle">
-                {capability_id}
-            </td>
-            <td class="left">
-                {$capabilityList[dimension][capability_id].title}
-            </td>
-            <td class="middle">
-                {data.value}
-            </td>
-            <td class="right">
-                {data.explanation}
-            </td>
-        </tr>
-    
-{/each}
+    {#each Object.entries(userInput) as [capability_id, data]}
+    {#if capabilities[capability_id].dimension == dimension && !data.notRelevant}
+    <tr>
+        <td class="middle">
+            {capability_id}
+        </td>
+        <td class="left">
+            {$capabilityList[capability_id].title}
+        </td>
+        <td class="middle">
+            {data.isValue}
+        </td>
+        <td class="right">
+            {data.explanation}
+        </td>
+    </tr>
+    {/if}
+    {/each}
 </table>
 
 <style>

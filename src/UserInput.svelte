@@ -1,8 +1,7 @@
 <script>
 	import CapabilityTable from "./CapabilityTable.svelte"
-	import UserInfo from "./UserInfo.svelte"
+
+	export let appConfig
 </script>
 
-<UserInfo/>
-
-<CapabilityTable/>
+<CapabilityTable appConfig={appConfig}/>

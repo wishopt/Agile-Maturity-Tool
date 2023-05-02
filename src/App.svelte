@@ -10,6 +10,10 @@
     let currentNav = 0
     let buttonText = "Next"
     let buttonHidden = false
+	let appConfig = {
+		hideIrrelevant: false
+	}
+	let unique = {}
 
     onMount(async () => {
 		try {
@@ -33,6 +37,15 @@
         }       
 	}
 
+	function toggleHidden() {
+		appConfig.hideIrrelevant = !appConfig.hideIrrelevant
+	}
+
+	function reload() {
+		unique = {}
+		toggleHidden()
+	}
+
 </script>
 
 <main>
@@ -45,17 +58,28 @@
 			</li>
 			{/each}
 		</ul>
+
+		{#if currentNav != 0}
+		<button id="hide" on:click={reload}>Hide capabilites marked as not relevant</button>
+		{/if}
+		
+		{#key unique} <!-- Updates as soon as the variable "unique" changes  -->
 		<div class="page">
 			<h2>{selected.page}</h2>
-			<svelte:component this={selected.component}/>
+			<svelte:component this={selected.component} bind:appConfig/>
 		</div>
+		{/key}
+
 	</div>
-    	{#if !buttonHidden}
-        <button on:click={changeComponent} id={currentNav+1}>{buttonText}</button>
-    	{/if}
+	{#if !buttonHidden}
+	<button on:click={changeComponent} id={currentNav+1}>{buttonText}</button>
+	{/if}
 </main>
 
 <style>
+	#hide {
+		margin-left: 2.5%;
+	}
 
 	main {
 		text-align: center;

@@ -1,13 +1,16 @@
 <script>
 
-    import {levelDesc, levelAmount, dimensionDesc, capabilityList, emptyUserData} from "./stores/constants"
+    import {levelDesc, levelAmount, dimensionDesc, capabilityList, emptyUserData, defaultConfig} from "./stores/constants"
     import TableRow from "./CapabilityTableRow.svelte"
-	import dataManager from "./dataManager";
+	import dataManager from "./dataManager"
 
-	let constants = $capabilityList
+	export let appConfig
+
 	let numLevels = $levelAmount
 	let levelDescriptions = $levelDesc
 	let dimensionDescriptions = $dimensionDesc
+	let capabilities = $capabilityList
+	let reload = {}
 
 	let userInput
 	try {
@@ -19,13 +22,13 @@
 
 </script>
 
-{#each Object.entries(constants) as [dimension, capabilities]}
+{#each Object.entries(dimensionDescriptions) as [dimension, description]}
 <div class="capability_container">
 
 	<div class="titlebar">
 		<details class="col dimensionDescription">
 			<summary class="summary-level">{dimension}</summary>
-			{dimensionDescriptions[dimension]}
+			{description}
 		</details>
 	</div>
 
@@ -37,12 +40,16 @@
 				{levelDescriptions[i]}
 			</details>
 		{/each}
+		<span class="col relevant" id="relevant">Not relevant</span>
 		<span class="col explanation" id="explanation">Explanation</span>
+	
 	</div>
 
 	<div class="capabilities">
-		{#each Object.entries(capabilities) as [capabilityID, data]}
-		<TableRow capabilityID={capabilityID} data={data} dimension={dimension} userInput={userInput}/>
+		{#each Object.entries(capabilities) as [id, capability]}
+		{#if capability.dimension == dimension && !(userInput[id].notRelevant && appConfig.hideIrrelevant)}
+		<TableRow capabilityID={id} userInput={userInput} bind:appConfig/>
+		{/if}
 		{/each}
 	</div>
 
@@ -103,6 +110,10 @@
 		display: flex;
 	}
 
+	.relevant {
+		width: 10%;
+		padding-top: 10px;
+	}
 
 	details {
 		flex: 4;
