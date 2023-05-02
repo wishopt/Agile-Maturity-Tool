@@ -1,20 +1,20 @@
 <script>
-	import dataManager from "./dataManager";
-	import { levelAmount } from "./stores/constants"
+	import dataManager from "./dataManager"
+	import { levelAmount, capabilityList } from "./stores/constants"
 
     export let capabilityID
-    export let data
-	export let dimension
 	export let userInput
+	export let appConfig
 
 	let levelArray = Array($levelAmount).fill().map((x,i) => i)
+	let capabilities = $capabilityList
 
     function updateIsValue(event) {
 		let newValue = this.value
 		if (typeof newValue == "string") {
 			newValue = Number(newValue.replace(/(\r\n|\n|\r)/gm, " "))
 		}
-		userInput[dimension][capabilityID].value = newValue
+		userInput[capabilityID].isValue = newValue
 		dataManager.saveToLocalStorage("dataUserInput", userInput)	
 	}
 
@@ -36,8 +36,8 @@
 
 <div class="row">
 	<details class="col">
-		<summary class="capability_title">{data.title} [{capabilityID}]</summary>
-		{data.description}
+		<summary class="capability_title">{capabilities[capabilityID].title} [{capabilityID}]</summary>
+		{capabilities[capabilityID].description}
 	</details>
 
 	<div class="radioGroups">
@@ -125,6 +125,9 @@
 		justify-content: space-around;	
 	}
 
+	.notrelevant {
+		width: 10%;
+	}
 
 	details {
 		width: 33%;

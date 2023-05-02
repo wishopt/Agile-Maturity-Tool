@@ -1,7 +1,7 @@
 <script>
 
     import { onMount } from 'svelte'
-	import { emptyUserInfo, emptyUserData } from "./stores/constants"
+	import { emptyUserInfo, emptyUserData, dimensionDesc, capabilityList } from "./stores/constants"
 	import EvaluationChart from './EvaluationChart.svelte'
     import EvaluationDataTable from './EvaluationDataTable.svelte'
 	import ExportButton from './ExportButton.svelte'
@@ -46,14 +46,14 @@
 		for (const dimension of Object.keys(dimensionDescriptions)) {
 			let values = getIsValues(dimension)
 			dividend = 0
-			divisor = Number(Object.keys(userInput[dimension]).length)
+			divisor = values.length
 			average = 0
 			
-			for (let capability in userInput[dimension]) {
-				dividend += Number(userInput[dimension][capability].value)
+			for (const value in values) {
+				dividend += value
 			}
 
-			averages[dimension] = round(dividend/(divisor*1.0), 1)
+			averages[dimension] = dividend/(divisor*1.0)
 		}
 	}
 
@@ -99,18 +99,17 @@
 		return array
 	}
 
-
 </script>
 
 <div id="auswertung">
 
 	<ExportButton data={userInput}/>
 
-	{#each Object.entries(userInput) as [dimension, capabilites]}
+	{#each Object.keys(dimensionDescriptions) as dimension}
 	
 	<EvaluationChart dimension={dimension} labels={getLabels(dimension)} isValues={getIsValues(dimension)} shouldValues={getShouldValues(dimension)} average={averages[dimension]} bind:images/>
 
-	<EvaluationDataTable capabilites={capabilites} dimension={dimension}/>
+	<EvaluationDataTable dimension={dimension}/>
 
 	{/each}
 
