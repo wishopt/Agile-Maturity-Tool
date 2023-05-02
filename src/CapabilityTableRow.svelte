@@ -4,7 +4,7 @@
 
     export let capabilityID
 	export let userInput
-	export let reload
+	export let appConfig
 
 	let levelArray = Array($levelAmount).fill().map((x,i) => i)
 	let capabilities = $capabilityList
@@ -20,7 +20,9 @@
 
 	function reloadParent() {
 		dataManager.saveToLocalStorage("dataUserInput", userInput)
-		reload = {}
+	function reloadConfig() {
+		dataManager.saveToLocalStorage("dataUserInput", userInput)
+		appConfig = appConfig
 	}
 
 </script>
@@ -67,6 +69,9 @@
 		display: flex;
 	}
 
+	.notrelevant {
+		width: 10%;
+	}
 
 	details {
 		flex: 4;

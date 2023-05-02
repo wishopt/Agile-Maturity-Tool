@@ -1,8 +1,10 @@
 <script>
 
-    import {levelDesc, levelAmount, dimensionDesc, capabilityList, emptyUserData} from "./stores/constants"
+    import {levelDesc, levelAmount, dimensionDesc, capabilityList, emptyUserData, defaultConfig} from "./stores/constants"
     import TableRow from "./CapabilityTableRow.svelte"
-	import dataManager from "./dataManager";
+	import dataManager from "./dataManager"
+
+	export let appConfig
 
 	let numLevels = $levelAmount
 	let levelDescriptions = $levelDesc
@@ -38,14 +40,15 @@
 				{levelDescriptions[i]}
 			</details>
 		{/each}
-		<span class="col explanation" id="explanation">Explanation</span>
 		<span class="col relevant" id="relevant">Not relevant</span>
+		<span class="col explanation" id="explanation">Explanation</span>
+	
 	</div>
 
 	<div class="capabilities">
 		{#each Object.entries(capabilities) as [id, capability]}
-		{#if capability.dimension == dimension && !userInput[id].notRelevant}
-		<TableRow capabilityID={id} userInput={userInput} bind:reload/>
+		{#if capability.dimension == dimension && !(userInput[id].notRelevant && appConfig.hideIrrelevant)}
+		<TableRow capabilityID={id} userInput={userInput} bind:appConfig/>
 		{/if}
 		{/each}
 	</div>
@@ -107,6 +110,10 @@
 		display: flex;
 	}
 
+	.relevant {
+		width: 10%;
+		padding-top: 10px;
+	}
 
 	details {
 		flex: 4;

@@ -31,7 +31,7 @@
     </tr>
 
     {#each Object.entries(userInput) as [capability_id, data]}
-    {#if capabilities[capability_id].dimension == dimension && data.visible}
+    {#if capabilities[capability_id].dimension == dimension && !data.notRelevant}
     <tr>
         <td class="middle">
             {capability_id}
