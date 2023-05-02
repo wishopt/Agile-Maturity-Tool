@@ -20,8 +20,10 @@
 		userInput = $emptyUserData
 	}
 
+
 </script>
 
+<p style="color:red;">Is = Red</p> <p style="color:blue;">Should = Blue</p>
 {#each Object.entries(dimensionDescriptions) as [dimension, description]}
 <div class="capability_container">
 

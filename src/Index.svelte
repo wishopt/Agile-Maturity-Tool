@@ -1,10 +1,14 @@
 <script>
+    import UserInfo from "./UserInfo.svelte";
+
     function deleteLocalStorage() {
         localStorage.clear()
         location.reload()
 }
 
 </script>
+
+<UserInfo/>
 
 <p>Welcome to the demo page of the Agile Maturity Tool!</p>
 

@@ -6,28 +6,36 @@
 
     export let dimension
     export let average
-	export let labels
-	export let values
+    export let labels
+	  export let isValues
+	  export let shouldValues
+	  export let images
 
     let ctx
-	let chart
+	  let chart
 
     try {
-		userInput = dataManager.loadFromLocalStorage("dataUserInput")
-	} catch (error) {
-		console.log(error)
-		userInfo = $emptyUserData
-	}
+		  userInput = dataManager.loadFromLocalStorage("dataUserInput")
+	  } catch (error) {
+		  console.log(error)
+		  userInfo = $emptyUserData
+	  }
 
     let config = {
 		type: 'radar',
 		data: { 
 			labels: labels,
 			datasets: [{
-				label: "",
-				backgroundColor: 'rgba(255, 99, 132, 0.2)',
-				borderColor: 'rgba(255, 99, 132, 0.6)',
-				data: values
+					label: "is Value",
+					backgroundColor: 'rgba(255, 99, 132, 0.2)',
+					borderColor: 'rgba(255, 99, 132, 0.6)',
+					data: isValues
+				},
+				{
+					label: "should Value",
+					backgroundColor: 'rgba(15, 58, 128, 0.2)',
+					borderColor: 'rgba(15, 58, 128, 0.6)',
+					data: shouldValues
 				}],
 			},
 		options: {
@@ -40,7 +48,12 @@
 					max: 5,
 				}
 			},
-			maintainAspectRatio: false
+			maintainAspectRatio: false,
+			animation: {
+      			onComplete: function () {
+        			images[dimension] = chart.toBase64Image();
+      			},
+    		},
 		},
 	}
 

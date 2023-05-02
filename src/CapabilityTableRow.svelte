@@ -9,7 +9,7 @@
 	let levelArray = Array($levelAmount).fill().map((x,i) => i)
 	let capabilities = $capabilityList
 
-    function updateInputData(event) {
+    function updateIsValue(event) {
 		let newValue = this.value
 		if (typeof newValue == "string") {
 			newValue = Number(newValue.replace(/(\r\n|\n|\r)/gm, " "))
@@ -18,8 +18,15 @@
 		dataManager.saveToLocalStorage("dataUserInput", userInput)	
 	}
 
-	function reloadParent() {
-		dataManager.saveToLocalStorage("dataUserInput", userInput)
+	function updateShouldValue(event) {
+		let newValue = this.value
+		if (typeof newValue == "string") {
+			newValue = Number(newValue.replace(/(\r\n|\n|\r)/gm, " "))
+		}
+		userInput[capabilityID].shouldValue = newValue
+		dataManager.saveToLocalStorage("dataUserInput", userInput)	
+	}
+
 	function reloadConfig() {
 		dataManager.saveToLocalStorage("dataUserInput", userInput)
 		appConfig = appConfig
@@ -33,17 +40,34 @@
 		{capabilities[capabilityID].description}
 	</details>
 
-	{#each levelArray as i}
-	{#if i+1 == userInput[capabilityID].isValue}
-	<input type="radio" class="col" checked={true}>
-	{:else}
-	<input type="radio" class="col" value={i+1} on:change={updateInputData}>
-	{/if}
-	{/each}
+	<div class="radioGroups">
+		<div class="isValues">
+			{#each levelArray as i}
+			{#if i+1 == userInput[capabilityID].isValue}
+			<input type="radio" class="col is" name="is{capabilityID}" checked={true}>
+			{:else}
+			<input type="radio" class="col is" name="is{capabilityID}" value={i+1} on:change={updateIsValue}>
+			{/if}
+			{/each}
+		</div>
+	
+		<div class="shouldValues">
+			{#each levelArray as i}
+			{#if i+1 == userInput[capabilityID].shoudlValue}
+			<input type="radio" class="col should" name="should{capabilityID}" checked={true}>
+			{:else}
+			<input type="radio" class="col should" name="should{capabilityID}" value={i+1} on:change={updateShouldValue}>
+			{/if}
+			{/each}
+		</div>
+	</div>
+
+	<div class="notrelevant">
+		<input type="checkbox" bind:checked={userInput[capabilityID].notRelevant} on:change={reloadConfig}>
+	</div>
 
 	<textarea class="col" bind:value={userInput[capabilityID].explanation} on:change={dataManager.saveToLocalStorage("dataUserInput", userInput)}></textarea>
-
-	<input type="checkbox" bind:checked={userInput[capabilityID].notRelevant} on:change={reloadParent}>
+	
 </div>
 
 
@@ -56,9 +80,25 @@
 		cursor: pointer;
 	}
 
+	input[type=checkbox] {
+		width: 100%;
+		max-height: 20px;
+		flex: 1;
+		margin-top: 1em;
+		cursor: pointer;
+	}
+
 	textarea {
-		flex: 3;
+		width: 25%;
 		padding: 0;	
+	}
+
+	.is {
+		accent-color: red;
+	}
+
+	.should {
+		accent-color: blue;
 	}
 
 	.capability_title {
@@ -67,6 +107,22 @@
 
 	.row {
 		display: flex;
+		margin-bottom: 20px;
+	}
+
+	.radioGroups {
+		width: 40%;
+		justify-content: space-around;	
+	}
+
+	.isValues {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	.shouldValues {
+		display: flex;
+		justify-content: space-around;	
 	}
 
 	.notrelevant {
@@ -74,7 +130,7 @@
 	}
 
 	details {
-		flex: 4;
+		width: 33%;
 		text-align: right;
 		font-weight: normal;
 		font-size: smaller;

@@ -1652,3 +1652,7 @@ export const emptyUserData = readable({
       "notRelevant": false,
   }
 })
+
+export const defaultConfig = readable({
+  displayHidden: true
+})

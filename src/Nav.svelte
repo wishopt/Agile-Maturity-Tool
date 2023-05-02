@@ -8,9 +8,9 @@ import Evaluation from './Evalutation.svelte';
 
 // these are our 'pages' to navigate through (in order for this export to work the script tag MUST include context="module")
 export const navOptions = [
-	{ page: 'Welcome',   component: Index},
-    { page: 'Input',   component: UserInput},
-    { page: 'Evaluation',   component: Evaluation},
+	{ page: 'Welcome',   component: Index },
+    { page: 'Input',   component: UserInput },
+    { page: 'Evaluation',   component: Evaluation },
 ];
 
 </script>
