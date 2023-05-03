@@ -7,12 +7,14 @@
     export let dimension
     export let average
     export let labels
-	  export let isValues
-	  export let shouldValues
-	  export let images
+	export let isValues
+	export let shouldValues
+	export let images
 
     let ctx
-	  let chart
+	let chart
+
+
 
     try {
 		  userInput = dataManager.loadFromLocalStorage("dataUserInput")
@@ -20,6 +22,10 @@
 		  console.log(error)
 		  userInfo = $emptyUserData
 	  }
+
+	let generatePNG = function () {
+		images[dimension] = chart.toBase64Image().replace(/^data:image\/(png|jpg);base64,/, "")
+	}
 
     let config = {
 		type: 'radar',
@@ -49,10 +55,8 @@
 				}
 			},
 			maintainAspectRatio: false,
-			animation: {
-      			onComplete: function () {
-        			images[dimension] = chart.toBase64Image();
-      			},
+ 			animation: {
+      			onComplete: generatePNG,
     		},
 		},
 	}

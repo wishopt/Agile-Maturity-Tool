@@ -1,9 +1,26 @@
 <script>
+    import { capabilityList, emptyUserInfo } from './stores/constants'
+    import dataManager from './dataManager'
     import * as XLSX from 'xlsx'
-    import { capabilityList } from './stores/constants';
+    import JSZip from 'jszip'
+	import FileSaver from 'file-saver'
 
     export let data
+    export let images
+
+	const zip = new JSZip()
+	const img = zip.folder("images")
+
     let capabilityInfo = $capabilityList
+
+    let userInfo
+
+    try {
+        userInfo = dataManager.loadFromLocalStorage("dataUserInfo")
+    } catch (error) {
+        console.log(error)
+        userInfo = $emptyUserInfo
+    }
 
 	function getCurrentDate() {
 		const date = new Date()
@@ -14,6 +31,32 @@
 
 		return `${year}${month}${day}`
 	}
+
+    function transformUserInfo(data) {
+        let newUserInfo = [ ]
+        let row = {}
+
+        for (const [key, value] of Object.entries(data)) {
+            row[key] = value    
+        }
+
+        newUserInfo.push(row)
+
+        return newUserInfo
+    }
+
+    function createDownload(data) {
+        let workbook = createXSLX(data)
+        zip.file("export.xlsx", workbook, {base64: true})
+
+        for (const [dimension, base64] of Object.entries(images)) {
+            img.file(`${dimension}.png`, base64, {base64: true})
+        }
+        
+        zip.generateAsync({type:"blob"}).then(function(content) {
+            saveAs(content, "example.zip")
+        })
+    }
 
     function transformData(data) {
 
@@ -53,14 +96,18 @@
         return transformedData
     }
 
-    function createExport(data) {
+    function createXSLX(data) {
         let transformedData = transformData(data)
 
         const workbook = XLSX.utils.book_new()
-        const worksheet = XLSX.utils.json_to_sheet(transformedData)
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Capabilities")  
-        XLSX.writeFile(workbook, `Export_Agile_Maturity_${getCurrentDate()}.xlsx`, { compression: true })
+        const worksheetData = XLSX.utils.json_to_sheet(transformedData)
+        const worksheetUserInfo = XLSX.utils.json_to_sheet(transformUserInfo(userInfo))
+        XLSX.utils.book_append_sheet(workbook, worksheetData, "Capabilities")
+        XLSX.utils.book_append_sheet(workbook, worksheetUserInfo, "User Info")  
+
+        return XLSX.write(workbook, {bookType: "xlsx", type: "base64"})
     }
+
 </script>
 
-<button on:click={createExport(data)}>Export Results</button>
+<button on:click={createDownload(data)}>Export Results</button>

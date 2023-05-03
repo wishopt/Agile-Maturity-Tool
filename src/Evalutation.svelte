@@ -15,6 +15,7 @@
 	let divisor
 	let average
 	let averages = []
+	let images = { }
 	let dimensionDescriptions = $dimensionDesc
 	let capabilites = $capabilityList
 
@@ -103,15 +104,15 @@
 
 <div id="auswertung">
 
-	<ExportButton data={userInput}/>
+	<ExportButton data={userInput} images={images}/>
 
 	{#each Object.keys(dimensionDescriptions) as dimension}
 	
-	<EvaluationChart dimension={dimension} labels={getLabels(dimension)} isValues={getIsValues(dimension)} shouldValues={getShouldValues(dimension)} average={averages[dimension]}/>
+	<EvaluationChart dimension={dimension} labels={getLabels(dimension)} isValues={getIsValues(dimension)} shouldValues={getShouldValues(dimension)} average={averages[dimension]} bind:images/>
 
 	<EvaluationDataTable dimension={dimension}/>
 
 	{/each}
 
-	<ExportButton data={userInput}/>
+	<ExportButton data={userInput} images={images}/>
 </div>
