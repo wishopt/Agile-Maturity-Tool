@@ -7,7 +7,7 @@
 	export let appConfig
 
 	let levelArray = Array($levelAmount).fill().map((x,i) => i)
-	let capabilities = $capabilityList
+	let capabilities = $capabilityList[appConfig.language]
 
     function updateIsValue(event) {
 		let newValue = this.value

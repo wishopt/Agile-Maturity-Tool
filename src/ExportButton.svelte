@@ -1,5 +1,5 @@
 <script>
-    import { capabilityList, emptyUserInfo } from './stores/constants'
+    import { ui, capabilityList, emptyUserInfo } from './stores/constants'
     import dataManager from './dataManager'
     import * as XLSX from 'xlsx'
     import JSZip from 'jszip'
@@ -7,11 +7,12 @@
 
     export let data
     export let images
+    export let appConfig
 
 	const zip = new JSZip()
 	const img = zip.folder("images")
 
-    let capabilityInfo = $capabilityList
+    let capabilityInfo = $capabilityList[appConfig.language]
 
     let userInfo
 
@@ -110,4 +111,4 @@
 
 </script>
 
-<button on:click={createDownload(data)}>Export Results</button>
+<button on:click={createDownload(data)}>{$ui[appConfig.language].exportButton.button}</button>

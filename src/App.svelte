@@ -2,17 +2,19 @@
 
 	import { onMount } from 'svelte'
 	import { navOptions } from "./Nav.svelte"
-	import { emptyUserData } from "./stores/constants"
+	import { emptyUserData, ui } from "./stores/constants"
     import dataManager from './dataManager';
 
+	let appConfig = {
+		hideIrrelevant: false,
+		language: "en"
+	}
+	let text 
+	$: text = $ui[appConfig.language].main
 	let userInput = $emptyUserData
     let selected = navOptions[0]
     let currentNav = 0
-    let buttonText = "Next"
     let buttonHidden = false
-	let appConfig = {
-		hideIrrelevant: false
-	}
 	let unique = {}
 
     onMount(async () => {
@@ -34,16 +36,22 @@
         if (index < 3) {
             currentNav = index
             selected = navOptions[event.srcElement.id];
-        }       
+        }
+		unique = {}
 	}
 
 	function toggleHidden() {
 		appConfig.hideIrrelevant = !appConfig.hideIrrelevant
+		unique = {}
 	}
 
-	function reload() {
+	function changeLanguage() {
+		if (appConfig.language == "en") {
+			appConfig.language = "de"
+		} else if (appConfig.language == "de") {
+			appConfig.language = "en"
+		}
 		unique = {}
-		toggleHidden()
 	}
 
 </script>
@@ -51,34 +59,56 @@
 <main>
 	<h1>Agile Maturity Tool - Demo</h1>
 	<div>
+		<div id="languageSwitch">
+			<span class="lang">EN</span>
+			<label class="switch" on:change={changeLanguage}>
+				<input type="checkbox">
+				<span class="slider round"></span>
+			</label>
+			<span class="lang"> DE</span>
+		</div>
+
+		{#key unique}
 		<ul>
 			{#each navOptions as option, componentId}
 			<li>
-				<button on:click={changeComponent} id={String(componentId)} role="tab">{option.page}</button>
+				<button on:click={changeComponent} id={String(componentId)} role="tab">{text.nav[option.page]}</button>
 			</li>
 			{/each}
 		</ul>
 
 		{#if currentNav != 0}
-		<button id="hide" on:click={reload}>Hide capabilites marked as not relevant</button>
+		<button id="hide" on:click={toggleHidden}>{text.hideButton}</button>
 		{/if}
 		
-		{#key unique} <!-- Updates as soon as the variable "unique" changes  -->
+		
 		<div class="page">
-			<h2>{selected.page}</h2>
+			<h2>{text.nav[selected.page]}</h2>
 			<svelte:component this={selected.component} bind:appConfig/>
 		</div>
+		
+		{#if !buttonHidden}
+		<button on:click={changeComponent} id={currentNav+1}>{text.next}</button>
+		{/if}
 		{/key}
-
 	</div>
-	{#if !buttonHidden}
-	<button on:click={changeComponent} id={currentNav+1}>{buttonText}</button>
-	{/if}
 </main>
 
 <style>
+
 	#hide {
-		margin-left: 2.5%;
+		margin-left: 2.4em;
+	}
+
+	#languageSwitch {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 0.5em;
+	}
+
+	.lang {
+		padding: 0.5em;
 	}
 
 	main {
@@ -93,6 +123,7 @@
 		text-transform: uppercase;
 		font-size: 4em;
 		font-weight: 100;
+		margin-bottom: 0.5em;
 	}
 
 	li {
@@ -114,5 +145,56 @@
     button {
         cursor: pointer;
     }
+
+	.switch {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+	}
+
+	.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+	}
+
+	.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
+	}
+
+	.slider:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+	}
+
+	input:checked + .slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
+	}
+
+	.slider.round {
+	border-radius: 34px;
+	}
+
+	.slider.round:before {
+	border-radius: 50%;
+	} 
 
 </style>

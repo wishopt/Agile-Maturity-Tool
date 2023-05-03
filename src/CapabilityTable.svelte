@@ -1,15 +1,16 @@
 <script>
 
-    import {levelDesc, levelAmount, dimensionDesc, capabilityList, emptyUserData, defaultConfig} from "./stores/constants"
+    import {ui, levelDesc, dimensionDesc, capabilityList, levelAmount, emptyUserData} from "./stores/constants"
     import TableRow from "./CapabilityTableRow.svelte"
 	import dataManager from "./dataManager"
 
 	export let appConfig
 
+	let text = $ui[appConfig.language].capabilityTable
 	let numLevels = $levelAmount
-	let levelDescriptions = $levelDesc
-	let dimensionDescriptions = $dimensionDesc
-	let capabilities = $capabilityList
+	let levelDescriptions = $levelDesc[appConfig.language]
+	let dimensionDescriptions = $dimensionDesc[appConfig.language]
+	let capabilities = $capabilityList[appConfig.language]
 	let reload = {}
 
 	let userInput
@@ -23,7 +24,7 @@
 
 </script>
 
-<p style="color:red;">Is = Red</p> <p style="color:blue;">Should = Blue</p>
+<span style="color:red;">{text.is}</span> | <span style="color:blue;">{text.should}</span>
 {#each Object.entries(dimensionDescriptions) as [dimension, description]}
 <div class="capability_container">
 
@@ -42,8 +43,8 @@
 				{levelDescriptions[i]}
 			</details>
 		{/each}
-		<span class="col relevant" id="relevant">Not relevant</span>
-		<span class="col explanation" id="explanation">Explanation</span>
+		<span class="col relevant" id="relevant">{text.notRelevant}</span>
+		<span class="col explanation" id="explanation">{text.explanation}</span>
 	
 	</div>
 

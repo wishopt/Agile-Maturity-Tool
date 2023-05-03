@@ -1,14 +1,16 @@
 <script>
     import { onMount } from 'svelte'
-    import { emptyUserData, capabilityList, dimensionDesc } from './stores/constants';
+    import { emptyUserData, ui } from './stores/constants';
     import { Chart } from 'chart.js/dist/chart';
     import dataManager from './dataManager';
 
     export let chartData
 	export let images
+	export let language
 
     let ctx
 	let chart
+	let text = $ui[language].evaluationChart
 
     try {
 		  userInput = dataManager.loadFromLocalStorage("dataUserInput")
@@ -26,13 +28,13 @@
 		data: { 
 			labels: chartData.labels,
 			datasets: [{
-					label: "is Value",
+					label: text.is,
 					backgroundColor: 'rgba(255, 99, 132, 0.2)',
 					borderColor: 'rgba(255, 99, 132, 0.6)',
 					data: chartData.isValues
 				},
 				{
-					label: "should Value",
+					label: text.should,
 					backgroundColor: 'rgba(15, 58, 128, 0.2)',
 					borderColor: 'rgba(15, 58, 128, 0.6)',
 					data: chartData.shouldValues

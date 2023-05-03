@@ -1,22 +1,26 @@
 <script>
-    import { capabilityList } from "./stores/constants"
+    import { ui, capabilityList } from "./stores/constants"
 
     export let tableData
     export let isHidden
+    export let language
 
+    console.log(language)
+
+    let text = $ui[language].evaluationDataTable
 </script>
 
 <table>
     <tr>
         <th class="middle">
-            ID
+            {text.id}
         </th>
         <th class="left">
-            Capability
+            {text.capability}
         </th>
         <th class="middle">Value</th>
         <th class="right">
-            Comment
+            {text.comment}
         </th>
     </tr>
 
@@ -29,7 +33,7 @@
             {capability_id}
         </td>
         <td class="left">
-            {$capabilityList[capability_id].title}
+            {$capabilityList[language][capability_id].title}
         </td>
         <td class="middle">
             {data.isValue}

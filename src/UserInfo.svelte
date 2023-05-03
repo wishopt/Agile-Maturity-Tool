@@ -1,7 +1,11 @@
 
 <script>
     import dataManager from "./dataManager";
-    import { emptyUserInfo } from "./stores/constants"
+    import { emptyUserInfo, ui } from "./stores/constants"
+
+	export let appConfig
+
+	let text = $ui[appConfig.language].userInfo
 
 	let userInfo
 
@@ -19,17 +23,17 @@
 
 <form id="firmenInfo">
 	
-	<label for="unternehmen">Company:</label>
+	<label for="unternehmen">{text.company}</label>
 	<input type="text" id="unternehmen" name="unternehmen" class="frontmatter" bind:value={userInfo.company} on:change={saveUserInfo}>
 
-	<label for="bereich">Organisation:</label>
+	<label for="bereich">{text.organisation}</label>
 	<input type="text" id="bereich" name="bereich" class="frontmatter" bind:value={userInfo.department} on:change={saveUserInfo}>
 
-	<label for="projekt">Name of agile project:</label>
+	<label for="projekt">{text.project}</label>
 	<input type="text" id="projekt" name="projekt" class="frontmatter" bind:value={userInfo.project} on:change={saveUserInfo}>
 
 
-	<label for="beschreibung">Description:</label>
+	<label for="beschreibung">{text.description}</label>
 	<textarea id="beschreibung" name="beschreibung" class="frontmatter" bind:value={userInfo.description} on:change={saveUserInfo}></textarea>
 
 </form>

@@ -1,6 +1,7 @@
 import { readable } from 'svelte/store'
 
 export const capabilityList = readable({
+  en: {
   '1-01': {
     category: 'Adaptability',
     description: 'The ability to identify changes in the environment and recognizing the resulting opportunities and new requirements.',
@@ -362,7 +363,7 @@ export const capabilityList = readable({
     dimension: "IT"
   },
   '4-04': {
-    category: 'CI/CD',
+    category: 'CI-CD',
     description: 'The ability to quickly and smoothly adapt or integrate current technologies with new or different technologies.',
     title: 'Technological Change Readiness',
     dimension: "IT"
@@ -386,7 +387,7 @@ export const capabilityList = readable({
     dimension: "IT"
   },
   '4-08': {
-    category: 'CI/CD',
+    category: 'CI-CD',
     description: 'The ability that facilitates IT-enabled business process integration through data and system communications.',
     title: 'IT Process Integration',
     dimension: "IT"
@@ -410,19 +411,19 @@ export const capabilityList = readable({
     dimension: "IT"
   },
   '4-12': {
-    category: 'CI/CD',
+    category: 'CI-CD',
     description: 'The ability to ensure the frequent integration and merging of coded software.',
     title: 'Continuous Integration IT Competency',
     dimension: "IT"
   },
   '4-13': {
-    category: 'CI/CD',
+    category: 'CI-CD',
     description: 'The ability to ensure coded software is always at a production-ready state after successfully passing automted tests and quality checks.',
     title: 'Continuous Delivery IT Competency',
     dimension: "IT"
   },
   '4-14': {
-    category: 'CI/CD',
+    category: 'CI-CD',
     description: 'The ability to automatically and steadily deploy coded software to customer environments.',
     title: 'Continuous Deployment IT Competency',
     dimension: "IT"
@@ -650,13 +651,13 @@ export const capabilityList = readable({
     dimension: "Customer-Centric Product Development"
   },
   '6-09': {
-    category: 'CI/CD',
+    category: 'CI-CD',
     description: 'The ability to introduce new products and services to the market at a high and fast rate.',
     title: 'Quick Product Time-to-Market',
     dimension: "Customer-Centric Product Development"
   },
   '6-10': {
-    category: 'CI/CD',
+    category: 'CI-CD',
     description: 'The ability to fabricate a model or assembly in a very short amount of time.',
     title: 'Rapid Prototyping',
     dimension: "Customer-Centric Product Development"
@@ -811,17 +812,840 @@ export const capabilityList = readable({
     title: 'Promoting Employees Ownership',
     dimension: "Leadership"
   }
+  },
+  de: {
+    '1-01': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, Veränderungen im Umfeld zu erkennen und die daraus resultierenden Chancen und neuen Anforderungen zu erkennen.',
+      title: 'Externe Veränderungen und aufkommende Geschäftsmöglichkeiten erkennen',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-02': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, Veränderungen und sich bietende Gelegenheiten im Umfeld aufzugreifen und wertschöpfend zu nutzen.',
+      title: 'Externe Veränderungen und aufkommende Geschäftsmöglichkeiten nutzen',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-03': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, die Unternehmensstrategie schnell neu auszurichten, um auf Geschäftsmöglichkeiten zu reagieren.',
+      title: 'Reaktionsfähigkeit auf externe Veränderungen und neue Geschäftsmöglichkeiten',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-04': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, das Geschäftsmodell proaktiv und schnell anzupassen.',
+      title: 'Anpassungsfähigkeit des Geschäftsmodells',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-05': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, Ressourcen fliessend umzuverteilen und zu nutzen.',
+      title: 'Ressourcenfluidität',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-06': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, wertvolles externes Wissen zu identifizieren und in die Wissensbasis des Unternehmens zu integrieren.',
+      title: 'Absorptionsfähigkeit',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-07': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, sich gleichzeitig an eine Vielzahl von Geschäftskontexten anzupassen.',
+      title: 'Simultane Anpassungsfähigkeit',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-08': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, verschiedene Aspekte des Geschäftsmodells der Organisation neu zu definieren.',
+      title: 'Strategische Innovationsfähigkeit',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-09': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, eine geeignete Umgebung zu schaffen, die das Experimentieren unterstützt.',
+      title: 'Unterstützung von organisationsweiten Experimenten',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-10': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, genau zu erkennen, was sich verändert, und regelmä\u00c3\u0178ig zu prüfen, wie sich diese Veränderungen auf den aktuellen Erfolg Ihres Unternehmens auswirken könnten.',
+      title: 'Verleugnung überwinden',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-11': {
+      category: 'Kollaboration',
+      description: 'Die Fähigkeit, Partnerschaften mit externen Parteien aufzubauen, um Ressourcen, Wissen und Kompetenzen zu nutzen.',
+      title: 'Aufbau von kooperativen und dauerhaften Partnerschaften',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-12': {
+      category: 'Kollaboration',
+      description: 'Die Fähigkeit, schnell geeignete Partner zu finden oder bestehende Partnerschaften zu ändern.',
+      title: 'Schnelle Identifizierung und Bildung von Partnerschaften',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-13': {
+      category: 'Kollaboration',
+      description: 'Die Fähigkeit, die vertrauensvolle Zusammenarbeit mit verschiedenen Interessengruppen innerhalb und ausserhalb der Organisation zu betonen und aufzubauen',
+      title: 'Förderung der internen und externen Zusammenarbeit',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-14': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit, die Teilnehmer eines Netzes durch Kommunikation zu koordinieren.',
+      title: 'Netzwerks-Kommunikation',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-15': {
+      category: 'Kollaboration',
+      description: 'Die Fähigkeit, Partner in den Prozess der Produktentwicklung einzubeziehen und zu beteiligen',
+      title: 'Einbindung von Partnern in den Produktentwicklungsprozess',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-16': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, langfristige Ziele (3 bis 5 Jahre) für die Mitarbeiter zu setzen',
+      title: 'Festlegung langfristiger strategischer Ziele für Mitarbeiter',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-17': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, konkrete kurzfristige Ziele für die Mitarbeiter zu setzen',
+      title: 'Festlegung spezifischer kurzfristiger Ziele für Mitarbeiter',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-18': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, den Mitarbeitern kontinuierliche Lern- und Schulungsmöglichkeiten zu bieten, um sie zu ständiger Weiterentwicklung und Weiterbildung zu ermutigen.',
+      title: 'Betonung des Lernens für organisatorische Exzellenz',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-19': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, Organisationsstrukturen durch die Definition einer wertvollen gemeinsamen Agenda für den Erfolg effektiv auszurichten.',
+      title: 'Integration und Ausrichtung der organisatorischen Komponenten',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-20': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, sich durch Investitionen in die Entwicklung und Verbreitung von Wissen einen Wettbewerbsvorteil gegenüber der Konkurrenz zu verschaffen',
+      title: 'Investitionen in Wissen als Wettbewerbsvorteil',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-21': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, offen zu sein für die Aufnahme neuer Informationen, Ideen und Fähigkeiten aus einer Vielzahl unterschiedlicher Quellen',
+      title: 'Strategische Offenheit',
+      dimension: 'Strategie und Zweck'
+    },
+    '1-22': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit, aktuelle Annahmen in Frage zu stellen und durch einen offenen Dialog über strategische Fragen über zukünftige Möglichkeiten nachzudenken.',
+      title: 'Strategisches Reframing',
+      dimension: 'Strategie und Zweck'
+    },
+    '2-01': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, Macht zu dezentralisieren und Teams zur Selbstorganisation zu ermutigen.',
+      title: 'Dezentralisierte Autorität und Kontrolle',
+      dimension: 'Struktur',
+    },
+    '2-02': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, ein Machtgleichgewicht zwischen einer Person in einer Führungsposition und einer Person in einer untergeordneten Position durch weniger Titel, Ebenen, Statusdimensionen usw. herzustellen.',
+      title: 'Wenige Autoritätsunterschiede',
+      dimension: 'Struktur'
+    },
+    '2-03': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, eine Organisationsstruktur mit einer grossen Kontrollspanne, aber einer geringen Anzahl von Hierarchieebenen umzusetzen.',
+      title: 'Flache Organisationsstruktur',
+      dimension: 'Struktur'
+    },
+    '2-04': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, eine Organisationsstruktur zu implementieren, in der ein einzelner Manager oder Vorgesetzter eine grosse Anzahl von Mitarbeitern beaufsichtigt',
+      title: 'Breite Kontrollspanne',
+      dimension: 'Struktur'
+    },
+    '2-05': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, eine Struktur mit geringer Komplexität und unkomplizierten Beziehungen zwischen den Strukturelementen zu erstellen.',
+      title: 'Geringe Strukturkomplexität',
+      dimension: 'Struktur'
+    },
+    '2-06': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, ein System autonomer Netze von Teams aufzubauen, die ein gemeinsames Ziel verfolgen und auf die Vision der Organisation ausgerichtet sind',
+      title: 'Netzwerk von Teams',
+      dimension: 'Struktur'
+    },
+    '2-07': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Fähigkeit zur Bildung effizienter multidisziplinärer Teams mit Personen aus verschiedenen Funktionsbereichen',
+      title: 'Funktionsübergreifender Team-Ansatz',
+      dimension: 'Struktur'
+    },
+    '2-08': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit, innerhalb eines Teams wichtige Leistungsindikatoren (KPIs) in Bezug auf Teameffizienz, Teamleistung, Teamzufriedenheit usw. festzulegen und zu verfolgen.',
+      title: 'Teambasierte Ziele und Massnahmen',
+      dimension: 'Struktur'
+    },
+    '2-09': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit, Ziele und Anreize auf allen Organisationsebenen aufeinander abzustimmen und einheitlich zu gestalten',
+      title: 'Angleichung von Zielen und Anreizen',
+      dimension: 'Struktur'
+    },
+    '2-10': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, eine Organisationsstruktur zu schaffen, die den Erhalt, den einfachen Zugang und den Transfer von Wissen innerhalb der Organisation unterstützt',
+      title: 'Strukturelle Unterstützung des dezentralen Wissensmanagements',
+      dimension: 'Struktur'
+    },
+    '2-11': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, eine Organisationsstruktur zu schaffen, die das organisatorische Lernen erleichtert.',
+      title: 'Strukturelle Unterstützung des organisatorischen Lernens',
+      dimension: 'Struktur'
+    },
+    '2-12': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, eine Organisationsstruktur zu schaffen, die den Mitarbeitern die nötige Unterstützung und Anleitung zum Experimentieren und Innovieren bietet.',
+      title: 'Strukturelle Unterstützung von Experimenten und Innovation',
+      dimension: 'Struktur'
+    },
+    '2-13': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, die Organisationsstruktur als Reaktion auf Umweltveränderungen anzupassen.',
+      title: 'Organisatorische Rekonfigurierbarkeit der Struktur',
+      dimension: 'Struktur'
+    },
+    '2-14': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, Rollen fliessend mit der Entwicklung des Unternehmens zu wechseln, so dass Mitarbeiter ihre Aufgaben erweitern und teilen können.',
+      title: 'Flüssige Rollendefinitionen',
+      dimension: 'Struktur'
+    },
+    '2-15': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, wenige und flexible Regeln und Verfahren einzuführen, z. B. um die Entscheidungsfindung und die Arbeitsleistung zu standardisieren.',
+      title: 'Formalisierung der Flexibilität',
+      dimension: 'Struktur'
+    },
+    '2-16': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit, das Silo-Denken innerhalb des Unternehmens zu minimieren, indem organisatorische Mauern beseitigt werden',
+      title: 'Unterstützung der organisatorischen Konnektivität',
+      dimension: 'Struktur'
+    },
+    '2-17': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, eine Organisationsstruktur aufzubauen, die flexibel angepasst werden kann, wenn sich die Zuständigkeiten innerhalb der Organisation ändern.',
+      title: 'Flexible Zuständigkeit',
+      dimension: 'Struktur'
+    },
+    '2-18': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, Ressourcen neu zu ordnen und zu kombinieren, wenn das Unternehmen wächst und sich Märkte und Technologien weiterentwickeln.',
+      title: 'Umstrukturierbarkeit von Ressourcen',
+      dimension: 'Struktur'
+    },
+    '3-01': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, Arbeitspraktiken festzulegen, die Leitlinien ohne allzu restriktive Grenzen definieren.',
+      title: 'Einführung flexibler Arbeitspraktiken',
+      dimension: 'Prozess'
+    },
+    '3-02': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, verschiedene Arten von Produkten herzustellen und mehrere Ziele mit denselben Anlagen zu erreichen.',
+      title: 'Operative Flexibilität',
+      dimension: 'Prozess'
+    },
+    '3-03': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, sich schnell und einfach an veränderte Umstände und Umgebungen anzupassen und Prozesse zu ändern.',
+      title: 'Prozess-Anpassungsfähigkeit',
+      dimension: 'Prozess'
+    },
+    '3-04': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, einen Innovationsprozess zu implementieren, der es ermöglicht, Ideen in neue Produkte oder Dienstleistungen umzusetzen.',
+      title: 'Etablierung eines Innovationsprozesses',
+      dimension: 'Prozess'
+    },
+    '3-05': {
+      category: 'Effizienz',
+      description: 'Die Fähigkeit, Ressourcen effizient zu nutzen, indem Verschwendung und nicht wertschöpfende Tätigkeiten reduziert werden',
+      title: 'Etablierung von \'Leanness\' der Tätigkeiten',
+      dimension: 'Prozess'
+    },
+    '3-06': {
+      category: 'Effizienz',
+      description: 'Die Fähigkeit, die Abläufe in einer Organisation schnell zu gestalten.',
+      title: 'Schnelle Operationszeit',
+      dimension: 'Prozess'
+    },
+    '3-07': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, Prozesse anzupassen, um Wissen innerhalb der Organisation zu zentralisieren und zu verwalten und es allen Mitarbeitern zugänglich zu machen.',
+      title: 'Integratives Wissensmanagement',
+      dimension: 'Prozess'
+    },
+    '3-08': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, den Wissensaustausch zwischen Einzelpersonen zu verarbeiten.',
+      title: 'Einfache Verteilung von Wissen',
+      dimension: 'Prozess'
+    },
+    '3-09': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, Prozesse so anzupassen, dass ein transparenter Informationsfluss zwischen den Beteiligten möglich ist, der eine fundierte Entscheidungsfindung ermöglicht.',
+      title: 'Transparenter Informationsfluss',
+      dimension: 'Prozess'
+    },
+    '3-10': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, schnell und einfach konsistente und korrekte Informationen zu erhalten.',
+      title: 'Schneller und präziser Zugang zu Informationen',
+      dimension: 'Prozess'
+    },
+    '3-11': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, mit einer begrenzten Anzahl von ungeschriebenen Regeln und Verfahren zu arbeiten.',
+      title: 'Reduktion auf notwendige Regeln und Verfahren',
+      dimension: 'Prozess'
+    },
+    '3-12': {
+      category: 'Effizienz',
+      description: 'Die Fähigkeit zur gleichzeitigen Ausführung verschiedener Tätigkeiten.',
+      title: 'Gleichzeitigkeit der Operationen',
+      dimension: 'Prozess'
+    },
+    '3-13': {
+      category: 'Effizienz',
+      description: 'Die Fähigkeit, Entscheidungsprozesse so anzupassen, dass eine rasche Umsetzung von Entscheidungen möglich ist.',
+      title: 'Erleichterung eines schnellen Entscheidungsfindungsprozesses',
+      dimension: 'Prozess'
+    },
+    '3-14': {
+      category: 'Effizienz',
+      description: 'Die Fähigkeit, durch den Auf- und Abbau von Systemen und Prozessen Optimierungsmöglichkeiten zu erkennen.',
+      title: 'Operative Modularisierung',
+      dimension: 'Prozess'
+    },
+    '3-15': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, durch häufiges Nachdenken potenzielle Verbesserungsbereiche zu ermitteln.',
+      title: 'Identifikation von kontinuierlichen Feedback-Schleifen',
+      dimension: 'Prozess'
+    },
+    '3-16': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, Prozesse für unternehmensweites Lernen anzupassen, indem die Schaffung, Weitergabe und Bewahrung von Wissen und Erfahrung ermöglicht wird.',
+      title: 'Einen organisatorischen Lernprozess einrichten',
+      dimension: 'Prozess'
+    },
+    '3-17': {
+      category: 'Effizienz',
+      description: 'Die Fähigkeit, Prozesse zu vereinfachen, indem man extern nach neuen Ideen sucht oder neue Erfindungen einbringt.',
+      title: 'Erfinden und Vereinfachen',
+      dimension: 'Prozess'
+    },
+    '4-01': {
+      category: 'Effizienz',
+      description: 'Die Fähigkeit, Technologie, IT-Anwendungen, Komponenten und Dienste innerhalb der Organisation effektiv einzusetzen.',
+      title: 'Effektive IT-Nutzung',
+      dimension: 'IT'
+    },
+    '4-02': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, technologiegetriebene Innovationen zu fördern und voranzutreiben.',
+      title: 'Förderung von technologiegestützten Innovation',
+      dimension: 'IT'
+    },
+    '4-03': {
+      category: 'Effizienz',
+      description: 'Die Fähigkeit, Technologie zu nutzen, um sich von der Konkurrenz abzuheben und einen Wettbewerbsvorteil zu schaffen.',
+      title: 'Technologie als Differenzierungsmerkmal anwenden',
+      dimension: 'IT'
+    },
+    '4-04': {
+      category: 'CI-CD',
+      description: 'Die Fähigkeit, aktuelle Technologien schnell und reibungslos an neue oder andere Technologien anzupassen oder zu integrieren.',
+      title: 'Bereitschaft zum technologischen Wandel',
+      dimension: 'IT'
+    },
+    '4-05': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, offen für neue Managementpraktiken zu sein und mit ihnen zu experimentieren.',
+      title: 'Offenheit für die Erkundung der IT-Management-Praxis',
+      dimension: 'IT'
+    },
+    '4-06': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit, Komponenten der IT-Infrastruktur effizient zu integrieren und Informationen in Geschäftsprozessen zwischen verschiedenen Teams auszutauschen.',
+      title: 'IT-Integration',
+      dimension: 'IT'
+    },
+    '4-07': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, die IT-Infrastruktur mit minimalen Einbussen bei Kosten, Aufwand, Zeit oder Leistung flexibel neu zu kombinieren.',
+      title: 'IT-Flexibilität',
+      dimension: 'IT'
+    },
+    '4-08': {
+      category: 'CI-CD',
+      description: 'Die Fähigkeit, die IT-gestützte Geschäftsprozessintegration durch Daten- und Systemkommunikation zu erleichtern.',
+      title: 'IT-Prozess-Integration',
+      dimension: 'IT'
+    },
+    '4-09': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, IT-gestütztes Wissensmanagement durchzuführen.',
+      title: 'IT-Wissensmanagement',
+      dimension: 'IT'
+    },
+    '4-10': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, sich über neue Technologien und technologische Veränderungen zu informieren.',
+      title: 'Technologisches Bewusstsein',
+      dimension: 'IT'
+    },
+    '4-11': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit der Mitarbeiter, den Umgang mit der neu eingeführten Technologie zu erlernen.',
+      title: 'Technologische Kompetenz',
+      dimension: 'IT'
+    },
+    '4-12': {
+      category: 'CI-CD',
+      description: 'Die Fähigkeit, die häufige Integration und Zusammenführung von kodierter Software zu gewährleisten.',
+      title: 'Kontinuierliche Integration IT-Kompetenz',
+      dimension: 'IT'
+    },
+    '4-13': {
+      category: 'CI-CD',
+      description: 'Die Fähigkeit, sicherzustellen, dass kodierte Software immer in einem produktionsfähigen Zustand ist, nachdem sie erfolgreich automatisierte Tests und Qualitätsprüfungen durchlaufen hat.',
+      title: 'IT-Kompetenzen im Bereich Continuous Delivery',
+      dimension: 'IT'
+    },
+    '4-14': {
+      category: 'CI-CD',
+      description: 'Die Fähigkeit, kodierte Software automatisch und kontinuierlich in Kundenumgebungen einzusetzen.',
+      title: 'IT-Kompetenzen im Bereich Continuous Deployment',
+      dimension: 'IT'
+    },
+    '4-15': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit zur Zusammenarbeit zwischen Entwicklungs- und IT-Betriebsteams, so dass sie gemeinsam kommunizieren und an Problemen, Aktualisierungen und Lösungen arbeiten können.',
+      title: 'Zusammenarbeit zwischen Entwicklung und IT-Betrieb',
+      dimension: 'IT'
+    },
+    '5-01': {
+      category: 'Effizienz',
+      description: 'Die Fähigkeit, als Team in regelmä\u00c3\u0178igen Abständen darüber nachzudenken, wie man effektiver werden kann, und das Verhalten dementsprechend anzupassen.',
+      title: 'Fokus auf Team-Reflexion',
+      dimension: 'Menschen'
+    },
+    '5-02': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, neue Fähigkeiten und Kompetenzen schnell und problemlos zu entwickeln und zu erlernen.',
+      title: 'Geschwindigkeit der Entwicklung neuer Fähigkeiten und Kompetenzen',
+      dimension: 'Menschen'
+    },
+    '5-03': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, ständig und systematisch aus der Gegenwart zu lernen, um kontinuierliche Verbesserungen zu gewährleisten.',
+      title: 'Organisatorische Lernkultur',
+      dimension: 'Menschen'
+    },
+    '5-04': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, das den Austausch von Wissen, Erkenntnissen und Erfahrungen fördert und ermöglicht, um das Unternehmen auf seine Ziele auszurichten.',
+      title: 'Kultur des Wissensaustauschs',
+      dimension: 'Menschen'
+    },
+    '5-05': {
+      category: 'Kollaboration',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, das eine kollaborative Denkweise von Personen fördert, die von Natur aus kollaborativ denken und handeln.',
+      title: 'Eine kollaborative Denkweise wachsen lassen',
+      dimension: 'Menschen'
+    },
+    '5-06': {
+      category: 'Kollaboration',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, in dem die Mitarbeiter effizient und flexibel über die Funktionsgrenzen der Organisation hinweg zusammenarbeiten.',
+      title: 'Fokus auf funktionsübergreifende Zusammenarbeit',
+      dimension: 'Menschen'
+    },
+    '5-07': {
+      category: 'Kollaboration',
+      description: 'Die Fähigkeit, interne und externe Stakeholder zur Zusammenarbeit zu bewegen, um Werte zu schaffen und die Interessen und Bedürfnisse der beteiligten Personen zu berücksichtigen.',
+      title: 'Co-Creation-Denken einbeziehen',
+      dimension: 'Menschen'
+    },
+    '5-08': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, das die rasche Umsetzung der von anderen (z. B. Wettbewerbern) übernommenen bewährten Verfahren unterstützt.',
+      title: 'Förderung der Anpassungsfähigkeit',
+      dimension: 'Menschen'
+    },
+    '5-09': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, potenzielle künftige Herausforderungen und Chancen zu antizipieren und im Voraus darauf zu reagieren.',
+      title: 'Unterstützung von proaktivem Verhalten',
+      dimension: 'Menschen'
+    },
+    '5-10': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, das zur Risikobereitschaft, zum Experimentieren und zu unkonventionellem Denken anregt, um neue Ideen und Innovationen zu fördern.',
+      title: 'Innovationsfördernde Kultur',
+      dimension: 'Menschen'
+    },
+    '5-11': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, das aus einer Reihe gemeinsamer Werte, Ziele und Praktiken besteht und das Lernen durch Experimentieren fördert.',
+      title: 'Förderung einer Kultur des Scheiterns',
+      dimension: 'Menschen'
+    },
+    '5-12': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, sich erfolgreich und rechtzeitig an Veränderungen des Marktumfelds anzupassen und gleichzeitig sicherzustellen, dass der Geschäftsbetrieb nicht gestört wird.',
+      title: 'Reaktionsfähigkeit der Arbeitskräfte',
+      dimension: 'Menschen'
+    },
+    '5-13': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, in dem die Mitarbeiter eine positive Einstellung entwickeln und sich mit Veränderungen, neuen Ideen, Menschen und Technologien wohlfühlen.',
+      title: 'Kultur des Wandels',
+      dimension: 'Menschen'
+    },
+    '5-14': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, in dem die Mitarbeiter neue Aufgaben und die damit verbundene Verantwortung problemlos annehmen und bewältigen können.',
+      title: 'Zunehmende Akzeptanz der sich ändernden Verantwortlichkeiten',
+      dimension: 'Menschen'
+    },
+    '5-15': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, in dem die Mitarbeiter flexibel und effizient zwischen verschiedenen Aufgaben, Teams und Projekten wechseln können.',
+      title: 'Ermutigung zur Flexibilität der Menschen',
+      dimension: 'Menschen'
+    },
+    '5-16': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, das es den Mitarbeitern ermöglicht, mit unsicheren und unerwarteten Situationen umzugehen, sich von Veränderungen zu erholen oder sich an Veränderungen anzupassen und von ihnen zu profitieren.',
+      title: 'Aufbau einer organisationsweiten Resilienz',
+      dimension: 'Menschen'
+    },
+    '5-17': {
+      category: 'Kollaboration',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, das Mitarbeiter anzieht und fördert, die über ein hohes Mass an Fachwissen in einem bestimmten Bereich verfügen und gleichzeitig die Bereitschaft zur Zusammenarbeit mit Experten aus anderen Bereichen haben.',
+      title: 'Förderung von T-Shaped Skills',
+      dimension: 'Menschen'
+    },
+    '5-18': {
+      category: 'Effizienz',
+      description: 'Die Fähigkeit, den Mitarbeitern die Ressourcen, die Autonomie und die Entwicklungsmöglichkeiten zu bieten, die sie benötigen, um ihre Arbeit effizienter zu erledigen.',
+      title: 'Menschen ermächtigen',
+      dimension: 'Menschen'
+    },
+    '5-19': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, das den Mitarbeitern mehr Autorität und Verantwortung bei der Ausführung ihrer Arbeit einräumt, damit sie Verantwortung übernehmen und mehr Initiative zeigen können.',
+      title: 'Schaffung einer engagierten Unternehmenskultur',
+      dimension: 'Menschen'
+    },
+    '5-20': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, in dem ein gemeinsamer dezentraler Entscheidungsfindungsprozess vorhanden ist, nach dem ein Team auf flexible und effiziente Weise autonome Entscheidungen treffen kann.',
+      title: 'Dezentralisierung der Entscheidungsautonomie',
+      dimension: 'Menschen'
+    },
+    '5-21': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, das die Mitarbeiter befähigt, Konfliktlösungsfähigkeiten zu entwickeln und anzuwenden.',
+      title: 'Förderung der Konfliktlösung',
+      dimension: 'Menschen'
+    },
+    '5-22': {
+      category: 'Kollaboration',
+      description: 'Die Fähigkeit, ein offenes Umfeld zu schaffen, das eine Kultur des Gedankenaustauschs unter den Mitarbeitern fördert und die Freiheit der Diskussion sowie eine offene Kommunikation, Feedback und Diskussionen begünstigt.',
+      title: 'Kultivierung einer offenen Kultur',
+      dimension: 'Menschen'
+    },
+    '5-23': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, das den Einzelnen befähigt, in selbstorganisierten Teams zu arbeiten.',
+      title: 'Ermutigung zu einer selbstorganisierten Teamhaltung',
+      dimension: 'Menschen'
+    },
+    '5-24': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, in dem die Nutzung von Technologie Teil der Unternehmenskultur ist.',
+      title: 'Implementierung von Technologie in die kulturelle DNA',
+      dimension: 'Menschen'
+    },
+    '5-25': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, das die Transparenz von Informationen, Absichten und Ergebnissen fördert und es den Mitarbeitern ermöglicht, fundierte Entscheidungen zu treffen.',
+      title: 'Transparenz schaffen',
+      dimension: 'Menschen'
+    },
+    '5-26': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, in dem die Mitarbeiter intrinsisch motiviert sind, weil sie einen Anspruch an die Arbeit haben, die sie mit der Vision, etwas zu bewirken, verrichten.',
+      title: 'Förderung einer zielgerichteten Denkweise',
+      dimension: 'Menschen'
+    },
+    '5-27': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, das die \u00c3\u0153bernahme von Verantwortung für die eigenen Handlungen, Ergebnisse, Möglichkeiten und Probleme fördert.',
+      title: 'Förderung der Selbstverantwortung',
+      dimension: 'Menschen'
+    },
+    '5-28': {
+      category: 'Kundenfokus',
+      description: 'Die Fähigkeit, ein Umfeld zu schaffen, das eine Kultur kultiviert, die sich auf die Schaffung des besten Kundenerlebnisses konzentriert, indem sie den Kunden in den Mittelpunkt aller Geschäftsaktivitäten stellt.',
+      title: 'Verankerung einer kundenzentrierten Kultur',
+      dimension: 'Menschen'
+    },
+    '6-01': {
+      category: 'Kundenfokus',
+      description: 'Die Fähigkeit, Kundenwünsche innerhalb der Organisation zu erfassen und zu verwalten.',
+      title: 'Verfügbarkeit von Kundenbedarfsinformationen',
+      dimension: 'Kundenzentrierte Produktentwicklung',
+    },
+    '6-02': {
+      category: 'Kundenfokus',
+      description: 'Die Fähigkeit, langfristige, vertrauensvolle Beziehungen zu den Kunden aufzubauen und sie davon abzuhalten, zu einem Konkurrenten zu wechseln.',
+      title: 'Kundenkonnektivität',
+      dimension: 'Kundenzentrierte Produktentwicklung'
+    },
+    '6-03': {
+      category: 'Kollaboration',
+      description: 'Die Fähigkeit, Kundeninformationen unternehmensweit zu definieren, zu konsolidieren und zu verwalten und, falls erforderlich, auch Informationen von Kooperationspartnern zu integrieren.',
+      title: 'Integration von Kundendaten',
+      dimension: 'Kundenzentrierte Produktentwicklung'
+    },
+    '6-04': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, schnell auf veränderte Kundenanforderungen zu reagieren und das Feedback, die Vorlieben und Bedürfnisse der Kunden in Produkte und Dienstleistungen zu integrieren.',
+      title: 'Reaktionsfähigkeit zu Kundenpräferenzen',
+      dimension: 'Kundenzentrierte Produktentwicklung'
+    },
+    '6-05': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, Kundenwünsche, Bedürfnisse und Präferenzen zu erkennen, beispielsweise durch Marktforschung, Fragebögen oder persönliche Begegnungen.',
+      title: 'Sensibilität zu Kundenpräferenzen',
+      dimension: 'Kundenzentrierte Produktentwicklung'
+    },
+    '6-06': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, die Leistung in Bezug auf Kundenzufriedenheit, Kundenbindung und andere Kennzahlen zu bewerten und dann Produkte und Dienstleistungen so zu gestalten, dass sie die Erwartungen der Kunden erfüllen und übertreffen, indem sie diese KPIs nutzen.',
+      title: 'Fokussierung auf kundenbezogene Massnahmen',
+      dimension: 'Kundenzentrierte Produktentwicklung'
+    },
+    '6-07': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, Ihren Kunden zuzuhören und von ihnen zu lernen (d. h. \u00c3\u201enderungen der Kundenbedürfnisse) und dieses Wissen intern umzusetzen.',
+      title: 'Von Kunden lernen',
+      dimension: 'Kundenzentrierte Produktentwicklung'
+    },
+    '6-08': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, die Produkt- und Dienstleistungspalette zu erneuern und gleichzeitig die interne Betriebsfluktuation aufrechtzuerhalten.',
+      title: 'Flexibilität des Produktangebots',
+      dimension: 'Kundenzentrierte Produktentwicklung'
+    },
+    '6-09': {
+      category: 'CI-CD',
+      description: 'Die Fähigkeit, neue Produkte und Dienstleistungen in hohem Tempo auf dem Markt einzuführen.',
+      title: 'Schnelle Markteinführung von Produkten',
+      dimension: 'Kundenzentrierte Produktentwicklung'
+    },
+    '6-10': {
+      category: 'CI-CD',
+      description: 'Die Fähigkeit, ein Modell in sehr kurzer Zeit zu fertigen.',
+      title: 'Schnelles Prototyping',
+      dimension: 'Kundenzentrierte Produktentwicklung'
+    },
+    '6-11': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, Produkte und Dienstleistungen in sehr kurzer Zeit zu entwickeln.',
+      title: 'Kurze Entwicklungszyklen',
+      dimension: 'Kundenzentrierte Produktentwicklung'
+    },
+    '6-12': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, Produkt- oder Dienstleistungskomponenten bei Bedarf schnell zu ändern.',
+      title: 'Kurze Zeit für Produktänderungen',
+      dimension: 'Kundenzentrierte Produktentwicklung'
+    },
+    '7-01': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit zu erkennen, welcher Führungsansatz für eine bestimmte Situation am besten geeignet ist, offen zu sein, neue Führungsansätze zu erlernen und in angemessener Weise zwischen verschiedenen Führungsstilen zu wechseln.',
+      title: 'Ganzheitlich ausgerichtete Führung',
+      dimension: 'Führung'
+    },
+    '7-02': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, während der gesamten Transformationsphase einen \'Ambidextrous Leadership\'-Ansatz umzusetzen, indem gleichzeitig traditionelle Führungsansätze und agile Führung angewendet werden.',
+      title: '\'Ambidextrous Leadership\' Ansatz',
+      dimension: 'Führung'
+    },
+    '7-03': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, sich von traditionellen Führungsansätzen zu lösen, die nicht geeignet und effektiv sind, um Mitarbeiter in einer agilen Organisation zu führen.',
+      title: 'Emotionale Loslösung von traditionellen Führungsansätzen',
+      dimension: 'Führung'
+    },
+    '7-04': {
+      category: 'Kollaboration',
+      description: 'Die Fähigkeit, eine partizipative Kultur aufzubauen, die die Mitarbeiter befähigt und inspiriert, die Unternehmensvision zu verwirklichen.',
+      title: 'Etablierung einer partizipativen Kultur',
+      dimension: 'Führung'
+    },
+    '7-05': {
+      category: 'Knowlegdge Transfer',
+      description: 'Die Fähigkeit, das Potenzial von Mitarbeitern zu erkennen, zu fördern und sie während ihres Entwicklungsprozesses zu unterstützen und zu motivieren.',
+      title: 'Unterstützung der Mitarbeiter bei der Ausschöpfung ihres ungenutzten Potenzials',
+      dimension: 'Führung'
+    },
+    '7-06': {
+      category: 'Knowlegdge Transfer',
+      description: 'Die Fähigkeit, geeignete Bedingungen zu schaffen, damit die Mitarbeiter ihre Kompetenzen und Fähigkeiten offenlegen und effektiv nutzen können, und sie zu ermutigen/zu fördern, neue Fähigkeiten und Kenntnisse zu entwickeln.',
+      title: 'Förderung der Stärken der Mitarbeiter',
+      dimension: 'Führung'
+    },
+    '7-07': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, Mitarbeiter aktiv und kontinuierlich in Entscheidungsprozesse einzubeziehen und sie zu befähigen, selbständig Entscheidungen zu treffen.',
+      title: 'Ermutigung der Mitarbeiter zur unabhängigen Entscheidungsfindung',
+      dimension: 'Führung'
+    },
+    '7-08': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, die Verantwortung für Aufgaben an andere Teammitglieder zu delegieren und ihnen die nötige Autonomie zu geben, damit sie unabhängig handeln können, aber dennoch für die getroffenen Entscheidungen verantwortlich sind.',
+      title: 'Gemeinsame Verantwortung und gegenseitige Rechenschaftspflicht',
+      dimension: 'Führung'
+    },
+    '7-09': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, den Mitarbeitern die nötige Autonomie, die Werkzeuge und die Unterstützung zu geben, die sie brauchen, um zu experimentieren, zu testen und neue Ideen zu entwickeln.',
+      title: 'Mitarbeiter zum Experimentieren und Innovieren ermutigen',
+      dimension: 'Führung'
+    },
+    '7-10': {
+      category: 'Kundenfokus',
+      description: 'Die Fähigkeit, im Interesse des Kunden zu denken und zu handeln sowie das ständige Ziel, die Bedürfnisse, Visionen, Schwierigkeiten usw. des Kunden zu verstehen.',
+      title: 'Kundenorientiertes Denken',
+      dimension: 'Führung'
+    },
+    '7-11': {
+      category: 'Kollaboration',
+      description: 'Die Fähigkeit, ein sehr gutes Verständnis für das Geschäft, die Bedürfnisse, Visionen, Strategien und Produkte von Kooperationspartnern zu haben.',
+      title: 'Gute Kenntnisse über die Unternehmen der Kooperationspartner',
+      dimension: 'Führung'
+    },
+    '7-12': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, den Mitarbeitern ein 360-Grad-Feedback zu geben und Verbesserungsmöglichkeiten vorzuschlagen, um neue Fähigkeiten und Kenntnisse zu entwickeln.',
+      title: 'Feedback an Mitarbeiter für kontinuierliches Lernen',
+      dimension: 'Führung'
+    },
+    '7-13': {
+      category: 'Innovation',
+      description: 'Die Fähigkeit, sich auf die Selbstreflexion und die Analyse des aktuellen Niveaus von Fähigkeiten, Stärken, Schwächen und Verhaltensmustern zu konzentrieren, um Lern- und Verbesserungsbereiche zu identifizieren.',
+      title: 'Selbstreflexion für kontinuierliche Verbesserung',
+      dimension: 'Führung'
+    },
+    '7-14': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit, die gemeinsame Annahme zu schaffen, dass jeder Mitarbeiter persönliche Risiken eingehen und seine Meinung sagen kann, ohne abgelehnt oder bestraft zu werden.',
+      title: 'Psychologische Sicherheit kultivieren',
+      dimension: 'Führung'
+    },
+    '7-15': {
+      category: 'Anpassungsfähigkeit',
+      description: 'Die Fähigkeit, mit Veränderungen umzugehen, indem man Gedanken an ein Scheitern beiseite schiebt und sich auf die Massnahmen konzentriert, die notwendig sind, um offen, widerstandsfähig und flexibel zu sein.',
+      title: 'Veränderungsorientiertes Mindset',
+      dimension: 'Führung'
+    },
+    '7-16': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit, Probleme zu erkennen und Mitarbeiter zu unterstützen und zu ermutigen, eine gemeinsame Lösung für eine Meinungsverschiedenheit zu finden.',
+      title: 'Problemlösungsorientierter Ansatz',
+      dimension: 'Führung'
+    },
+    '7-17': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit, Mitarbeiter zu führen und ihr Verhalten zu beeinflussen, indem man die Unternehmensvision definiert und sicherstellt, dass alle Mitarbeiter diese Visionen und Ziele verstehen.',
+      title: 'Führung der Mitarbeiter entlang der Unternehmensvision',
+      dimension: 'Führung'
+    },
+    '7-18': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit, das Team zu leiten und das Verhalten des Teams kontinuierlich zu beeinflussen, indem eine Leitvision (Erklärung des übergeordneten Ziels der Organisation) definiert, verbreitet und aufrechterhalten wird.',
+      title: 'Zielgerichtete Führung',
+      dimension: 'Führung'
+    },
+    '7-19': {
+      category: 'Kollaboration',
+      description: 'Die Fähigkeit, siloorientiertes Denken zu beseitigen und die Mitarbeiter zu befähigen, eine wertbezogene Orientierung zwischen verschiedenen Teams und Einheiten aufzubauen.',
+      title: 'Förderung einer wertbezogenen Solidarität zwischen Teams und Abteilungen',
+      dimension: 'Führung'
+    },
+    '7-20': {
+      category: 'Wissensmanagement',
+      description: 'Die Fähigkeit, dafür zu sorgen, dass Wissen transparent vermittelt wird und für den Rest der Organisation zugänglich ist.',
+      title: 'Priorisierung des unternehmensweiten Wissenstransfers',
+      dimension: 'Führung'
+    },
+    '7-21': {
+      category: 'Kommunikation',
+      description: 'Die Fähigkeit, relevante Unternehmensinformationen und -meinungen offen und transparent an die Mitarbeiter weiterzugeben, um ein vertrauensvolles Umfeld zu schaffen.',
+      title: 'Schaffen Sie ein Umfeld der Transparenz und des Vertrauens',
+      dimension: 'Führung'
+    },
+    '7-22': {
+      category: 'Effizienz',
+      description: 'Die Fähigkeit, Hindernisse zu erkennen und zu beseitigen, die Mitarbeiter daran hindern, ihre Ziele zu erreichen.',
+      title: 'Ergebnisorientiertes Management',
+      dimension: 'Führung'
+    },
+    '7-23': {
+      category: 'Organisations- und Managementstrukturen',
+      description: 'Die Fähigkeit, Mitarbeiter zu ermutigen, Verantwortung für ihre Handlungen und Ergebnisse zu übernehmen.',
+      title: 'Förderung der Eigenverantwortung der Arbeitnehmer',
+      dimension: 'Führung'
+    }
+  }
 })
 
-export const levelDesc = readable([
-  'The organization is aware of the relevance of agility capabilities and their anchoring in the resp. agility dimensions. The goal of enhancing agile maturity has been communicated and is reflected in work practices and collaboration  approaches.',
-  'The organization has already taken first steps towards the development of agility capabilities and thus satisfying the goal of enhancing agile maturity. All activities implemented follow this goal and ensure customer centricity and satisfaction.',
-  'The organization has further focused on the realization of agility capabilities. All activities are centered around the customer and creating customer value. The organization uses the value of resources within and outside the organization for deliver high quality products and services.',
-  'The organization has focused on agility capabilities as a priority in several dimensions. Thus, the organization can respond to change in an effective and productive manner. The organization focuses on constant improvement and uncertainty management. ',
-  'The organization has holistically anchored agility within its strategy, structure, processes, culture, workforces’ mindset, and leadership approach. The org. establishes a constant vibrant environment to sustain agility and to follow an organizational learning approach. '
-])
+export const levelDesc = readable({
+  en: [
+    'The organization is aware of the relevance of agility capabilities and their anchoring in the resp. agility dimensions. The goal of enhancing agile maturity has been communicated and is reflected in work practices and collaboration  approaches.',
+    'The organization has already taken first steps towards the development of agility capabilities and thus satisfying the goal of enhancing agile maturity. All activities implemented follow this goal and ensure customer centricity and satisfaction.',
+    'The organization has further focused on the realization of agility capabilities. All activities are centered around the customer and creating customer value. The organization uses the value of resources within and outside the organization for deliver high quality products and services.',
+    'The organization has focused on agility capabilities as a priority in several dimensions. Thus, the organization can respond to change in an effective and productive manner. The organization focuses on constant improvement and uncertainty management. ',
+    'The organization has holistically anchored agility within its strategy, structure, processes, culture, workforces’ mindset, and leadership approach. The org. establishes a constant vibrant environment to sustain agility and to follow an organizational learning approach. '
+  ],
+  de: [
+    'Die Organisation ist sich der Relevanz von Agilitätsfähigkeiten und deren Verankerung in den jeweiligen Agilitätsdimensionen bewusst. Das Ziel, den agilen Reifegrad zu erhöhen, ist kommuniziert und spiegelt sich in den Arbeitspraktiken und Ansätzen der Zusammenarbeit wieder.',
+    'Die Organisation hat bereits erste Schritte zur Entwicklung von Agilitätskapazitäten unternommen und erfüllt damit das Ziel, den agilen Reifegrad zu erhöhen. Alle durchgeführten Aktivitäten folgen diesem Ziel und gewährleisten Kundenorientierung und -zufriedenheit.',
+    'Die Organisation hat sich weiter auf die Realisierung von Agilitätsfähigkeiten konzentriert. Alle Aktivitäten sind auf den Kunden und die Schaffung von Kundennutzen ausgerichtet. Das Unternehmen nutzt den Wert der Ressourcen innerhalb und außerhalb des Unternehmens, um qualitativ hochwertige Produkte und Dienstleistungen zu liefern.',
+    'Die Organisation hat sich in mehreren Dimensionen auf die Agilitätsfähigkeit konzentriert. Auf diese Weise kann die Organisation effektiv und produktiv auf Veränderungen reagieren. Die Organisation konzentriert sich auf ständige Verbesserung und Unsicherheitsmanagement.',
+    'Die Organisation hat Agilität ganzheitlich in ihrer Strategie, ihrer Struktur, ihren Prozessen, ihrer Kultur, der Denkweise ihrer Mitarbeiter und ihrem Führungsansatz verankert. Die Organisation schafft ein konstantes, lebendiges Umfeld, um Agilität aufrechtzuerhalten und einen organisatorischen Lernansatz zu verfolgen.'
+  ]
+})
 
 export const dimensionDesc = readable({
+  en: {
   'Strategy & Purpose': 'Strategy & Purpose comprises the purpose of an organization, its vision and mission as well as its business model.',
   Structure: 'Structure comprises the organizational structure, the gover-nance, and the functions and roles within the organization.',
   Process: 'Process comprises the process organization and the information and decision flow within the organization',
@@ -829,6 +1653,41 @@ export const dimensionDesc = readable({
   People: 'People & Culture comprises the organizational culture, the behavior and mindset of individual employees, and their skills.',
   Leadership: 'Leadership comprises the leadership approach, leadership values and attitude, and workforce empowerment.',
   'Customer-Centric Product Development': 'Customer-Centric Product Development comprises the approach to build products that place the customer at its core.'
+  },
+  de: {
+    'Strategie und Zweck': 'Strategie und Zweck umfasst den Zweck einer Organisation, ihre Vision und Mission sowie ihr Geschäftsmodell.',
+    'Struktur': 'Struktur umfasst die Organisationsstruktur, die Führung sowie die Funktionen und Rollen innerhalb der Organisation.',
+    'Prozess': 'Prozess umfasst die Prozessorganisation und den Informations- und Entscheidungsfluss innerhalb der Organisation',
+    'IT': 'Informationstechnologie umfasst die technische Infrastruktur und Architektur sowie die Anwendung der Technologie.',
+    'Menschen': 'Menschen & Kultur umfasst die Organisationskultur, das Verhalten und die Denkweise der einzelnen Mitarbeiter sowie deren Fähigkeiten.',
+    'Führung': 'Führung umfasst den Führungsansatz, die Führungswerte und -einstellung sowie die Befähigung der Mitarbeiter.',
+    'Kundenzentrierte Produktentwicklung': 'Kundenzentrierte Produktentwicklung umfasst den Ansatz, Produkte zu entwickeln, bei denen der Kunde im Mittelpunkt steht.'
+  }
+})
+
+export const categories = readable({
+  en: {
+  Adaptability: 'Adaptability',
+  "CI-CD": 'CI-CD',
+  Collaboration: 'Collaboration',
+  Communication: 'Communication',
+  "Customer Focus": 'Customer Focus',
+  Efficiency: 'Efficiency',
+  Innovation: 'Innovation',
+  "Knowledge Management": "Knowledge Management",
+  "Organizational and Management Structures": "Organizational and Management Structures"
+  },
+  de: {
+    Adaptability: 'Anpassungsfähigkeit',
+    "CI-CD": 'CI-CD',
+    Collaboration: 'Kollaboration',
+    Communication: 'Kommunikation',
+    "Customer Focus": 'Kundenfokus',
+    Efficiency: 'Effizienz',
+    Innovation: 'Innovation',
+    "Knowledge Management": "Wissensmanagement",
+    "Organizational and Management Structures": "Organisations- und Managementstrukturen"
+  }
 })
 
 export const levelAmount = readable(5)
@@ -1655,4 +2514,96 @@ export const emptyUserData = readable({
 
 export const defaultConfig = readable({
   displayHidden: true
+})
+
+export const ui = readable({
+  en: {
+    main: {
+      welcome: "Welcome",
+      input: "Input",
+      evaluation: "Evaluation",
+      next: "Next",
+      hideButton: "Hide capabilites marked as not relevant",
+      language: "EN",
+      nav: {
+        welcome: "Welcome",
+        input: "Input",
+        evaluation: "Evaluation"
+      }
+    },
+
+    index: {
+      intro: "<p>Welcome to the demo page of the Agile Maturity Tool!</p><p>This is a demo version of the tool to illustrate the functionality. The tool is still under development, which is why the visual aspects of the tool are not yet fully developed.<p><p>The agile maturity model was developed in Competence Centre 08 and 09. The aim is to assess the maturity level of agile skills, to derive the agile maturity level of the company and to provide indicative recommendations for action to build up skills. </p><p>The model includes the following artefacts:</p><ul><li>The <b>Agile Maturity Grid</b> provides an overview of necessary agile capabilities including a description and a mapping to the associated agility dimension</li><li>The benefit of the <b>Quick Check</b> lies in the quick assessment of the existing maturity level of the corresponding agile capabilities as well as an indication of the agile maturity level of the company</li><li>The <b>Tool</b> serves to complement the first two artefacts and allows users to make indicative recommendations for action to improve the agile capabilities and thus the agile maturity of the company</li><li>The <b>Tool</b> serves to complement the first two artefacts and allows users to make indicative recommendations for action to improve the agile capabilities and thus the agile maturity of the company</li></ul><p>All three artefacts can be applied to different areas of the company. The prerequisite for this is that the business unit in question is at the beginning or in the middle of an agile transformation. The model should be completed by a representative number of employees. It should be noted that different departments and hierarchical levels are also taken into account in order to contain as realistic an estimate as possible of the extent to which the agile skills listed are being implemented.</p>",
+      deleteButtonText: 'If you\'ve already tested a previous version of the tool in the same browser, the existing data in the local storage might break the tool. If this happens, you can click on the "Delete Data" button below.',
+      deleteButton: "Delete Data"
+    },
+    userInfo: {
+      company: "Company:",
+      organisation: "Organisation:",
+      project: "Name of agile project:",
+      description: "Description:"
+    },
+    capabilityTable: {
+      is: "Is = Red",
+      should: "Should = Blue",
+      notRelevant: "Not relevant",
+      explanation: "Explanation"   
+    },
+    evaluationDataTable: {
+      id: "ID",
+      capability: "Capability",
+      comment: "Comment"
+    },
+    evaluationChart: {
+      is: "Is-Value",
+      should: "Should-Value"
+    },
+    exportButton: {
+      button: "Export Results"
+    }
+  },
+  de: {
+    main: {
+      welcome: "Willkommen",
+      input: "Input",
+      evaluation: "Auswertung",
+      next: "Nächster Schritt",
+      hideButton: "Irrelevante Capabilitites ausblenden",
+      language: "DE",
+      nav: {
+        welcome: "Willkommen",
+        input: "Input",
+        evaluation: "Auswertung"
+      }
+    },
+    index: {
+      intro: "<p>Willkommen zur Demopage des Agile Maturity Tools!</p><p>Dies ist eine Demoversion des Tools, welche die Funktionalitäten veranschaulichen soll. Das Tool ist noch in Entwicklung, weswegen vor allem die visuellen Aspekte des Tools noch nicht ganz ausgereift sind.</p><p>Das agile Reifegradmodell wurde im Competence Center 08 und 09 entwickelt. Ziel ist die Einschätzung des Reifegrads agiler Fähigkeiten, Ableitung des agilen Reifegrads des Unternehmens sowie Bereitstellung indikativer Handlungsempfehlungen zum Fähigkeitenaufbau. </p><p>Das Modell umfasst folgende Artefakte:</p><ul><li>Der <b>Agile Maturity Grid</b> gibt eine übersicht über notwendige agile Fähigkeiten inklusive Beschreibung und einem Mapping auf die zugehörige Agility Dimension.</li><li>Der Nutzen des <b>Schnell-Check</b> liegt in der schnellen Einschätzung des vorhandenen Reifegrads der entsprechenden agilen Fähigkeiten sowie Indikation über den agilen Reifegrad des Unternehmens.</li><li>Das <b>Tool</b> dient zur Ergänzung der ersten beiden Artefakte und erlaubt es Nutzern indikative Handlungsempfehlungen zur Verbesserung der agilen Fähigkeiten und somit des agilen Reifegrads des Unternehmens </li></ul> <p>Alle drei Artefakte können auf verschiedene Unternehmensbereiche angewendet werden. Voraussetzung hierfür ist, das sich der betreffende Unternehmensbereich am Anfang oder mitten in einer agilen Transformation befindet. Das Modell sollte von einer repräsentativen Anzahl der Mitarbeitenden ausgefüllt werden. Hierbei sollte beachtet werden, dass auch unterschiedliche Fachbereiche und Hierarchiestufen berücksichtigt werden, um eine möglichst realistische Einschätzung zu der Ausprägung der aufgeführten agilen Fähigkeiten zu enthalten.</p>",
+      deleteButtonText: 'Wenn Sie bereits eine vorherige Version des Tools getestet haben kann es sein, dass die neue Version wegen bestehenden Daten nicht richtig funktioniert. Falls das passiert, können Sie alten Daten mit diesem Button löschen:',
+      deleteButton: "Daten löschen"
+    },
+    userInfo: {
+      company: "Firma:",
+      organisation: "Organisation:",
+      project: "Name des agilen Projektes:",
+      description: "Beschreibung:"
+    },
+    capabilityTable: {
+      is: "Ist = Rot",
+      should: "Soll = Blau",
+      notRelevant: "Nicht relevant",
+      explanation: "Begründung"   
+    },
+    evaluationDataTable: {
+      id: "ID",
+      capability: "Capability",
+      comment: "Kommentar"
+    },
+    evaluationChart: {
+      is: "Ist-Wert",
+      should: "Soll-Wert"
+    },
+    exportButton: {
+      button: "Resultate exportieren"
+    }
+  }
 })

@@ -1,7 +1,7 @@
 <script>
 
     import { onMount } from 'svelte'
-	import { emptyUserInfo, emptyUserData, dimensionDesc, categoryDesc, capabilityList } from "./stores/constants"
+	import { emptyUserInfo, emptyUserData, dimensionDesc, categories, capabilityList } from "./stores/constants"
 	import EvaluationChart from './EvaluationChart.svelte'
     import EvaluationDataTable from './EvaluationDataTable.svelte'
 	import ExportButton from './ExportButton.svelte'
@@ -16,9 +16,9 @@
 	let average
 	let averages = []
 	let images = { }
-	let dimensionDescriptions = $dimensionDesc
-	let categoryDescriptions = $categoryDesc
-	let capabilities = $capabilityList
+	let dimensionDescriptions = $dimensionDesc[appConfig.language]
+	let categoryDescriptions = $categories[appConfig.language]
+	let capabilities = $capabilityList[appConfig.language]
 
 	try {
 		userInput = dataManager.loadFromLocalStorage("dataUserInput")
@@ -144,7 +144,6 @@
 		} 
 		else {
 			for (const [key, value] of Object.entries(userInput)) {
-				console.log(input)
 				if (capabilities[key].category == input) {
 					tableData[key] = value
 				}
@@ -168,25 +167,25 @@
 
 <div id="auswertung">
 
-	<ExportButton data={userInput} images={images}/>
+	<ExportButton data={userInput} images={images} appConfig={appConfig}/>
 
 	{#each Object.keys(dimensionDescriptions) as dimension}
 	
-	<EvaluationChart chartData={generateChartData(dimension)} bind:images/>
+	<EvaluationChart chartData={generateChartData(dimension)} bind:images language={appConfig.language}/>
 
-	<EvaluationDataTable tableData={generateTableData(dimension)} isHidden={appConfig.hideIrrelevant}/>
+	<EvaluationDataTable tableData={generateTableData(dimension)} isHidden={appConfig.hideIrrelevant} language={appConfig.language}/>
 
 	{/each}
 
-	{#each Object.keys(categoryDescriptions) as category}
+	{#each Object.values(categoryDescriptions) as category}
 
-	<EvaluationChart chartData={generateChartData(category)} bind:images/>
+	<EvaluationChart chartData={generateChartData(category)} bind:images language={appConfig.language}/>
 
-	<EvaluationDataTable tableData={generateTableData(category)} isHidden={appConfig.hideIrrelevant}/>
+	<EvaluationDataTable tableData={generateTableData(category)} isHidden={appConfig.hideIrrelevant} language={appConfig.language}/>
 		
 	{/each}
 
 
 
-	<ExportButton data={userInput} images={images}/>
+	<ExportButton data={userInput} images={images} appConfig={appConfig}/>
 </div>
