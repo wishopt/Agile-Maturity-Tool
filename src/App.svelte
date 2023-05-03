@@ -11,6 +11,7 @@
 	}
 	let text 
 	$: text = $ui[appConfig.language].main
+	let buttonText
 	let userInput = $emptyUserData
     let selected = navOptions[0]
     let currentNav = 0
