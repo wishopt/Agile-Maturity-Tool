@@ -1,18 +1,8 @@
 <script>
-    import { capabilityList, emptyUserData } from "./stores/constants"
-    import dataManager from "./dataManager";
+    import { capabilityList } from "./stores/constants"
 
-    export let dimension
-
-    let capabilities = $capabilityList
-    let userInput
-
-    try {
-		userInput = dataManager.loadFromLocalStorage("dataUserInput")
-	} catch (error) {
-		console.log(error)
-		userInfo = $emptyUserData
-	}
+    export let tableData
+    export let isHidden
 
 </script>
 
@@ -30,8 +20,10 @@
         </th>
     </tr>
 
-    {#each Object.entries(userInput) as [capability_id, data]}
-    {#if capabilities[capability_id].dimension == dimension && !data.notRelevant}
+    {#each Object.entries(tableData) as [capability_id, data]}
+    {#if data.notRelevant && isHidden}
+    
+    {:else}
     <tr>
         <td class="middle">
             {capability_id}

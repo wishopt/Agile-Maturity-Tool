@@ -4,17 +4,11 @@
     import { Chart } from 'chart.js/dist/chart';
     import dataManager from './dataManager';
 
-    export let dimension
-    export let average
-    export let labels
-	export let isValues
-	export let shouldValues
+    export let chartData
 	export let images
 
     let ctx
 	let chart
-
-
 
     try {
 		  userInput = dataManager.loadFromLocalStorage("dataUserInput")
@@ -24,24 +18,24 @@
 	  }
 
 	let generatePNG = function () {
-		images[dimension] = chart.toBase64Image().replace(/^data:image\/(png|jpg);base64,/, "")
+		images[chartData.title] = chart.toBase64Image().replace(/^data:image\/(png|jpg);base64,/, "")
 	}
 
     let config = {
 		type: 'radar',
 		data: { 
-			labels: labels,
+			labels: chartData.labels,
 			datasets: [{
 					label: "is Value",
 					backgroundColor: 'rgba(255, 99, 132, 0.2)',
 					borderColor: 'rgba(255, 99, 132, 0.6)',
-					data: isValues
+					data: chartData.isValues
 				},
 				{
 					label: "should Value",
 					backgroundColor: 'rgba(15, 58, 128, 0.2)',
 					borderColor: 'rgba(15, 58, 128, 0.6)',
-					data: shouldValues
+					data: chartData.shouldValues
 				}],
 			},
 		options: {
@@ -66,7 +60,7 @@
 	})	
 
     function updateChart() {
-        ctx = document.getElementById("chart-" + dimension.replace(/\s+/g, '')).getContext("2d")
+        ctx = document.getElementById("chart-" + chartData.title.replace(/\s+/g, '')).getContext("2d")
 
         chart = new Chart(ctx, config)
         chart.update()
@@ -74,10 +68,9 @@
 
 </script>
 
-<h2>{dimension}</h2>
+<h2>{chartData.title}</h2>
 <div class="chart">
-    <canvas id="chart-{dimension.replace(/\s+/g, '')}"></canvas>
-    <!-- <p>Average: {average}</p> -->
+    <canvas id="chart-{chartData.title.replace(/\s+/g, '')}"></canvas>
 </div>
 
 <style>

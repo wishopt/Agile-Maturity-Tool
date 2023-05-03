@@ -1,7 +1,7 @@
 <script>
 
     import { onMount } from 'svelte'
-	import { emptyUserInfo, emptyUserData, dimensionDesc, capabilityList } from "./stores/constants"
+	import { emptyUserInfo, emptyUserData, dimensionDesc, categoryDesc, capabilityList } from "./stores/constants"
 	import EvaluationChart from './EvaluationChart.svelte'
     import EvaluationDataTable from './EvaluationDataTable.svelte'
 	import ExportButton from './ExportButton.svelte'
@@ -17,7 +17,8 @@
 	let averages = []
 	let images = { }
 	let dimensionDescriptions = $dimensionDesc
-	let capabilites = $capabilityList
+	let categoryDescriptions = $categoryDesc
+	let capabilities = $capabilityList
 
 	try {
 		userInput = dataManager.loadFromLocalStorage("dataUserInput")
@@ -58,12 +59,22 @@
 		}
 	}
 
-	function getLabels(dimension) {
+	function getLabels(input) {
+		// TODO: Clean up
 		let array = []
 
-		for (const [id, capabilityData] of Object.entries(capabilites)) {
-			if (capabilityData.dimension == dimension && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
-				array.push(capabilityData.title)
+		if (dimensionDescriptions.hasOwnProperty(input)) {
+			for (const [id, capabilityData] of Object.entries(capabilities)) {
+				if (capabilityData.dimension == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
+					array.push(capabilityData.title)
+				}
+			}
+		}
+		else {
+			for (const [id, capabilityData] of Object.entries(capabilities)) {
+				if (capabilityData.category == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
+					array.push(capabilityData.title)
+				}
 			}
 		}
 
@@ -72,12 +83,22 @@
 		return array
 	}
 
-	function getIsValues(dimension) {
+	function getIsValues(input) {
+		// TODO: Clean up
 		let array = []
 
-		for (const [id, capabilityData] of Object.entries(capabilites)) {
-			if (capabilityData.dimension == dimension && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
-				array.push(Number(userInput[id].isValue))
+		if (dimensionDescriptions.hasOwnProperty(input)) {
+			for (const [id, capabilityData] of Object.entries(capabilities)) {
+				if (capabilityData.dimension == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
+					array.push(Number(userInput[id].isValue))
+				}
+			}
+		}
+		else {
+			for (const [id, capabilityData] of Object.entries(capabilities)) {
+				if (capabilityData.category == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
+					array.push(Number(userInput[id].isValue))
+				}
 			}
 		}
 
@@ -86,18 +107,61 @@
 		return array
 	}
 
-	function getShouldValues(dimension) {
+	function getShouldValues(input) {
+		// TODO: Clean up
 		let array = []
 
-		for (const [id, capabilityData] of Object.entries(capabilites)) {
-			if (capabilityData.dimension == dimension && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
-				array.push(Number(userInput[id].shouldValue))
+		if (dimensionDescriptions.hasOwnProperty(input)) {
+			for (const [id, capabilityData] of Object.entries(capabilities)) {
+				if (capabilityData.dimension == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
+					array.push(Number(userInput[id].shouldValue))
+				}
+			}
+		}
+		else {
+			for (const [id, capabilityData] of Object.entries(capabilities)) {
+				if (capabilityData.category == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
+					array.push(Number(userInput[id].shouldValue))
+				}
 			}
 		}
 
 		// apply filter
 
 		return array
+	}
+
+	function generateTableData(input) {
+		// TODO: Clean up
+		let tableData = { }
+
+		if (dimensionDescriptions.hasOwnProperty(input)) {
+			for (const [key, value] of Object.entries(userInput)) {
+				if (capabilities[key].dimension == input) {
+					tableData[key] = value
+				}
+			}
+		} 
+		else {
+			for (const [key, value] of Object.entries(userInput)) {
+				console.log(input)
+				if (capabilities[key].category == input) {
+					tableData[key] = value
+				}
+			}
+		}
+		return tableData
+	}
+
+	function generateChartData(input) {
+		let chartData = { }
+
+		chartData.labels = getLabels(input)
+		chartData.isValues = getIsValues(input)
+		chartData.shouldValues = getShouldValues(input)
+		chartData.title = input
+
+		return chartData
 	}
 
 </script>
@@ -108,11 +172,21 @@
 
 	{#each Object.keys(dimensionDescriptions) as dimension}
 	
-	<EvaluationChart dimension={dimension} labels={getLabels(dimension)} isValues={getIsValues(dimension)} shouldValues={getShouldValues(dimension)} average={averages[dimension]} bind:images/>
+	<EvaluationChart chartData={generateChartData(dimension)} bind:images/>
 
-	<EvaluationDataTable dimension={dimension}/>
+	<EvaluationDataTable tableData={generateTableData(dimension)} isHidden={appConfig.hideIrrelevant}/>
 
 	{/each}
+
+	{#each Object.keys(categoryDescriptions) as category}
+
+	<EvaluationChart chartData={generateChartData(category)} bind:images/>
+
+	<EvaluationDataTable tableData={generateTableData(category)} isHidden={appConfig.hideIrrelevant}/>
+		
+	{/each}
+
+
 
 	<ExportButton data={userInput} images={images}/>
 </div>
