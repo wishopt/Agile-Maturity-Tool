@@ -7,7 +7,7 @@
 
 	let appConfig = {
 		hideIrrelevant: false,
-		language: "en"
+		language: "de"
 	}
 	let text 
 	$: text = $ui[appConfig.language].main
@@ -61,12 +61,12 @@
 	<h1>Agile Maturity Tool - Demo</h1>
 	<div>
 		<div id="languageSwitch">
-			<span class="lang">EN</span>
+			<span class="lang">DE</span>
 			<label class="switch" on:change={changeLanguage}>
 				<input type="checkbox">
 				<span class="slider round"></span>
 			</label>
-			<span class="lang"> DE</span>
+			<span class="lang"> EN</span>
 		</div>
 
 		{#key unique}

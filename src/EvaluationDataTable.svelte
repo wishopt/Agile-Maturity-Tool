@@ -5,8 +5,6 @@
     export let isHidden
     export let language
 
-    console.log(language)
-
     let text = $ui[language].evaluationDataTable
 </script>
 
