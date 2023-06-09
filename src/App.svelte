@@ -8,7 +8,7 @@
 	let appConfig = {
 		hideIrrelevant: false,
 		language: "de",
-		currentFilter: "it"
+		currentFilter: "none"
 	}
 	let text 
 	$: text = $ui[appConfig.language].main
