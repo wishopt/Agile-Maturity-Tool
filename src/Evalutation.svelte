@@ -65,14 +65,14 @@
 
 		if (dimensionDescriptions.hasOwnProperty(input)) {
 			for (const [id, capabilityData] of Object.entries(capabilities)) {
-				if (capabilityData.dimension == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
+				if (capabilityData.dimension == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")) {
 					array.push(capabilityData.title)
 				}
 			}
 		}
 		else {
 			for (const [id, capabilityData] of Object.entries(capabilities)) {
-				if (capabilityData.category == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
+				if (capabilityData.category == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")) {
 					array.push(capabilityData.title)
 				}
 			}
@@ -89,14 +89,14 @@
 
 		if (dimensionDescriptions.hasOwnProperty(input)) {
 			for (const [id, capabilityData] of Object.entries(capabilities)) {
-				if (capabilityData.dimension == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
+				if (capabilityData.dimension == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")) {
 					array.push(Number(userInput[id].isValue))
 				}
 			}
 		}
 		else {
 			for (const [id, capabilityData] of Object.entries(capabilities)) {
-				if (capabilityData.category == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
+				if (capabilityData.category == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")) {
 					array.push(Number(userInput[id].isValue))
 				}
 			}
@@ -113,14 +113,14 @@
 
 		if (dimensionDescriptions.hasOwnProperty(input)) {
 			for (const [id, capabilityData] of Object.entries(capabilities)) {
-				if (capabilityData.dimension == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
+				if (capabilityData.dimension == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")) {
 					array.push(Number(userInput[id].shouldValue))
 				}
 			}
 		}
 		else {
 			for (const [id, capabilityData] of Object.entries(capabilities)) {
-				if (capabilityData.category == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant)) {
+				if (capabilityData.category == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")) {
 					array.push(Number(userInput[id].shouldValue))
 				}
 			}
