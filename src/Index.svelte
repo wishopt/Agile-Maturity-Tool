@@ -6,6 +6,7 @@
     import dataManager from "./dataManager";
 
     export let appConfig
+
     let text = $ui[appConfig.language].index
     let files
     let filetype
@@ -32,7 +33,7 @@
         } else if (filetype == "xlsx") {
             importXLSX(data)
         } else {
-            console.log("3")
+            alert("The import must be a .csv or .xlsx file")
         }
     }
 
@@ -102,7 +103,6 @@
     <button on:click={deleteLocalStorage}><b>{text.deleteButton}</b></button>
 </div>
 
-
 <style>
     
     .delete {
@@ -123,7 +123,6 @@
     }
 
     .import {
-        border: solid;
         border-width: 1px;
         padding: none;
         margin: auto;
