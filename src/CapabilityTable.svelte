@@ -21,7 +21,6 @@
 		userInput = $emptyUserData
 	}
 
-
 </script>
 
 <span style="color:red;">{text.is}</span> | <span style="color:blue;">{text.should}</span>
@@ -50,7 +49,7 @@
 
 	<div class="capabilities">
 		{#each Object.entries(capabilities) as [id, capability]}
-		{#if capability.dimension == dimension && !(userInput[id].notRelevant && appConfig.hideIrrelevant)}
+		{#if capability.dimension == dimension && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")}
 		<TableRow capabilityID={id} userInput={userInput} bind:appConfig/>
 		{/if}
 		{/each}

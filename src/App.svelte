@@ -7,7 +7,8 @@
 
 	let appConfig = {
 		hideIrrelevant: false,
-		language: "de"
+		language: "de",
+		currentFilter: "it"
 	}
 	let text 
 	$: text = $ui[appConfig.language].main
@@ -80,8 +81,18 @@
 
 		{#if currentNav != 0}
 		<button id="hide" on:click={toggleHidden}>{text.hideButton}</button>
-		{/if}
 		
+
+		<!-- ToDo: Dynamically generate dropdown from object, let user append to that object in edit mode -->
+		<label for="filters">Filtern:</label>
+		<select id="filters" name="filters" bind:value={appConfig.currentFilter}>
+			<option value="none">keine</option>
+			<option value="it">IT</option>
+			<option value="organisation">Organisation</option>
+			<option value="unternehmensentwicklung">Unternehmensentwicklung</option>
+			<option value="innovation">Innovation</option>
+		  </select>
+		{/if}
 		
 		<div class="page">
 			<h2>{text.nav[selected.page]}</h2>
