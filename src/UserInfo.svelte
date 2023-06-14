@@ -1,11 +1,20 @@
 
 <script>
     import dataManager from "./dataManager";
-    import { emptyUserInfo, ui } from "./stores/constants"
+    import { emptyUserInfo, ui, defaultPresets } from "./stores/constants"
 
 	export let appConfig
 
 	let text = $ui[appConfig.language].userInfo
+	
+	let presets
+
+	try {
+		presets = dataManager.loadFromLocalStorage("dataUserPresets")
+	} catch (error) {
+		console.log(error)
+		presets = $defaultPresets
+	}
 
 	let userInfo
 
@@ -32,9 +41,14 @@
 	<label for="projekt">{text.project}</label>
 	<input type="text" id="projekt" name="projekt" class="frontmatter" bind:value={userInfo.project} on:change={saveUserInfo}>
 
-
 	<label for="beschreibung">{text.description}</label>
 	<textarea id="beschreibung" name="beschreibung" class="frontmatter" bind:value={userInfo.description} on:change={saveUserInfo}></textarea>
+
+	<label for="funktion">{text.function}</label>
+	<select id="funktion" name="funktion" class="frontmatter" bind:value={userInfo.function} on:change={saveUserInfo}>
+		{#each Object.keys(presets) as name}
+		<option value="{name}">{name}</option>
+		{/each}
 
 </form>
 

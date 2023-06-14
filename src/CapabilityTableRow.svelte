@@ -62,9 +62,10 @@
 		</div>
 	</div>
 
-	<div class="notrelevant">
+<!-- 	<div class="notrelevant">
 		<input type="checkbox" bind:checked={userInput[capabilityID].notRelevant} on:change={reloadConfig}>
-	</div>
+	</div> 
+-->
 
 	<textarea class="col" bind:value={userInput[capabilityID].explanation} on:change={dataManager.saveToLocalStorage("dataUserInput", userInput)}></textarea>
 	

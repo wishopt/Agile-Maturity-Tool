@@ -1,7 +1,7 @@
 <script>
 
     import { onMount } from 'svelte'
-	import { emptyUserInfo, emptyUserData, dimensionDesc, categories, capabilityList } from "./stores/constants"
+	import { emptyUserInfo, emptyUserData, dimensionDesc, categories, capabilityList, defaultFilters, capabilityConverter, topicConverter } from "./stores/constants"
 	import EvaluationChart from './EvaluationChart.svelte'
     import EvaluationDataTable from './EvaluationDataTable.svelte'
 	import ExportButton from './ExportButton.svelte'
@@ -65,14 +65,14 @@
 
 		if (dimensionDescriptions.hasOwnProperty(input)) {
 			for (const [id, capabilityData] of Object.entries(capabilities)) {
-				if (capabilityData.dimension == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")) {
+				if (capabilityData.dimension == input) {
 					array.push(capabilityData.title)
 				}
 			}
 		}
 		else {
 			for (const [id, capabilityData] of Object.entries(capabilities)) {
-				if (capabilityData.category == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")) {
+				if (capabilityData.category == input) {
 					array.push(capabilityData.title)
 				}
 			}
@@ -89,14 +89,14 @@
 
 		if (dimensionDescriptions.hasOwnProperty(input)) {
 			for (const [id, capabilityData] of Object.entries(capabilities)) {
-				if (capabilityData.dimension == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")) {
+				if (capabilityData.dimension == input) {
 					array.push(Number(userInput[id].isValue))
 				}
 			}
 		}
 		else {
 			for (const [id, capabilityData] of Object.entries(capabilities)) {
-				if (capabilityData.category == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")) {
+				if (capabilityData.category == input) {
 					array.push(Number(userInput[id].isValue))
 				}
 			}
@@ -113,14 +113,14 @@
 
 		if (dimensionDescriptions.hasOwnProperty(input)) {
 			for (const [id, capabilityData] of Object.entries(capabilities)) {
-				if (capabilityData.dimension == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")) {
+				if (capabilityData.dimension == input) {
 					array.push(Number(userInput[id].shouldValue))
 				}
 			}
 		}
 		else {
 			for (const [id, capabilityData] of Object.entries(capabilities)) {
-				if (capabilityData.category == input && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")) {
+				if (capabilityData.category == input) {
 					array.push(Number(userInput[id].shouldValue))
 				}
 			}
@@ -163,6 +163,17 @@
 		return chartData
 	}
 
+	function arrayIntersection(array1, array2) {
+		// refactor to avoid duplication
+		let intersection
+		intersection = array1.filter(item => array2.includes(item))
+		if (intersection.length > 0) {
+			return true
+		} else {
+			return false
+		}
+	}
+
 </script>
 
 <div id="auswertung">
@@ -170,19 +181,26 @@
 	<ExportButton data={userInput} images={images} appConfig={appConfig}/>
 
 	{#each Object.keys(dimensionDescriptions) as dimension}
-	
+
+	{#if appConfig.checkedFilters[$capabilityConverter[dimension]]}
+
 	<EvaluationChart chartData={generateChartData(dimension)} bind:images language={appConfig.language}/>
 
 	<EvaluationDataTable tableData={generateTableData(dimension)} isHidden={appConfig.hideIrrelevant} language={appConfig.language}/>
-
+	{/if}
+	
 	{/each}
 
 	{#each Object.values(categoryDescriptions) as category}
+
+	{#if appConfig.checkedFilters[$topicConverter[category]]}
 
 	<EvaluationChart chartData={generateChartData(category)} bind:images language={appConfig.language}/>
 
 	<EvaluationDataTable tableData={generateTableData(category)} isHidden={appConfig.hideIrrelevant} language={appConfig.language}/>
 		
+	{/if}
+
 	{/each}
 
 

@@ -1694,6 +1694,7 @@ export const levelAmount = readable(5)
 
 export const emptyUserInfo = readable({
   company: '',
+  function: '',
   department: '',
   project: '',
   description: ''
@@ -2677,6 +2678,7 @@ export const ui = readable({
     userInfo: {
       company: "Company:",
       organisation: "Organisation:",
+      function: "Function",
       project: "Name of agile project:",
       description: "Description:"
     },
@@ -2722,6 +2724,7 @@ export const ui = readable({
     userInfo: {
       company: "Firma:",
       organisation: "Organisation:",
+      function: "Funktion",
       project: "Name des agilen Projektes:",
       description: "Beschreibung:"
     },
@@ -2744,4 +2747,120 @@ export const ui = readable({
       button: "Resultate exportieren"
     }
   }
+})
+
+export const defaultFilters = readable({
+  'Strategy & Purpose': ['1-01','1-02','1-03','1-04','1-05','1-06','1-07','1-08','1-09','1-10','1-11','1-12','1-13','1-14','1-15','1-16','1-17','1-18','1-19','1-20','1-21','1-22'],
+  Structure: ['2-01','2-02','2-03','2-04','2-05','2-06','2-07','2-08','2-09','2-10','2-11','2-12','2-13','2-14','2-15','2-16','2-17','2-18'],
+  Process: ['3-01','3-02','3-03','3-04','3-05','3-06','3-07','3-08','3-09','3-10','3-11','3-12','3-13','3-14','3-15','3-16','3-17'],
+  IT: ['4-01','4-02','4-03','4-04','4-05','4-06','4-07','4-08','4-09','4-10','4-11','4-12','4-13','4-14','4-15'],
+  People: ['5-01','5-02','5-03','5-04','5-05','5-06','5-07','5-08','5-09','5-10','5-11','5-12','5-13','5-14','5-15','5-16','5-17','5-18','5-19','5-20','5-21','5-22','5-23','5-24','5-25','5-26','5-27','5-28'],
+  'Customer-Centric Product Development': ['6-01','6-02','6-03','6-04','6-05','6-06','6-07','6-08','6-09','6-10','6-11','6-12'],
+  Leadership: ['7-01','7-02','7-03','7-04','7-05','7-06','7-07','7-08','7-09','7-10','7-11','7-12','7-13','7-14','7-15','7-16','7-17','7-18','7-19','7-20','7-21','7-22','7-23'],
+  Adaptability: ['1-01','1-02','1-03','1-04','1-05','1-07','1-10','2-13','2-14','2-15','2-17','2-18','3-02','3-03','4-07','4-10','5-08','5-09','5-12','5-13','5-14','5-15','5-16','6-04','6-05','6-06','6-11','6-12','7-01','7-02','7-15'],
+  'CI-CD': ['4-04','4-08','4-12','4-13','4-14','6-09','6-10'],
+  Collaboration: ['1-11','1-12','1-13','1-15','5-05','5-06','5-07','5-17','5-22','6-03','7-04','7-11','7-19'],
+  Communication: ['1-14','1-22','2-08','2-09','2-16','4-06','4-15','5-21','5-25','7-14','7-16','7-17','7-18','7-21'],
+  'Customer Focus': ['5-28','6-01','6-02','7-10'],
+  Efficiency: ['3-05','3-06','3-12','3-13','3-14','3-17','4-01','4-03','5-01','5-18','7-22'],
+  Innovation: ['1-08','1-09','2-12','3-01','3-04','3-15','4-02','5-02','5-03','5-10','5-11','5-24','7-09','7-13'],
+  'Knowledge Management': ['1-06','1-18','1-20','1-21','2-10','2-11','3-07','3-08','3-09','3-10','3-16','4-09','4-11','5-04','6-07','7-12','7-20'],
+  'Organizational and Management Structures': ['1-16','1-17','1-19','2-01','2-02','2-03','2-04','2-05','2-06','2-07','3-11','4-05','5-19','5-20','5-23','5-26','5-27','6-08','7-03','7-07','7-08','7-23']
+})
+
+export const defaultPresets = readable({
+  IT: {
+    'Strategy & Purpose': false,
+    Structure: false,
+    Process: false,
+    IT: true,
+    People: false,
+    'Customer-Centric Product Development': false,
+    Leadership: false,
+    Adaptability: false,
+    'CI-CD': true,
+    Collaboration: false,
+    Communication: false,
+    'Customer Focus': false,
+    Efficiency: false,
+    Innovation: false,
+    'Knowledge Management': false,
+    'Organizational and Management Structures': false,
+  },
+  Projektleitung: {
+    'Strategy & Purpose': true,
+    Structure: true,
+    Process: true,
+    IT: false,
+    People: true,
+    'Customer-Centric Product Development': true,
+    Leadership: true,
+    Adaptability: false,
+    'CI-CD': false,
+    Collaboration: true,
+    Communication: true,
+    'Customer Focus': true,
+    Efficiency: true,
+    Innovation: true,
+    'Knowledge Management': true,
+    'Organizational and Management Structures': false,
+  },
+  Organisation: {
+    'Strategy & Purpose': true,
+    Structure: true,
+    Process: true,
+    IT: false,
+    People: false,
+    'Customer-Centric Product Development': false,
+    Leadership: false,
+    Adaptability: false,
+    'CI-CD': false,
+    Collaboration: false,
+    Communication: true,
+    'Customer Focus': false,
+    Efficiency: false,
+    Innovation: false,
+    'Knowledge Management': true,
+    'Organizational and Management Structures': true,
+  },
+  'anderes (alle Capabilites anzeigen)': {
+    'Strategy & Purpose': true,
+    Structure: true,
+    Process: true,
+    IT: true,
+    People: true,
+    'Customer-Centric Product Development': true,
+    Leadership: true,
+    Adaptability: false,
+    'CI-CD': false,
+    Collaboration: false,
+    Communication: false,
+    'Customer Focus': false,
+    Efficiency: false,
+    Innovation: false,
+    'Knowledge Management': false,
+    'Organizational and Management Structures': false,
+  },
+})
+
+export const capabilityConverter = readable({
+  'Strategie und Zweck': 'Strategy & Purpose',
+  Struktur: "Structure",
+  Prozess: "Process",
+  IT: "IT",
+  Menschen: "People",
+  "Kundenzentrierte Produktentwicklung": 'Customer-Centric Product Development',
+  "Führung": "Leadership",
+})
+
+export const topicConverter = readable({
+  "Anpassungsfähigkeit": "Adaptability",
+  "CI-CD": 'CI-CD',
+  "Kollaboration": "Collaboration",
+  "Kommunikation": "Communication",
+  "Kundenfokus": 'Customer Focus',
+  "Effizienz": "Efficiency",
+  "Innovation": "Innovation",
+  "Wissensmanagement": 'Knowledge Management',
+  "Organisations- und Managementstrukturen": 'Organizational and Management Structures',
 })

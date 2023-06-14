@@ -8,7 +8,25 @@
 	let appConfig = {
 		hideIrrelevant: false,
 		language: "de",
-		currentFilter: "none"
+		currentFilter: [],
+		checkedFilters: {
+			'Strategy & Purpose': true,
+  			Structure: true,
+  			Process: true,
+		  	IT: true,
+			People: true,
+  			'Customer-Centric Product Development': true,
+  			Leadership: true,
+			Adaptability: false,
+			'CI-CD': false,
+			Collaboration: false,
+			Communication: false,
+			'Customer Focus': false,
+			Efficiency: false,
+			Innovation: false,
+			'Knowledge Management': false,
+			'Organizational and Management Structures': false,
+		}
 	}
 	let text 
 	$: text = $ui[appConfig.language].main
@@ -80,18 +98,7 @@
 		</ul>
 
 		{#if currentNav != 0}
-		<button id="hide" on:click={toggleHidden}>{text.hideButton}</button>
-		
-
-		<!-- ToDo: Dynamically generate dropdown from object, let user append to that object in edit mode -->
-		<label for="filters">Filtern:</label>
-		<select id="filters" name="filters" bind:value={appConfig.currentFilter}>
-			<option value="none">keine</option>
-			<option value="it">IT</option>
-			<option value="organisation">Organisation</option>
-			<option value="unternehmensentwicklung">Unternehmensentwicklung</option>
-			<option value="innovation">Innovation</option>
-		  </select>
+		<!-- <button id="hide" on:click={toggleHidden}>{text.hideButton}</button> -->
 		{/if}
 		
 		<div class="page">

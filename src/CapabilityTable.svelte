@@ -1,11 +1,13 @@
 <script>
 
-    import {ui, levelDesc, dimensionDesc, capabilityList, levelAmount, emptyUserData} from "./stores/constants"
+    import {ui, levelDesc, dimensionDesc, capabilityList, levelAmount, emptyUserData, defaultFilters, categories, defaultPresets, emptyUserInfo, capabilityConverter} from "./stores/constants"
     import TableRow from "./CapabilityTableRow.svelte"
 	import dataManager from "./dataManager"
+    import App from "./App.svelte";
 
 	export let appConfig
 
+	let categoryNames = $categories.en
 	let text = $ui[appConfig.language].capabilityTable
 	let numLevels = $levelAmount
 	let levelDescriptions = $levelDesc[appConfig.language]
@@ -13,7 +15,11 @@
 	let capabilities = $capabilityList[appConfig.language]
 	let reload = {}
 
+	let editMode = false
+
 	let userInput
+	let selectedPreset = "alles"
+
 	try {
 		userInput = dataManager.loadFromLocalStorage("dataUserInput")
 	} catch (error) {
@@ -21,19 +27,149 @@
 		userInput = $emptyUserData
 	}
 
+	let userInfo
+
+	try {
+		userInfo = dataManager.loadFromLocalStorage("dataUserInfo")
+	} catch (error) {
+		console.log(error)
+		userInfo = $emptyUserInfo
+	}
+
+		function openFilterPopUp() {
+		document.getElementById("overlay").style.display = "block"
+	}
+
+	let presets
+
+	try {
+		presets = dataManager.loadFromLocalStorage("dataUserPresets")
+	} catch (error) {
+		console.log(error)
+		presets = $defaultPresets
+	}
+
+	let filters
+
+	try {
+		filters = dataManager.loadFromLocalStorage("dataUserFilters")
+	} catch (error) {
+		console.log(error)
+		filters = $defaultFilters
+	}
+
+
+	function closeFilterPopUp() {
+
+		initFilter()
+
+		document.getElementById("overlay").style.display = "none"
+	}
+
+	function initFilter() {
+		let newFilter = []
+
+		for (filter in appConfig.checkedFilters) {
+			let idArray = filters[filter]
+
+			if (appConfig.checkedFilters[filter]) {
+				for (id of idArray) {
+					newFilter.push(id)
+				}
+			}
+		}
+
+		appConfig.currentFilter = newFilter
+	}
+
+	function resetFilter() {
+		appConfig.currentFilter = []
+		for (filter in appConfig.checkedFilters) {
+			appConfig.checkedFilters[filter] = false
+		}
+
+		selectedPreset = ""
+	}
+
+	function updateFilters() {
+		appConfig.checkedFilters = presets[selectedPreset]
+	}
+
+	function arrayIntersection(array1, array2) {
+		let intersection
+		intersection = array1.filter(item => array2.includes(item))
+		if (intersection.length > 0) {
+			return true
+		} else {
+			return false
+		}
+	}
+
+	function toggleEditMode(event) {
+		if (editMode) {
+			document.getElementById(event.srcElement.id).textContent = "bearbeiten"
+
+			let newFilter = appConfig.checkedFilters
+
+			console.log(newFilter)
+			console.log()
+
+			presets[event.srcElement.value] = newFilter
+
+
+			dataManager.saveToLocalStorage("dataUserPresets", presets)	
+
+			// let checkboxes = document.collection = document.getElementsByClassName("filterCheckbox")
+			// for (box in checkboxes) {
+			// 	console.log(box.style)
+			// }
+			
+		} else {
+			document.getElementById(event.srcElement.id).textContent = "speichern"
+			// let checkboxes = document.collection = document.getElementsByClassName("filterCheckbox")
+			// for (box in checkboxes) {
+			// box.style.accentColor = 'red';
+			// }
+		}
+		
+		editMode = !editMode
+	}
+
+	function resetPresets() {
+		presets = $defaultPresets
+
+		dataManager.saveToLocalStorage("dataUserPresets", presets)	
+	}
+
+	function addPreset() {
+		let name = prompt()
+		presets[name] = $defaultPresets['anderes (alle Capabilites anzeigen)']
+	}
+
+	selectedPreset = userInfo.function
+
+	updateFilters()
+
+	initFilter()
+
+
 </script>
+
+<button on:click={openFilterPopUp}>Filter Anwenden</button>
+
+<br>
 
 <span style="color:red;">{text.is}</span> | <span style="color:blue;">{text.should}</span>
 {#each Object.entries(dimensionDescriptions) as [dimension, description]}
-<div class="capability_container">
 
+<div class="capability_container">
+	{#if arrayIntersection(appConfig.currentFilter, filters[$capabilityConverter[dimension]])}
 	<div class="titlebar">
 		<details class="col dimensionDescription">
 			<summary class="summary-level">{dimension}</summary>
 			{description}
 		</details>
 	</div>
-
 	<div class="row titles">
 		<div class="empty col"></div>
 		{#each Array(numLevels) as _, i}
@@ -42,23 +178,117 @@
 				{levelDescriptions[i]}
 			</details>
 		{/each}
-		<span class="col relevant" id="relevant">{text.notRelevant}</span>
+		<!-- <span class="col relevant" id="relevant">{text.notRelevant}</span> -->
 		<span class="col explanation" id="explanation">{text.explanation}</span>
-	
 	</div>
-
 	<div class="capabilities">
 		{#each Object.entries(capabilities) as [id, capability]}
-		{#if capability.dimension == dimension && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && (userInput[id].tags.includes(appConfig.currentFilter) || appConfig.currentFilter == "none")}
+		{#if capability.dimension == dimension && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && appConfig.currentFilter.includes(id)}
 		<TableRow capabilityID={id} userInput={userInput} bind:appConfig/>
 		{/if}
 		{/each}
 	</div>
+	{/if}
 
 </div>
+
 {/each}
 
+<div id="overlay">
+	<div id="filterwindow">
+		<h2>Capabilites filtern</h2>
+
+		<div class="filterwindowContent">
+			<div class="filterContainer">
+				<h3>Kategorien</h3>
+				{#each Object.entries(filters) as [name, idArray]}
+					{#if !(name in categoryNames)}
+						<div class="filterRow">
+							<input type="checkbox" name="filter" id="filter_{name}" bind:checked={appConfig.checkedFilters[name]}>
+							<span>{name}</span>
+						</div>
+						<br>	
+					{/if}
+				{/each}
+			</div>
+			<div class="filterContainer">
+				<h3>Themen</h3>
+				{#each Object.entries(filters) as [name, idArray]}
+					{#if name in categoryNames}
+						<div class="filterRow">
+							<input type="checkbox" name="filter" id="filter_{name}" class="filterCheckbox" bind:checked={appConfig.checkedFilters[name]}>
+							<span>{name}</span>
+						</div>
+						<br>	
+					{/if}
+				{/each}
+			</div>
+			<div class="filterContainer">
+				<h3>Presets</h3>
+				{#each Object.entries(presets) as [title, filterNames]}
+				<div class="preset">
+					<input type="radio" name="selectedPreset" id="{title}" bind:group={selectedPreset} value="{title}" on:change={updateFilters}>
+					<span >{title}</span>
+					<button id="btn_{title}" value="{title}" on:click={toggleEditMode}>bearbeiten</button>
+					<br>
+				</div>
+				{/each}
+			</div>
+		</div>
+
+		<button on:click={closeFilterPopUp}>Schliessen</button>
+
+		<button on:click={resetFilter}>Alle Filter entfernen</button>
+
+		<button on:click={resetPresets}>Presets zurücksetzen</button>
+
+		<button on:click={addPreset}>Preset hinzufügen</button>
+
+	</div>
+</div>
+
 <style>
+	#overlay {
+		position: fixed; /* Sit on top of the page content */
+		display: none; /* Hidden by default */
+		width: 100%; /* Full width (cover the whole page) */
+		height: 100%; /* Full height (cover the whole page) */
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+		z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+	}
+
+	#filterwindow {
+		padding: 1%;
+		background-color: white;
+		margin: auto;
+		text-align: left;
+	}
+
+	.filterwindowContent {
+		display: inline-block;
+	}
+
+	.filterContainer {
+		float: left;
+		padding-right: 1em;
+	}
+
+	.filterRow {
+		font-size: small;
+	}
+
+	.filterCheckbox {
+		color: blue;
+	}
+
+	.preset {
+		display: flex,
+	}
+
     #explanation {
 		padding-left: 0;
 		height: 1em;
@@ -85,7 +315,7 @@
 	}
 
 	.explanation {
-		flex: 3;
+		flex: 3.3;
 		text-align: left;
 		padding-bottom: 1em;
 		padding-left: 0;
@@ -110,11 +340,6 @@
 
 	.row {
 		display: flex;
-	}
-
-	.relevant {
-		width: 10%;
-		padding-top: 10px;
 	}
 
 	details {
