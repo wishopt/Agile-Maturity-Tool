@@ -18,7 +18,8 @@
 	let editMode = false
 
 	let userInput
-	let selectedPreset = "alles"
+	let selectedPreset = "anderes (alle Capabilites anzeigen)"
+	let emptyPreset = "anderes (alle Capabilites anzeigen)"
 
 	try {
 		userInput = dataManager.loadFromLocalStorage("dataUserInput")
@@ -106,39 +107,36 @@
 	}
 
 	function toggleEditMode(event) {
-		if (editMode) {
-			document.getElementById(event.srcElement.id).textContent = "bearbeiten"
+		if (editMode && event.target.textContent == "speichern") {
+			event.target.textContent = "bearbeiten"
 
 			let newFilter = appConfig.checkedFilters
 
-			console.log(newFilter)
-			console.log()
-
 			presets[event.srcElement.value] = newFilter
-
 
 			dataManager.saveToLocalStorage("dataUserPresets", presets)	
 
-			// let checkboxes = document.collection = document.getElementsByClassName("filterCheckbox")
-			// for (box in checkboxes) {
-			// 	console.log(box.style)
-			// }
+			editMode = !editMode
 			
-		} else {
-			document.getElementById(event.srcElement.id).textContent = "speichern"
-			// let checkboxes = document.collection = document.getElementsByClassName("filterCheckbox")
-			// for (box in checkboxes) {
-			// box.style.accentColor = 'red';
-			// }
+		} else if (!editMode && event.target.textContent == "bearbeiten") {
+			event.target.textContent = "speichern"
+
+			selectedPreset = event.srcElement.value
+
+			updateFilters()
+
+			initFilter()
+
+			editMode = !editMode
 		}
-		
-		editMode = !editMode
 	}
 
 	function resetPresets() {
 		presets = $defaultPresets
 
 		dataManager.saveToLocalStorage("dataUserPresets", presets)	
+
+		alert("Presets zurückgesetzt")
 	}
 
 	function addPreset() {
@@ -146,7 +144,12 @@
 		presets[name] = $defaultPresets['anderes (alle Capabilites anzeigen)']
 	}
 
-	selectedPreset = userInfo.function
+	if (userInfo.function) {
+		selectedPreset = userInfo.function
+	} else {
+		selectedPreset = emptyPreset
+	}
+	
 
 	updateFilters()
 
@@ -178,7 +181,6 @@
 				{levelDescriptions[i]}
 			</details>
 		{/each}
-		<!-- <span class="col relevant" id="relevant">{text.notRelevant}</span> -->
 		<span class="col explanation" id="explanation">{text.explanation}</span>
 	</div>
 	<div class="capabilities">
@@ -236,13 +238,15 @@
 			</div>
 		</div>
 
-		<button on:click={closeFilterPopUp}>Schliessen</button>
+		<div class="buttonRow">
+			<button on:click={closeFilterPopUp}>Schliessen</button>
 
-		<button on:click={resetFilter}>Alle Filter entfernen</button>
+			<button on:click={resetFilter}>Alle Filter entfernen</button>
+	
+			<button on:click={addPreset}>Preset hinzufügen</button>
 
-		<button on:click={resetPresets}>Presets zurücksetzen</button>
-
-		<button on:click={addPreset}>Preset hinzufügen</button>
+			<button on:click={resetPresets} style="color:red;">Presets zurücksetzen</button>
+		</div>
 
 	</div>
 </div>
@@ -265,7 +269,9 @@
 		padding: 1%;
 		background-color: white;
 		margin: auto;
+		margin-top: 5em;
 		text-align: left;
+		width: fit-content;
 	}
 
 	.filterwindowContent {
@@ -279,6 +285,10 @@
 
 	.filterRow {
 		font-size: small;
+	}
+
+	.buttonRow {
+
 	}
 
 	.filterCheckbox {
