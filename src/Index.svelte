@@ -39,8 +39,10 @@
 
     function importXLSX(data) {
         let newUserInput = $emptyUserData
+        let newUserInfo = $emptyUserInfo
         let workbook = XLSX.read(data, {type: "binary"})
         const inputData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetNames[0]])
+        const infoData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetNames[1]])
         for (const capability of inputData) {
             let id = capability.ID
             newUserInput[id].explanation = capability["Comments"]
@@ -48,8 +50,17 @@
             newUserInput[id].shouldValue = capability["Should Value"]
             newUserInput[id].notRelevant = capability["Not Relevant"]
         }
-        
+
         dataManager.saveToLocalStorage("dataUserInput", newUserInput)
+        
+        newUserInfo.company = infoData[0].company
+        newUserInfo.function = infoData[0].function
+        newUserInfo.department = infoData[0].department
+        newUserInfo.project = infoData[0].project
+        newUserInfo.description = infoData[0].description
+
+               
+        dataManager.saveToLocalStorage("dataUserInfo", newUserInfo)
         location.reload()
     }
 
