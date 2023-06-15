@@ -24,7 +24,7 @@
 		userInput = dataManager.loadFromLocalStorage("dataUserInput")
 	} catch (error) {
 		console.log(error)
-		userInfo = $emptyUserData
+		userInput = $emptyUserData
 	}
 
 	try {

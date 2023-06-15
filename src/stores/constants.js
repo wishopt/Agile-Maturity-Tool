@@ -2668,7 +2668,6 @@ export const ui = readable({
         evaluation: "Evaluation"
       }
     },
-
     index: {
       intro: "<p>Welcome to the demo page of the Agile Maturity Tool!</p><p>This is a demo version of the tool to illustrate the functionality. The tool is still under development, which is why the visual aspects of the tool are not yet fully developed.<p><p>The agile maturity model was developed in Competence Centre 08 and 09. The aim is to assess the maturity level of agile skills, to derive the agile maturity level of the company and to provide indicative recommendations for action to build up skills. </p><p>The model includes the following artefacts:</p><ul><li>The <b>Agile Maturity Grid</b> provides an overview of necessary agile capabilities including a description and a mapping to the associated agility dimension</li><li>The benefit of the <b>Quick Check</b> lies in the quick assessment of the existing maturity level of the corresponding agile capabilities as well as an indication of the agile maturity level of the company</li><li>The <b>Tool</b> serves to complement the first two artefacts and allows users to make indicative recommendations for action to improve the agile capabilities and thus the agile maturity of the company</li><li>The <b>Tool</b> serves to complement the first two artefacts and allows users to make indicative recommendations for action to improve the agile capabilities and thus the agile maturity of the company</li></ul><p>All three artefacts can be applied to different areas of the company. The prerequisite for this is that the business unit in question is at the beginning or in the middle of an agile transformation. The model should be completed by a representative number of employees. It should be noted that different departments and hierarchical levels are also taken into account in order to contain as realistic an estimate as possible of the extent to which the agile skills listed are being implemented.</p>",
       deleteButtonText: 'If you\'ve already tested a previous version of the tool in the same browser, the existing data in the local storage might break the tool. If this happens, you can click on the "Delete Data" button below.',
@@ -2686,7 +2685,16 @@ export const ui = readable({
       is: "Is = Red",
       should: "Should = Blue",
       notRelevant: "Not relevant",
-      explanation: "Explanation"   
+      explanation: "Explanation",
+      applyFilter: "Apply filter",
+      filterClose: "Close",
+      filterRemove: "Remove all filters",
+      filterAddPreset: "Add preset",
+      filterResetPresets: "Reset all presets",
+      edit: "Edit",
+      categories: "Categories",
+      topics: "Topics",
+      filterCapabilites: "Filter capabilites"
     },
     evaluationDataTable: {
       id: "ID",
@@ -2699,6 +2707,30 @@ export const ui = readable({
     },
     exportButton: {
       button: "Export Results"
+    },
+    categories: {
+      'Strategy & Purpose': 'Strategy & Purpose',
+      "Structure": "Structure",
+      "Process": "Process",
+      "People": "People",
+      'Customer-Centric Product Development': "Customer-Centric Product Development",
+      "Leadership": "Leadership",
+      IT: "IT",
+      "Adaptability": "Adaptability",
+      "CI-CD": 'CI-CD',
+      "Collaboration": "Collaboration",
+      "Communication": "Communication",
+      "Customer Focus": 'Customer Focus',
+      "Efficiency": "Efficiency",
+      "Innovation": "Innovation",
+      "Knowledge Management": 'Knowledge Management',
+      "Organizational and Management Structures": 'Organizational and Management Structures',
+    },
+    presets: {
+      IT: "IT",
+      projectManager: "Project Manager",
+      organisation: "Organisation",
+      other: "Other (display all capabilities)"
     }
   },
   de: {
@@ -2732,7 +2764,16 @@ export const ui = readable({
       is: "Ist = Rot",
       should: "Soll = Blau",
       notRelevant: "Nicht relevant",
-      explanation: "Begründung"   
+      explanation: "Begründung",
+      applyFilter: "Filter anwenden",
+      filterClose: "Schliessen",
+      filterRemove: "Alle Filter entfernen",
+      filterAddPreset: "Preset hinzufügen",
+      filterResetPresets: "Presets zurücksetzen",
+      edit: "bearbeiten",
+      categories: "Kategorien",
+      topics: "Themen",
+      filterCapabilites: "Capabilites filtern"
     },
     evaluationDataTable: {
       id: "ID",
@@ -2745,6 +2786,30 @@ export const ui = readable({
     },
     exportButton: {
       button: "Resultate exportieren"
+    },
+    categories: {
+      'Strategy & Purpose': 'Strategie und Zweck',
+      "Structure": "Struktur",
+      "Process": "Prozess",
+      "People": "Menschen",
+      'Customer-Centric Product Development': "Kundenzentrierte Produktentwicklung",
+      "Leadership": "Führung",
+      IT: "IT",
+      "Adaptability": "Anpassungsfähigkeit",
+      "CI-CD": 'CI-CD',
+      "Collaboration": "Kollaboration",
+      "Communication": "Kommunikation",
+      "Customer Focus": 'Kundenfokus',
+      "Efficiency": "Effizienz",
+      "Innovation": "Innovation",
+      "Knowledge Management": 'Wissensmanagement',
+      "Organizational and Management Structures": 'Organisations- und Managementstrukturen',   
+    },
+    presets: {
+      IT: "IT",
+      projectManager: "Projektleiter",
+      organisation: "Organisation",
+      other: "Anderes (alle Capabilities anzeigen)"
     }
   }
 })
@@ -2787,7 +2852,7 @@ export const defaultPresets = readable({
     'Knowledge Management': false,
     'Organizational and Management Structures': false,
   },
-  Projektleitung: {
+  projectManager: {
     'Strategy & Purpose': true,
     Structure: true,
     Process: true,
@@ -2805,7 +2870,7 @@ export const defaultPresets = readable({
     'Knowledge Management': true,
     'Organizational and Management Structures': false,
   },
-  Organisation: {
+  organisation: {
     'Strategy & Purpose': true,
     Structure: true,
     Process: true,
@@ -2823,7 +2888,7 @@ export const defaultPresets = readable({
     'Knowledge Management': true,
     'Organizational and Management Structures': true,
   },
-  'anderes (alle Capabilites anzeigen)': {
+  other: {
     'Strategy & Purpose': true,
     Structure: true,
     Process: true,
@@ -2851,6 +2916,12 @@ export const capabilityConverter = readable({
   Menschen: "People",
   "Kundenzentrierte Produktentwicklung": 'Customer-Centric Product Development',
   "Führung": "Leadership",
+  'Strategy & Purpose': 'Strategy & Purpose',
+  "Structure": "Structure",
+  "Process": "Process",
+  "People": "People",
+  'Customer-Centric Product Development': "Customer-Centric Product Development",
+  "Leadership": "Leadership",
 })
 
 export const topicConverter = readable({

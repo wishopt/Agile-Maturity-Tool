@@ -8,7 +8,8 @@
 	export let appConfig
 
 	let categoryNames = $categories.en
-	let text = $ui[appConfig.language].capabilityTable
+	let text 
+	$: text = $ui[appConfig.language].capabilityTable
 	let numLevels = $levelAmount
 	let levelDescriptions = $levelDesc[appConfig.language]
 	let dimensionDescriptions = $dimensionDesc[appConfig.language]
@@ -18,8 +19,8 @@
 	let editMode = false
 
 	let userInput
-	let selectedPreset = "anderes (alle Capabilites anzeigen)"
-	let emptyPreset = "anderes (alle Capabilites anzeigen)"
+	let selectedPreset = "other"
+	let emptyPreset = "other"
 
 	try {
 		userInput = dataManager.loadFromLocalStorage("dataUserInput")
@@ -158,7 +159,7 @@
 
 </script>
 
-<button on:click={openFilterPopUp}>Filter Anwenden</button>
+<button on:click={openFilterPopUp}>{text.applyFilter}</button>
 
 <br>
 
@@ -198,28 +199,28 @@
 
 <div id="overlay">
 	<div id="filterwindow">
-		<h2>Capabilites filtern</h2>
+		<h2>{text.filterCapabilites}</h2>
 
 		<div class="filterwindowContent">
 			<div class="filterContainer">
-				<h3>Kategorien</h3>
+				<h3>{text.categories}</h3>
 				{#each Object.entries(filters) as [name, idArray]}
 					{#if !(name in categoryNames)}
 						<div class="filterRow">
 							<input type="checkbox" name="filter" id="filter_{name}" bind:checked={appConfig.checkedFilters[name]}>
-							<span>{name}</span>
+							<span>{$ui[appConfig.language].categories[name]}</span>
 						</div>
 						<br>	
 					{/if}
 				{/each}
 			</div>
 			<div class="filterContainer">
-				<h3>Themen</h3>
+				<h3>{text.topics}</h3>
 				{#each Object.entries(filters) as [name, idArray]}
 					{#if name in categoryNames}
 						<div class="filterRow">
 							<input type="checkbox" name="filter" id="filter_{name}" class="filterCheckbox" bind:checked={appConfig.checkedFilters[name]}>
-							<span>{name}</span>
+							<span>{$ui[appConfig.language].categories[name]}</span>
 						</div>
 						<br>	
 					{/if}
@@ -230,8 +231,8 @@
 				{#each Object.entries(presets) as [title, filterNames]}
 				<div class="preset">
 					<input type="radio" name="selectedPreset" id="{title}" bind:group={selectedPreset} value="{title}" on:change={updateFilters}>
-					<span >{title}</span>
-					<button id="btn_{title}" value="{title}" on:click={toggleEditMode}>bearbeiten</button>
+					<span >{$ui[appConfig.language].presets[title]}</span>
+					<button id="btn_{title}" value="{title}" on:click={toggleEditMode}>{text.edit}</button>
 					<br>
 				</div>
 				{/each}
@@ -239,13 +240,13 @@
 		</div>
 
 		<div class="buttonRow">
-			<button on:click={closeFilterPopUp}>Schliessen</button>
+			<button on:click={closeFilterPopUp}>{text.filterClose}</button>
 
-			<button on:click={resetFilter}>Alle Filter entfernen</button>
+			<button on:click={resetFilter}>{text.filterRemove}</button>
 	
-			<button on:click={addPreset}>Preset hinzufügen</button>
+			<button on:click={addPreset}>{text.filterAddPreset}</button>
 
-			<button on:click={resetPresets} style="color:red;">Presets zurücksetzen</button>
+			<button on:click={resetPresets} style="color:red;">{text.filterResetPresets}</button>
 		</div>
 
 	</div>

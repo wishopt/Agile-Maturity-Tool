@@ -47,7 +47,7 @@
 	<label for="funktion">{text.function}</label>
 	<select id="funktion" name="funktion" class="frontmatter" bind:value={userInfo.function} on:change={saveUserInfo}>
 		{#each Object.keys(presets) as name}
-		<option value="{name}">{name}</option>
+		<option value="{name}">{$ui[appConfig.language].presets[name]}</option>
 		{/each}
 
 </form>
