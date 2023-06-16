@@ -17,10 +17,13 @@
 	let reload = {}
 
 	let editMode = false
-
-	let userInput
+	let selectedSnapshot
+	
 	let selectedPreset = "other"
 	let emptyPreset = "other"
+
+	let userInput
+	$: userInput
 
 	try {
 		userInput = dataManager.loadFromLocalStorage("dataUserInput")
@@ -38,7 +41,7 @@
 		userInfo = $emptyUserInfo
 	}
 
-		function openFilterPopUp() {
+	function openFilterPopUp() {
 		document.getElementById("overlay").style.display = "block"
 	}
 
@@ -60,6 +63,14 @@
 		filters = $defaultFilters
 	}
 
+	let snapshots
+
+	try {
+		snapshots = dataManager.loadFromLocalStorage("dataUserSnapshots")
+	} catch (error) {
+		console.log(error)
+		snapshots = {}
+	}
 
 	function closeFilterPopUp() {
 
@@ -141,7 +152,12 @@
 	}
 
 	function addPreset() {
-		let name = prompt()
+		let name = prompt("Preset name")
+
+		if (!name) {
+			return
+		}
+
 		presets[name] = $defaultPresets['anderes (alle Capabilites anzeigen)']
 	}
 
@@ -150,18 +166,81 @@
 	} else {
 		selectedPreset = emptyPreset
 	}
-	
 
+	function createSnapshot() {
+		let name = prompt("Insert snapshot name (ex. 2023-06-15)")
+
+		if (!name) {
+			return
+		}
+
+		snapshots[name] = userInput
+		
+		dataManager.saveToLocalStorage("dataUserSnapshots", snapshots)
+	}
+
+	function loadSnapshot() {
+		userInput = snapshots[selectedSnapshot]
+	}
+
+	function deleteSnapshot() {
+		delete snapshots[selectedSnapshot]
+		
+		dataManager.saveToLocalStorage("dataUserSnapshots", snapshots)
+	}
+	
 	updateFilters()
 
 	initFilter()
 
-
 </script>
 
-<button on:click={openFilterPopUp}>{text.applyFilter}</button>
+
+
+<div class="capabilityHeader">
+	<div class="padding">
+	</div>
+	<div class="headerContainer">
+
+		<h3>Filter</h3>
+	
+		<span>Aktuelles Filterpreset: {$ui[appConfig.language].presets[selectedPreset]}</span>
+		
+		<br>
+		
+		<button on:click={openFilterPopUp} style="margin-top: 1em;">{text.applyFilter}</button>
+	
+	</div>
+	
+	<div class="headerContainer">
+	
+		<h3>Snapshots</h3>
+	
+		<select name="snapshots" id="snapshots" bind:value={selectedSnapshot}>
+			{#each Object.keys(snapshots) as snapshotName}
+			<option value="{snapshotName}">{snapshotName}</option>
+			{/each}
+		</select>
+
+		<br>
+		
+		<button on:click={loadSnapshot}>Load snapshot</button>
+		<button on:click={deleteSnapshot}>Delete snapshot</button>
+		
+		<br>
+		
+		<button on:click={createSnapshot}>Create new snapshot</button>
+		
+	</div>
+	<div class="padding">
+	</div>
+</div>
+
+
 
 <br>
+
+<h3>Capabilities</h3>
 
 <span style="color:red;">{text.is}</span> | <span style="color:blue;">{text.should}</span>
 {#each Object.entries(dimensionDescriptions) as [dimension, description]}
@@ -253,6 +332,18 @@
 </div>
 
 <style>
+	.padding {
+		flex: 2;
+	}
+
+	.capabilityHeader {
+		display: flex;
+	}
+
+	.headerContainer {
+		flex: 1;
+	}
+
 	#overlay {
 		position: fixed; /* Sit on top of the page content */
 		display: none; /* Hidden by default */
@@ -286,10 +377,6 @@
 
 	.filterRow {
 		font-size: small;
-	}
-
-	.buttonRow {
-
 	}
 
 	.filterCheckbox {
