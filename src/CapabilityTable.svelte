@@ -41,10 +41,6 @@
 		userInfo = $emptyUserInfo
 	}
 
-	function openFilterPopUp() {
-		document.getElementById("overlay").style.display = "block"
-	}
-
 	let presets
 
 	try {
@@ -70,6 +66,10 @@
 	} catch (error) {
 		console.log(error)
 		snapshots = {}
+	}
+
+	function openFilterPopUp() {
+		document.getElementById("overlay").style.display = "block"
 	}
 
 	function closeFilterPopUp() {
@@ -158,7 +158,8 @@
 			return
 		}
 
-		presets[name] = $defaultPresets['anderes (alle Capabilites anzeigen)']
+		presets[name] = $defaultPresets['other']
+		dataManager.saveToLocalStorage("dataUserPresets", presets)	
 	}
 
 	if (userInfo.function) {
@@ -169,24 +170,52 @@
 
 	function createSnapshot() {
 		let name = prompt("Insert snapshot name (ex. 2023-06-15)")
-
 		if (!name) {
 			return
 		}
 
-		snapshots[name] = userInput
-		
+		selectedSnapshot = name
+		snapshots[selectedSnapshot] = userInput
+		console.log(snapshots)
 		dataManager.saveToLocalStorage("dataUserSnapshots", snapshots)
+		location.reload()
 	}
 
 	function loadSnapshot() {
+		try {
+			snapshots = dataManager.loadFromLocalStorage("dataUserSnapshots")
+		} catch (error) {
+			console.log(error)
+			snapshots = {}
+		}
+
 		userInput = snapshots[selectedSnapshot]
+		dataManager.saveToLocalStorage("dataUserInput", userInput)
 	}
 
 	function deleteSnapshot() {
 		delete snapshots[selectedSnapshot]
 		
 		dataManager.saveToLocalStorage("dataUserSnapshots", snapshots)
+	}
+
+	function getPresetTitle(title) {
+		let displayTitle = $ui[appConfig.language].presets[title]
+		if (displayTitle) {
+			return displayTitle
+		}
+
+		return title
+	}
+
+	function getCurrentPreset(input) {
+
+		if (input) {
+			return input
+		}
+
+		return text.currentPreset
+
 	}
 	
 	updateFilters()
@@ -204,7 +233,7 @@
 
 		<h3>Filter</h3>
 	
-		<span>Aktuelles Filterpreset: {$ui[appConfig.language].presets[selectedPreset]}</span>
+		<span>{text.filterPreset}{getCurrentPreset($ui[appConfig.language].presets[selectedPreset])}</span>
 		
 		<br>
 		
@@ -224,12 +253,12 @@
 
 		<br>
 		
-		<button on:click={loadSnapshot}>Load snapshot</button>
-		<button on:click={deleteSnapshot}>Delete snapshot</button>
+		<button on:click={loadSnapshot}>{text.loadSnapshot}</button>
+		<button on:click={deleteSnapshot}>{text.deleteSnapshot}</button>
 		
 		<br>
 		
-		<button on:click={createSnapshot}>Create new snapshot</button>
+		<button on:click={createSnapshot}>{text.createSnapshot}</button>
 		
 	</div>
 	<div class="padding">
@@ -310,7 +339,7 @@
 				{#each Object.entries(presets) as [title, filterNames]}
 				<div class="preset">
 					<input type="radio" name="selectedPreset" id="{title}" bind:group={selectedPreset} value="{title}" on:change={updateFilters}>
-					<span >{$ui[appConfig.language].presets[title]}</span>
+					<span >{getPresetTitle(title)}</span>
 					<button id="btn_{title}" value="{title}" on:click={toggleEditMode}>{text.edit}</button>
 					<br>
 				</div>
