@@ -7,6 +7,7 @@
     export let chartData
 	export let images
 	export let language
+	export let snapConfig
 
     let ctx
 	let chart
@@ -62,7 +63,11 @@
 	})	
 
     function updateChart() {
-        ctx = document.getElementById("chart-" + chartData.title.replace(/\s+/g, '')).getContext("2d")
+		ctx = document.getElementById("chart-" + chartData.title.replace(/\s+/g, '')).getContext("2d")
+
+		if (snapConfig) {
+			config.data.datasets = snapConfig
+		}
 
         chart = new Chart(ctx, config)
         chart.update()
