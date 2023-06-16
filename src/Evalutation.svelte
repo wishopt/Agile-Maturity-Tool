@@ -203,7 +203,5 @@
 
 	{/each}
 
-
-
 	<ExportButton data={userInput} images={images} appConfig={appConfig}/>
 </div>

@@ -49,6 +49,7 @@
 		{#each Object.keys(presets) as name}
 		<option value="{name}">{$ui[appConfig.language].presets[name]}</option>
 		{/each}
+	</select>
 
 </form>
 

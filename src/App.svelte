@@ -2,7 +2,7 @@
 
 	import { onMount } from 'svelte'
 	import { navOptions } from "./Nav.svelte"
-	import { emptyUserData, ui } from "./stores/constants"
+	import { ui } from "./stores/constants"
     import dataManager from './dataManager';
 
 	let appConfig = {
@@ -31,20 +31,10 @@
 	let text 
 	$: text = $ui[appConfig.language].main
 	let buttonText
-	let userInput = $emptyUserData
     let selected = navOptions[0]
     let currentNav = 0
     let buttonHidden = false
 	let unique = {}
-
-    onMount(async () => {
-		try {
-			userInput = dataManager.loadFromLocalStorage("dataUserInput")
-		} catch (error) {
-			console.log(error)
-			userInput = $emptyUserData
-		}
-    });	
 
 	function changeComponent(event) {
         let index = Number(event.target.id)
