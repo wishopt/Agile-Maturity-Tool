@@ -6,7 +6,7 @@
     import dataManager from './dataManager';
 
 	let appConfig = {
-		hideIrrelevant: false,
+		hideCustomFilter: true,
 		language: "de",
 		currentFilter: [],
 		checkedFilters: {
@@ -26,6 +26,7 @@
 			Innovation: false,
 			'Knowledge Management': false,
 			'Organizational and Management Structures': false,
+			'Custom Filter': true
 		}
 	}
 	let text 
@@ -34,7 +35,6 @@
     let selected = navOptions[0]
     let currentNav = 0
     let buttonHidden = false
-	let unique = {}
 
 	function changeComponent(event) {
         let index = Number(event.target.id)
@@ -50,18 +50,12 @@
 		unique = {}
 	}
 
-	function toggleHidden() {
-		appConfig.hideIrrelevant = !appConfig.hideIrrelevant
-		unique = {}
-	}
-
 	function changeLanguage() {
 		if (appConfig.language == "en") {
 			appConfig.language = "de"
 		} else if (appConfig.language == "de") {
 			appConfig.language = "en"
 		}
-		unique = {}
 	}
 
 </script>
@@ -78,7 +72,6 @@
 			<span class="lang"> EN</span>
 		</div>
 
-		{#key unique}
 		<ul>
 			{#each navOptions as option, componentId}
 			<li>
@@ -99,7 +92,6 @@
 		{#if !buttonHidden}
 		<button on:click={changeComponent} id={currentNav+1}>{text.next}</button>
 		{/if}
-		{/key}
 	</div>
 </main>
 

@@ -48,7 +48,7 @@
             newUserInput[id].explanation = capability["Comments"]
             newUserInput[id].isValue = capability["Is Value"]
             newUserInput[id].shouldValue = capability["Should Value"]
-            newUserInput[id].notRelevant = capability["Not Relevant"]
+            newUserInput[id].inFilter = capability["In Filter"]
         }
 
         dataManager.saveToLocalStorage("dataUserInput", newUserInput)

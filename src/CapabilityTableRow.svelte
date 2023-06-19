@@ -1,6 +1,9 @@
 <script>
 	import dataManager from "./dataManager"
 	import { levelAmount, capabilityList } from "./stores/constants"
+	import { createEventDispatcher } from 'svelte'
+
+	const dispatch = createEventDispatcher()
 
     export let capabilityID
 	export let userInput
@@ -32,6 +35,50 @@
 		appConfig = appConfig
 	}
 
+	function updateFilter(event) {
+		reloadConfig()
+		dispatch('updateFilter', {
+			id: event.target.value,
+			state: event.target.checked
+		})
+	}
+
+	function hideCustomCheckbox(bool) {
+		let checkboxTitles
+		let checkboxDivs
+		try {
+			checkboxDivs = document.getElementsByClassName("inFilterCheckbox")
+			checkboxTitles = document.getElementsByClassName("inFilter")
+		} catch (error) {
+			return
+		}
+		
+		if (bool) {
+			for (let i = 0; i < checkboxDivs.length; i++) {
+				checkboxDivs[i].style["display"] = "none"
+			}
+
+			for (let i = 0; i < checkboxTitles.length; i++) {
+				checkboxTitles[i].style["display"] = "none"
+			}
+			
+		} else if (!checkboxDivs) {
+			return
+		} else {
+			for (let i = 0; i < checkboxDivs.length; i++) {
+				checkboxDivs[i].style["display"] = "block"
+			}
+
+			for (let i = 0; i < checkboxTitles.length; i++) {
+				checkboxTitles[i].style["display"] = "block"
+			}
+		}
+
+
+	}
+
+	$: hideCustomCheckbox(appConfig.hideCustomFilter)
+
 </script>
 
 <div class="row">
@@ -62,10 +109,10 @@
 		</div>
 	</div>
 
-<!-- 	<div class="notrelevant">
-		<input type="checkbox" bind:checked={userInput[capabilityID].notRelevant} on:change={reloadConfig}>
+	<div class="inFilterCheckbox">
+		<input type="checkbox" bind:checked={userInput[capabilityID].inFilter} value="{capabilityID}" on:change={updateFilter}>
 	</div> 
--->
+
 
 	<textarea class="col" bind:value={userInput[capabilityID].explanation} on:change={dataManager.saveToLocalStorage("dataUserInput", userInput)}></textarea>
 	
@@ -126,7 +173,7 @@
 		justify-content: space-around;	
 	}
 
-	.notrelevant {
+	.inFilterCheckbox {
 		width: 10%;
 	}
 
