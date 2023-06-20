@@ -215,6 +215,7 @@
 
 	function deleteSnapshot() {
 		delete snapshots[selectedSnapshot]
+		location.reload()
 		
 		dataManager.saveToLocalStorage("dataUserSnapshots", snapshots)
 	}
@@ -240,10 +241,10 @@
 	
 	function toggleHidden(event) {
 		if (!appConfig.displayHidden) {
-			event.target.textContent = "Benutzderdefinierten Filter speichern"
+			event.target.textContent = text.saveCustomFilter
 			displayCustomFilterColumn()
 		} else {
-			event.target.textContent = "Benutzerdefinierten Filter bearbeiten"
+			event.target.textContent = text.editCustomFilter
 			dataManager.saveToLocalStorage("dataUserFilters", filters)
 			hideCustomFilterColumn()
 		}
@@ -298,7 +299,7 @@
 		
 		<button on:click={openFilterPopUp} style="margin-top: 1em;">{text.applyFilter}</button>
 	
-		<button on:click={toggleHidden}>Benutzerdefinierten Filter bearbeiten</button>
+		<button on:click={toggleHidden}>{text.editCustomFilter}</button>
 	</div>
 	
 	<div class="headerContainer">
@@ -315,9 +316,6 @@
 		
 		<button on:click={loadSnapshot}>{text.loadSnapshot}</button>
 		<button on:click={deleteSnapshot}>{text.deleteSnapshot}</button>
-		
-		<br>
-		
 		<button on:click={createSnapshot}>{text.createSnapshot}</button>
 		
 	</div>
@@ -348,7 +346,7 @@
 				{levelDescriptions[i]}
 			</details>
 		{/each}
-		<span class="col explanation inFilter">Custom Filter</span>
+		<span class="col explanation inFilter">{text.customFilterColumn}</span>
 		<span class="col explanation" id="explanation">{text.explanation}</span>
 	</div>
 	<div class="capabilities">
@@ -426,7 +424,7 @@
 
 <style>
 	.padding {
-		flex: 2;
+		flex: 1;
 	}
 
 	.capabilityHeader {
@@ -435,6 +433,8 @@
 
 	.headerContainer {
 		flex: 1;
+		background-color: #e6dfdf;
+		margin: 0 1em 0 1em;
 	}
 
 	.inFilter {

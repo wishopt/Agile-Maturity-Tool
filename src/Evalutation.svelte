@@ -20,6 +20,7 @@
 	let categoryDescriptions = $categories[appConfig.language]
 	let capabilities = $capabilityList[appConfig.language]
 	let snapshots
+	let displaySnapshots = false
 
 	try {
 		snapshots = dataManager.loadFromLocalStorage("dataUserSnapshots")
@@ -185,13 +186,22 @@
 	function toggleMode() {
 		let chartImages = document.getElementById("chartContainer")
 		let snapshotImages = document.getElementById("snapshotContainer")
-		
+		let errorMessage = document.getElementById("errorMessage")
 		if (chartImages.style.display == "none") {
 			chartImages.style.display = "block"
 			snapshotImages.style.display = "none"
-		} else {
+			errorMessage.style.display = "none"
+			displaySnapshots = false
+		} else if (!(Object.keys(snapshots).length === 0)) {
 			chartImages.style.display = "none"
 			snapshotImages.style.display = "block"
+			errorMessage.style.display = "none"
+			displaySnapshots = true
+		} else {
+			chartImages.style.display = "none"
+			snapshotImages.style.display = "none"
+			errorMessage.style.display = "block"
+			displaySnapshots = false
 		}
 	}
 
@@ -283,6 +293,9 @@
 	</div>
 
 	<div id="snapshotContainer">
+		{#if displaySnapshots}
+			
+		
 		{#each Object.keys(dimensionDescriptions) as dimension}
 
 		{#if appConfig.checkedFilters[$capabilityConverter[dimension]]}
@@ -305,6 +318,12 @@
 		{/if}
 	
 		{/each}
+
+		{/if}
+	</div>
+
+	<div id="errorMessage">
+		<p>{$ui[appConfig.language].evaluation.errorMessage}</p>
 	</div>
 
 	<ExportButton data={userInput} images={images} appConfig={appConfig}/>
@@ -312,5 +331,9 @@
 
 <style>
 	#chartContainer {
+	}
+
+	#errorMessage {
+		display: none;
 	}
 </style>

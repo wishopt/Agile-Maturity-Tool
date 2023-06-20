@@ -2834,7 +2834,10 @@ export const ui = readable({
       loadSnapshot: "Load snapshot",
       deleteSnapshot: "Delete snapshot",
       createSnapshot: "Create snapshot",
-      currentPreset: "Custom"
+      currentPreset: "Custom",
+      editCustomFilter: "Edit custom filter",
+      saveCustomFilter: "Save custom filter",
+      customFilterColumn: "Custom filter"
     },
     evaluationDataTable: {
       id: "ID",
@@ -2846,7 +2849,8 @@ export const ui = readable({
       should: "Should-Value"
     },
     evaluation: {
-      changeMode: "Change mode"
+      changeMode: "Change mode",
+      errorMessage: "No snapshots saved, please save a snapshot before viewing this page."
     },
     exportButton: {
       button: "Export Results"
@@ -2922,7 +2926,10 @@ export const ui = readable({
       loadSnapshot: "Snapshot laden",
       deleteSnapshot: "Snapshot löschen",
       createSnapshot: "Snapshot erstellen",
-      currentPreset: "Benutzerdefiniert"
+      currentPreset: "Benutzerdefiniert",
+      editCustomFilter: "Benutzerdefinierten Filter bearbeiten",
+      saveCustomFilter: "Benutzerdefinierten Filter speichern",
+      customFilterColumn: "Benutzerdef. Filter"
     },
     evaluationDataTable: {
       id: "ID",
@@ -2934,7 +2941,8 @@ export const ui = readable({
       should: "Soll-Wert"
     },
     evaluation: {
-      changeMode: "Modus wechseln"
+      changeMode: "Modus wechseln",
+      errorMessage: "Keine Snapshots vorhanden. Bitte speichern Sie einen Snapshot ab, bevor Sie diese Ansicht öffnen."
     },
     exportButton: {
       button: "Resultate exportieren"
