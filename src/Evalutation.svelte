@@ -256,7 +256,7 @@
 <div id="auswertung">
 	<ExportButton data={userInput} images={images} appConfig={appConfig}/>
 
-	<button on:click={toggleMode}>Modus wechseln</button>
+	<button on:click={toggleMode}>{$ui[appConfig.language].evaluation.changeMode}</button>
 
 	<div id="chartContainer">
 		{#each Object.keys(dimensionDescriptions) as dimension}

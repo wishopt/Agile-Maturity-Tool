@@ -2710,6 +2710,9 @@ export const ui = readable({
       is: "Is-Value",
       should: "Should-Value"
     },
+    evaluation: {
+      changeMode: "Change mode"
+    },
     exportButton: {
       button: "Export Results"
     },
@@ -2793,6 +2796,9 @@ export const ui = readable({
     evaluationChart: {
       is: "Ist-Wert",
       should: "Soll-Wert"
+    },
+    evaluation: {
+      changeMode: "Modus wechseln"
     },
     exportButton: {
       button: "Resultate exportieren"

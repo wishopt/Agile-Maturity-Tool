@@ -12,6 +12,7 @@
     let ctx
 	let chart
 	let text = $ui[language].evaluationChart
+	let noImage = false
 
     try {
 		  userInput = dataManager.loadFromLocalStorage("dataUserInput")
@@ -21,6 +22,13 @@
 	  }
 
 	let generatePNG = function () {
+		try {
+			let image = chart.toBase64Image().replace(/^data:image\/(png|jpg);base64,/, "")
+		} catch {
+			images[chartData.title] = ""
+			noImage = true
+			return
+		}
 		images[chartData.title] = chart.toBase64Image().replace(/^data:image\/(png|jpg);base64,/, "")
 	}
 
@@ -76,7 +84,7 @@
 </script>
 
 <h2>{chartData.title}</h2>
-<div class="chart">
+<div class="chart" id="uniquediv">
     <canvas id="chart-{chartData.title.replace(/\s+/g, '')}"></canvas>
 </div>
 
