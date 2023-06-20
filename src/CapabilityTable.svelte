@@ -118,6 +118,14 @@
 
 	function updateFilters() {
 		appConfig.checkedFilters = presets[selectedPreset]
+		for (const id in userInput) {
+			if (filters["Custom Filter"].includes(id)) {
+				userInput[id].customFilter = true
+			} else {
+				userInput[id].customFilter = false
+			}
+		}
+		initFilter()
 	}
 
 	function arrayIntersection(array1, array2) {
@@ -240,6 +248,7 @@
 			hideCustomFilterColumn()
 		}
 		appConfig.displayHidden = !appConfig.displayHidden
+		initFilter()
 	}
 
 	function updateCustomFilter(event) {

@@ -110,9 +110,8 @@
 	</div>
 
 	<div class="inFilterCheckbox">
-		<input type="checkbox" bind:checked={userInput[capabilityID].inFilter} value="{capabilityID}" on:change={updateFilter}>
+		<input type="checkbox" bind:checked={userInput[capabilityID].hideCustomFilter} value="{capabilityID}" on:change={updateFilter}>
 	</div> 
-
 
 	<textarea class="col" bind:value={userInput[capabilityID].explanation} on:change={dataManager.saveToLocalStorage("dataUserInput", userInput)}></textarea>
 	
