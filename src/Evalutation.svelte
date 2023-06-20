@@ -21,6 +21,7 @@
 	let capabilities = $capabilityList[appConfig.language]
 	let snapshots
 	let displaySnapshots = false
+	let snapColors = {}
 
 	try {
 		snapshots = dataManager.loadFromLocalStorage("dataUserSnapshots")
@@ -215,15 +216,10 @@
 		for (const [snapName, snapValues] of Object.entries(snapshots)) {
 			let snapshotData = { }
 
-			let r = getRandomInt(255)
-			let g = getRandomInt(255)
-			let b = getRandomInt(255)
-
-			// snapshotData.labels = getLabels(input)
 			snapshotData.label = snapName
 			snapshotData.data = getIsValuesSnapshots(input, snapshots[snapName])
-			snapshotData.backgroundColor = `rgba(${r}, ${g}, ${b}, 0.2)`
-			snapshotData.borderColor = `rgba(${r}, ${g}, ${b}, 0.6)`
+			snapshotData.backgroundColor = snapColors[snapName].backgroundColor
+			snapshotData.borderColor = snapColors[snapName].borderColor
 			snapshotDatasets.push(snapshotData)
 		}
 
@@ -260,6 +256,17 @@
 		return newData
 	}
 
+	function generateColors() {
+		for (snap of Object.keys(snapshots)) {
+			let r = getRandomInt(255)
+			let g = getRandomInt(255)
+			let b = getRandomInt(255)
+			snapColors[snap] = {}
+			snapColors[snap].backgroundColor = `rgba(${r}, ${g}, ${b}, 0.2)`
+			snapColors[snap].borderColor = `rgba(${r}, ${g}, ${b}, 0.6)`
+		}
+	}
+	generateColors()
 </script>
 
 <div id="auswertung">

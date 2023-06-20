@@ -2837,7 +2837,8 @@ export const ui = readable({
       currentPreset: "Custom",
       editCustomFilter: "Edit custom filter",
       saveCustomFilter: "Save custom filter",
-      customFilterColumn: "Custom filter"
+      customFilterColumn: "Custom filter",
+      save: "Save"
     },
     evaluationDataTable: {
       id: "ID",
@@ -2929,7 +2930,8 @@ export const ui = readable({
       currentPreset: "Benutzerdefiniert",
       editCustomFilter: "Benutzerdefinierten Filter bearbeiten",
       saveCustomFilter: "Benutzerdefinierten Filter speichern",
-      customFilterColumn: "Benutzerdef. Filter"
+      customFilterColumn: "Benutzerdef. Filter",
+      save: "speichern"
     },
     evaluationDataTable: {
       id: "ID",

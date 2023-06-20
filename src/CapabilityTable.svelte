@@ -125,7 +125,7 @@
 				userInput[id].customFilter = false
 			}
 		}
-		initFilter()
+		// initFilter()
 	}
 
 	function arrayIntersection(array1, array2) {
@@ -139,8 +139,8 @@
 	}
 
 	function toggleEditMode(event) {
-		if (editMode && event.target.textContent == "speichern") {
-			event.target.textContent = "bearbeiten"
+		if (editMode && event.target.textContent == text.save) {
+			event.target.textContent = text.edit
 
 			let newFilter = appConfig.checkedFilters
 
@@ -150,8 +150,8 @@
 
 			editMode = !editMode
 			
-		} else if (!editMode && event.target.textContent == "bearbeiten") {
-			event.target.textContent = "speichern"
+		} else if (!editMode && event.target.textContent == text.edit) {
+			event.target.textContent = text.save
 
 			selectedPreset = event.srcElement.value
 
@@ -169,6 +169,8 @@
 		dataManager.saveToLocalStorage("dataUserPresets", presets)	
 
 		alert("Presets zurückgesetzt")
+
+		updateFilters()
 	}
 
 	function addPreset() {
@@ -249,7 +251,6 @@
 			hideCustomFilterColumn()
 		}
 		appConfig.displayHidden = !appConfig.displayHidden
-		initFilter()
 	}
 
 	function updateCustomFilter(event) {
@@ -396,7 +397,7 @@
 					{/if}
 				{/each}
 			</div>
-			<div class="filterContainer">
+			<div class="filterContainer presets">
 				<h3>Presets</h3>
 				{#each Object.entries(presets) as [title, filterNames]}
 				<div class="preset">
@@ -537,6 +538,12 @@
 
 	.row {
 		display: flex;
+	}
+
+	.presets {
+		border-color: #e6dfdf;
+		border-style: solid;
+		padding: 0 1em 0 1em;
 	}
 
 	details {
