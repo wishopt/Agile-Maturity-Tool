@@ -7,10 +7,12 @@
     export let chartData
 	export let images
 	export let language
+	export let snapConfig
 
     let ctx
 	let chart
 	let text = $ui[language].evaluationChart
+	let noImage = false
 
     try {
 		  userInput = dataManager.loadFromLocalStorage("dataUserInput")
@@ -20,6 +22,13 @@
 	  }
 
 	let generatePNG = function () {
+		try {
+			let image = chart.toBase64Image().replace(/^data:image\/(png|jpg);base64,/, "")
+		} catch {
+			images[chartData.title] = ""
+			noImage = true
+			return
+		}
 		images[chartData.title] = chart.toBase64Image().replace(/^data:image\/(png|jpg);base64,/, "")
 	}
 
@@ -62,7 +71,11 @@
 	})	
 
     function updateChart() {
-        ctx = document.getElementById("chart-" + chartData.title.replace(/\s+/g, '')).getContext("2d")
+		ctx = document.getElementById("chart-" + chartData.title.replace(/\s+/g, '')).getContext("2d")
+
+		if (snapConfig) {
+			config.data.datasets = snapConfig
+		}
 
         chart = new Chart(ctx, config)
         chart.update()
@@ -71,7 +84,7 @@
 </script>
 
 <h2>{chartData.title}</h2>
-<div class="chart">
+<div class="chart" id="uniquediv">
     <canvas id="chart-{chartData.title.replace(/\s+/g, '')}"></canvas>
 </div>
 

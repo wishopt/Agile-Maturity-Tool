@@ -1651,8 +1651,8 @@ export const dimensionDesc = readable({
   Process: 'Process comprises the process organization and the information and decision flow within the organization',
   IT: 'Information Technology comprises the techn. infrastructure and architecture and the application of technology.',
   People: 'People & Culture comprises the organizational culture, the behavior and mindset of individual employees, and their skills.',
+  'Customer-Centric Product Development': 'Customer-Centric Product Development comprises the approach to build products that place the customer at its core.',
   Leadership: 'Leadership comprises the leadership approach, leadership values and attitude, and workforce empowerment.',
-  'Customer-Centric Product Development': 'Customer-Centric Product Development comprises the approach to build products that place the customer at its core.'
   },
   de: {
     'Strategie und Zweck': 'Strategie und Zweck umfasst den Zweck einer Organisation, ihre Vision und Mission sowie ihr Geschäftsmodell.',
@@ -1660,8 +1660,8 @@ export const dimensionDesc = readable({
     'Prozess': 'Prozess umfasst die Prozessorganisation und den Informations- und Entscheidungsfluss innerhalb der Organisation',
     'IT': 'Informationstechnologie umfasst die technische Infrastruktur und Architektur sowie die Anwendung der Technologie.',
     'Menschen': 'Menschen & Kultur umfasst die Organisationskultur, das Verhalten und die Denkweise der einzelnen Mitarbeiter sowie deren Fähigkeiten.',
+    'Kundenzentrierte Produktentwicklung': 'Kundenzentrierte Produktentwicklung umfasst den Ansatz, Produkte zu entwickeln, bei denen der Kunde im Mittelpunkt steht.',
     'Führung': 'Führung umfasst den Führungsansatz, die Führungswerte und -einstellung sowie die Befähigung der Mitarbeiter.',
-    'Kundenzentrierte Produktentwicklung': 'Kundenzentrierte Produktentwicklung umfasst den Ansatz, Produkte zu entwickeln, bei denen der Kunde im Mittelpunkt steht.'
   }
 })
 
@@ -2684,9 +2684,9 @@ export const ui = readable({
     capabilityTable: {
       is: "Is = Red",
       should: "Should = Blue",
-      notRelevant: "Not relevant",
+      filterIncluded: "Included in filter",
       explanation: "Explanation",
-      applyFilter: "Edit filter",
+      applyFilter: "Select filter",
       filterClose: "Close",
       filterRemove: "Remove all filters",
       filterAddPreset: "Add preset",
@@ -2694,7 +2694,12 @@ export const ui = readable({
       edit: "Edit",
       categories: "Categories",
       topics: "Topics",
-      filterCapabilites: "Filter capabilites"
+      filterCapabilites: "Filter capabilites",
+      filterPreset: "Current filter preset: ",
+      loadSnapshot: "Load snapshot",
+      deleteSnapshot: "Delete snapshot",
+      createSnapshot: "Create snapshot",
+      currentPreset: "Custom"
     },
     evaluationDataTable: {
       id: "ID",
@@ -2704,6 +2709,9 @@ export const ui = readable({
     evaluationChart: {
       is: "Is-Value",
       should: "Should-Value"
+    },
+    evaluation: {
+      changeMode: "Change mode"
     },
     exportButton: {
       button: "Export Results"
@@ -2764,9 +2772,9 @@ export const ui = readable({
     capabilityTable: {
       is: "Ist = Rot",
       should: "Soll = Blau",
-      notRelevant: "Nicht relevant",
+      filterIncluded: "Im Filter enthalten",
       explanation: "Begründung",
-      applyFilter: "Filter bearbeiten",
+      applyFilter: "Filter wählen",
       filterClose: "Schliessen",
       filterRemove: "Alle Filter entfernen",
       filterAddPreset: "Preset hinzufügen",
@@ -2774,7 +2782,12 @@ export const ui = readable({
       edit: "bearbeiten",
       categories: "Kategorien",
       topics: "Themen",
-      filterCapabilites: "Capabilites filtern"
+      filterCapabilites: "Capabilites filtern",
+      filterPreset: "Aktuelles Filter-Preset: ",
+      loadSnapshot: "Snapshot laden",
+      deleteSnapshot: "Snapshot löschen",
+      createSnapshot: "Snapshot erstellen",
+      currentPreset: "Benutzerdefiniert"
     },
     evaluationDataTable: {
       id: "ID",
@@ -2784,6 +2797,9 @@ export const ui = readable({
     evaluationChart: {
       is: "Ist-Wert",
       should: "Soll-Wert"
+    },
+    evaluation: {
+      changeMode: "Modus wechseln"
     },
     exportButton: {
       button: "Resultate exportieren"
