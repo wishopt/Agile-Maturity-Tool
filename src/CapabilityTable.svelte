@@ -228,7 +228,7 @@
 	}
 
 	function displayCustomFilterColumn() {
-		
+		let explanation = document.getElementById("explanation")
 		appConfig.hideCustomFilter = false
 		explanation.style["flex"] = 3.1
 	}
@@ -236,7 +236,7 @@
 	function hideCustomFilterColumn() {
 		let explanation = document.getElementById("explanation")
 		appConfig.hideCustomFilter = true
-		explanation.style["flex"] = 3.1
+		explanation.style["flex"] = 3.3
 	}
 	
 	updateFilters()
@@ -310,7 +310,7 @@
 				{levelDescriptions[i]}
 			</details>
 		{/each}
-		<span class="col explanation inFilter">Benutzerdefinierter Filter</span>
+		<span class="col explanation inFilter">Custom Filter</span>
 		<span class="col explanation" id="explanation">{text.explanation}</span>
 	</div>
 	<div class="capabilities">
