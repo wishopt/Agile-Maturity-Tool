@@ -214,7 +214,6 @@
 			snapshotData.data = getIsValuesSnapshots(input, snapshots[snapName])
 			snapshotData.backgroundColor = `rgba(${r}, ${g}, ${b}, 0.2)`
 			snapshotData.borderColor = `rgba(${r}, ${g}, ${b}, 0.6)`
-
 			snapshotDatasets.push(snapshotData)
 		}
 
@@ -265,9 +264,9 @@
 	
 		<EvaluationChart chartData={generateChartData(dimension)} bind:images language={appConfig.language}/>
 	
-		<EvaluationDataTable tableData={generateTableData(dimension)} isHidden={appConfig.hideIrrelevant} language={appConfig.language}/>
+		<EvaluationDataTable tableData={generateTableData(dimension)} isHidden={appConfig.inFilter} language={appConfig.language}/>
 		{/if}
-		
+    
 		{/each}
 	
 		{#each Object.values(categoryDescriptions) as category}
@@ -276,7 +275,7 @@
 	
 		<EvaluationChart chartData={generateChartData(category)} bind:images language={appConfig.language}/>
 	
-		<EvaluationDataTable tableData={generateTableData(category)} isHidden={appConfig.hideIrrelevant} language={appConfig.language}/>
+		<EvaluationDataTable tableData={generateTableData(category)} isHidden={appConfig.inFilter} language={appConfig.language}/>
 			
 		{/if}
 	

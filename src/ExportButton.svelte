@@ -84,7 +84,7 @@
                     Description: `${capabilityInfo[id].description}`,
                     "Should Value": `${capabilityData.shouldValue}`,
                     "Is Value": `${capabilityData.isValue}`,
-                    "Not Relevant": `${capabilityData.notRelevant}`,
+                    "In Filter": `${capabilityData.inFilter}`,
                     Comments: `${capabilityData.explanation}`
                 }
             } catch (error) {

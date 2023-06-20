@@ -79,6 +79,17 @@
 		document.getElementById("overlay").style.display = "none"
 	}
 
+	function applyFilter() {
+		for (const [id, values] of Object.entries(userInput)) {
+			if (appConfig.currentFilter.includes(id)) {
+				userInput[id].inFilter = true
+			} else {
+				userInput[id].inFilter = false
+			}
+		}
+		dataManager.saveToLocalStorage("dataUserInput", userInput)
+	}
+
 	function initFilter() {
 		let newFilter = []
 
@@ -93,6 +104,7 @@
 		}
 
 		appConfig.currentFilter = newFilter
+		applyFilter()
 	}
 
 	function resetFilter() {
@@ -218,6 +230,44 @@
 
 	}
 	
+	function toggleHidden(event) {
+		if (!appConfig.displayHidden) {
+			event.target.textContent = "Benutzderdefinierten Filter speichern"
+			displayCustomFilterColumn()
+		} else {
+			event.target.textContent = "Benutzerdefinierten Filter bearbeiten"
+			dataManager.saveToLocalStorage("dataUserFilters", filters)
+			hideCustomFilterColumn()
+		}
+		appConfig.displayHidden = !appConfig.displayHidden
+	}
+
+	function updateCustomFilter(event) {
+		if (event.detail.state) {
+			filters['Custom Filter'].push(event.detail.id)
+		} else {
+			filters['Custom Filter'].pop(event.detail.id)
+		}
+		dataManager.saveToLocalStorage("dataUserFilters", filters)
+	}
+
+	function resetCustomFilter() {
+		filters['Custom Filter'] = []
+		dataManager.saveToLocalStorage("dataUserFilters", filters)
+	}
+
+	function displayCustomFilterColumn() {
+		let explanation = document.getElementById("explanation")
+		appConfig.hideCustomFilter = false
+		explanation.style["flex"] = 3.1
+	}
+
+	function hideCustomFilterColumn() {
+		let explanation = document.getElementById("explanation")
+		appConfig.hideCustomFilter = true
+		explanation.style["flex"] = 3.3
+	}
+	
 	updateFilters()
 
 	initFilter()
@@ -239,6 +289,7 @@
 		
 		<button on:click={openFilterPopUp} style="margin-top: 1em;">{text.applyFilter}</button>
 	
+		<button on:click={toggleHidden}>Benutzerdefinierten Filter bearbeiten</button>
 	</div>
 	
 	<div class="headerContainer">
@@ -265,8 +316,6 @@
 	</div>
 </div>
 
-
-
 <br>
 
 <h3>Capabilities</h3>
@@ -275,7 +324,7 @@
 {#each Object.entries(dimensionDescriptions) as [dimension, description]}
 
 <div class="capability_container">
-	{#if arrayIntersection(appConfig.currentFilter, filters[$capabilityConverter[dimension]])}
+	{#if arrayIntersection(appConfig.currentFilter, filters[$capabilityConverter[dimension]]) || appConfig.displayHidden}
 	<div class="titlebar">
 		<details class="col dimensionDescription">
 			<summary class="summary-level">{dimension}</summary>
@@ -290,12 +339,13 @@
 				{levelDescriptions[i]}
 			</details>
 		{/each}
+		<span class="col explanation inFilter">Custom Filter</span>
 		<span class="col explanation" id="explanation">{text.explanation}</span>
 	</div>
 	<div class="capabilities">
 		{#each Object.entries(capabilities) as [id, capability]}
-		{#if capability.dimension == dimension && !(userInput[id].notRelevant && appConfig.hideIrrelevant) && appConfig.currentFilter.includes(id)}
-		<TableRow capabilityID={id} userInput={userInput} bind:appConfig/>
+		{#if capability.dimension == dimension && (userInput[id].inFilter || appConfig.displayHidden)}
+		<TableRow capabilityID={id} userInput={userInput} bind:appConfig on:updateFilter={updateCustomFilter}/>
 		{/if}
 		{/each}
 	</div>
@@ -316,7 +366,12 @@
 					{#if !(name in categoryNames)}
 						<div class="filterRow">
 							<input type="checkbox" name="filter" id="filter_{name}" bind:checked={appConfig.checkedFilters[name]}>
+							{#if name == "Custom Filter"}
 							<span>{$ui[appConfig.language].categories[name]}</span>
+							<button on:click={resetCustomFilter}>Reset</button>
+							{:else}
+							<span>{$ui[appConfig.language].categories[name]}</span>
+							{/if}
 						</div>
 						<br>	
 					{/if}
@@ -373,6 +428,12 @@
 		flex: 1;
 	}
 
+	.inFilter {
+		flex: 1;
+		padding-top: 10px;
+	}
+
+
 	#overlay {
 		position: fixed; /* Sit on top of the page content */
 		display: none; /* Hidden by default */
@@ -420,6 +481,7 @@
 		padding-left: 0;
 		height: 1em;
 		margin-top: 0.8em;
+		flex: 3.3;
 	}
 
 	.capabilities {
@@ -442,7 +504,6 @@
 	}
 
 	.explanation {
-		flex: 3.3;
 		text-align: left;
 		padding-bottom: 1em;
 		padding-left: 0;

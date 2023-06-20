@@ -23,7 +23,7 @@
     </tr>
 
     {#each Object.entries(tableData) as [capability_id, data]}
-    {#if data.notRelevant && isHidden}
+    {#if !data.inFilter && isHidden}
     
     {:else}
     <tr>
