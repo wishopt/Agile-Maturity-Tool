@@ -7,7 +7,8 @@
 
     export let appConfig
 
-    let text = $ui[appConfig.language].index
+    let text 
+    $: text = $ui[appConfig.language].index
     let files
     let filetype
     let sheetNames = ["Capabilities", "User Info"]

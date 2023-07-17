@@ -61,7 +61,8 @@
 </script>
 
 <main>
-	<h1>Agile Maturity Tool - Demo</h1>
+	<img src="bei.png" alt="BEI Logo" id="logo">
+	<h1>Agile Maturity Tool</h1>
 	<div>
 		<div id="languageSwitch">
 			<span class="lang">DE</span>
@@ -93,9 +94,20 @@
 		<button on:click={changeComponent} id={currentNav+1}>{text.next}</button>
 		{/if}
 	</div>
+
+	© BEI 2023
 </main>
 
 <style>
+
+	#logo {
+		position: absolute;
+        top: 0px;
+        right: 0px;
+		width: 10%;
+		margin-top: 1em;
+		margin-right: 1em;
+	}
 
 	#hide {
 		margin-left: 2.4em;
