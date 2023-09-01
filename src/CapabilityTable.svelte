@@ -19,9 +19,6 @@
 	let editMode = false
 	let selectedSnapshot
 	
-	let selectedPreset = "other"
-	let emptyPreset = "other"
-
 	let userInput
 	$: userInput
 
@@ -113,11 +110,11 @@
 			appConfig.checkedFilters[filter] = false
 		}
 
-		selectedPreset = ""
+		appConfig.selectedPreset = ""
 	}
 
 	function updateFilters() {
-		appConfig.checkedFilters = presets[selectedPreset]
+		appConfig.checkedFilters = presets[appConfig.selectedPreset]
 		for (const id in userInput) {
 			if (filters["Custom Filter"].includes(id)) {
 				userInput[id].customFilter = true
@@ -182,12 +179,6 @@
 
 		presets[name] = $defaultPresets['other']
 		dataManager.saveToLocalStorage("dataUserPresets", presets)	
-	}
-
-	if (userInfo.function) {
-		selectedPreset = userInfo.function
-	} else {
-		selectedPreset = emptyPreset
 	}
 
 	function createSnapshot() {
@@ -293,7 +284,7 @@
 
 		<h3>Filter</h3>
 	
-		<span>{text.filterPreset}{getCurrentPreset($ui[appConfig.language].presets[selectedPreset])}</span>
+		<span>{text.filterPreset}{getCurrentPreset($ui[appConfig.language].presets[appConfig.selectedPreset])}</span>
 		
 		<br>
 		
@@ -400,7 +391,7 @@
 				<h3>Presets</h3>
 				{#each Object.entries(presets) as [title, filterNames]}
 				<div class="preset">
-					<input type="radio" name="selectedPreset" id="{title}" bind:group={selectedPreset} value="{title}" on:change={updateFilters}>
+					<input type="radio" name="selectedPreset" id="{title}" bind:group={appConfig.selectedPreset} value="{title}" on:change={updateFilters}>
 					<span >{getPresetTitle(title)}</span>
 					<button id="btn_{title}" value="{title}" on:click={toggleEditMode}>{text.edit}</button>
 					<br>

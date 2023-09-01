@@ -27,7 +27,7 @@
 			'Knowledge Management': false,
 			'Organizational and Management Structures': false,
 			'Custom Filter': true
-		}
+		},
 	}
 	let text 
 	$: text = $ui[appConfig.language].main

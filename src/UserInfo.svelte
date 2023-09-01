@@ -25,7 +25,10 @@
 		userInfo = $emptyUserInfo
 	}
 
+	appConfig.selectedPreset = userInfo.selectedPreset
+
 	function saveUserInfo() {
+		userInfo.selectedPreset = appConfig.selectedPreset
 		dataManager.saveToLocalStorage("dataUserInfo", userInfo)
 	}
 </script>
@@ -45,7 +48,7 @@
 	<textarea id="beschreibung" name="beschreibung" class="frontmatter" bind:value={userInfo.description} on:change={saveUserInfo}></textarea>
 
 	<label for="funktion">{text.function}</label>
-	<select id="funktion" name="funktion" class="frontmatter" bind:value={userInfo.function} on:change={saveUserInfo}>
+	<select id="funktion" name="funktion" class="frontmatter" bind:value={appConfig.selectedPreset} on:change={saveUserInfo}>
 		{#each Object.keys(presets) as name}
 		<option value="{name}">{$ui[appConfig.language].presets[name]}</option>
 		{/each}

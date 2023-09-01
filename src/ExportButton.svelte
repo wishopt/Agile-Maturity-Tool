@@ -4,6 +4,7 @@
     import * as XLSX from 'xlsx'
     import JSZip from 'jszip'
 	import FileSaver from 'file-saver'
+    import App from './App.svelte';
 
     export let data
     export let images
@@ -53,6 +54,7 @@
         for (const [key, value] of Object.entries(data)) {
             row[key] = value    
         }
+        row["selectedPreset"] = appConfig.selectedPreset
 
         newUserInfo.push(row)
 

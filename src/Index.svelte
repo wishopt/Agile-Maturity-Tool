@@ -58,11 +58,13 @@
         dataManager.saveToLocalStorage("dataUserInput", newUserInput)
         
         newUserInfo.company = infoData[0].company
-        newUserInfo.function = infoData[0].function
         newUserInfo.department = infoData[0].department
         newUserInfo.project = infoData[0].project
         newUserInfo.description = infoData[0].description
-
+        newUserInfo.selectedPreset = infoData[0].selectedPreset
+        appConfig.selectedPreset = infoData[0].selectedPreset
+        console.log(infoData[0].selectedPreset)
+        console.log(appConfig.selectedPreset)
 
         dataManager.saveToLocalStorage("dataUserInfo", newUserInfo)
 
@@ -81,8 +83,6 @@
                 position += 1
             }
             dataManager.saveToLocalStorage("dataUserPresets", presets)
-            appConfig.selectedPreset = "other"
-            console.log(presets)
         }
 
         if (customFilterData.length > 0) {
@@ -127,7 +127,6 @@
         localStorage.clear()
         location.reload()
     }
-
 
 </script>
 

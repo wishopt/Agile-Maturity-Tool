@@ -1694,7 +1694,7 @@ export const levelAmount = readable(5)
 
 export const emptyUserInfo = readable({
   company: '',
-  function: '',
+  selectedPreset: 'IT',
   department: '',
   project: '',
   description: ''
