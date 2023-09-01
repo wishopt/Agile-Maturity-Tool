@@ -1,5 +1,5 @@
 <script>
-    import { ui, capabilityList, emptyUserInfo } from './stores/constants'
+    import { ui, capabilityList, emptyUserInfo, defaultPresets } from './stores/constants'
     import dataManager from './dataManager'
     import * as XLSX from 'xlsx'
     import JSZip from 'jszip'
@@ -13,8 +13,21 @@
 	const img = zip.folder("images")
 
     let capabilityInfo = $capabilityList[appConfig.language]
-
     let userInfo
+    let presetData
+    let customFilter
+
+    try {
+        presetData = dataManager.loadFromLocalStorage("dataUserPresets")
+    } catch (error) {
+        presetData = $defaultPresets
+    } 
+
+    try {
+        customFilter = dataManager.loadFromLocalStorage("dataUserFilters")
+    } catch (error) {
+        customFilter = {}
+    }
 
     try {
         userInfo = dataManager.loadFromLocalStorage("dataUserInfo")
@@ -44,6 +57,41 @@
         newUserInfo.push(row)
 
         return newUserInfo
+    }
+
+    function transformPresetData(data) {
+        let newPresetData = [ ]
+        let length = Object.keys(data.IT).length
+        let titles = Object.keys(data)
+
+        for (let i = 0; i < length; i++) {
+            let row = { }
+            for (preset of titles) {
+                let obj = { }
+                obj[preset] = Object.values(data[preset])[i]
+                row = Object.assign({}, row, obj)
+            }
+            newPresetData.push(row)
+        }
+
+        return newPresetData
+    }
+
+    function transformCustomFilter(data) {
+        let newCustomFilter = data["Custom Filter"]
+        if (newCustomFilter === undefined) {
+            newCustomFilter = []
+        }
+
+        let transformedData = []
+        let row = {}
+        for (capability of newCustomFilter) {
+            row = {"Capability": capability}
+            
+            transformedData.push(row)
+        }
+
+        return transformedData
     }
 
     function createDownload(data) {
@@ -103,8 +151,12 @@
         const workbook = XLSX.utils.book_new()
         const worksheetData = XLSX.utils.json_to_sheet(transformedData)
         const worksheetUserInfo = XLSX.utils.json_to_sheet(transformUserInfo(userInfo))
+        const worksheetPresetData = XLSX.utils.json_to_sheet(transformPresetData(presetData))
+        const worksheetCustomFilter = XLSX.utils.json_to_sheet(transformCustomFilter(customFilter))
         XLSX.utils.book_append_sheet(workbook, worksheetData, "Capabilities")
-        XLSX.utils.book_append_sheet(workbook, worksheetUserInfo, "User Info")  
+        XLSX.utils.book_append_sheet(workbook, worksheetUserInfo, "User Info")
+        XLSX.utils.book_append_sheet(workbook, worksheetPresetData, "Presets")
+        XLSX.utils.book_append_sheet(workbook, worksheetCustomFilter, "Custom Filter")
 
         return XLSX.write(workbook, {bookType: "xlsx", type: "base64"})
     }

@@ -2,7 +2,7 @@
     import { writeXLSX } from "xlsx";
     import * as XLSX from 'xlsx'
     import UserInfo from "./UserInfo.svelte"
-    import { ui, emptyUserData, emptyUserInfo } from "./stores/constants"
+    import { ui, emptyUserData, emptyUserInfo, defaultPresets, defaultFilters } from "./stores/constants"
     import dataManager from "./dataManager";
 
     export let appConfig
@@ -11,7 +11,8 @@
     $: text = $ui[appConfig.language].index
     let files
     let filetype
-    let sheetNames = ["Capabilities", "User Info"]
+    let sheetNames = ["Capabilities", "User Info", "Presets", "Custom Filter"]
+    let defaultPreset = $defaultPresets
 
     async function handleFileUpload(event) {
         const file = files[0]
@@ -44,6 +45,8 @@
         let workbook = XLSX.read(data, {type: "binary"})
         const inputData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetNames[0]])
         const infoData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetNames[1]])
+        const presetData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetNames[2]])
+        const customFilterData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetNames[3]])
         for (const capability of inputData) {
             let id = capability.ID
             newUserInput[id].explanation = capability["Comments"]
@@ -60,8 +63,40 @@
         newUserInfo.project = infoData[0].project
         newUserInfo.description = infoData[0].description
 
-               
+
         dataManager.saveToLocalStorage("dataUserInfo", newUserInfo)
+
+        if (presetData.length > 0) {
+            let presets = {}
+            const categories = Object.keys(defaultPreset.IT)
+            const rowLength = 4
+            let position = 0
+            for (const row of presetData) {
+                for (const [preset, value] of Object.entries(row)) {
+                    let category = categories[position]
+                    let obj = { }
+                    obj[category] = value
+                    presets[preset] = Object.assign({}, presets[preset], obj)
+                }
+                position += 1
+            }
+            dataManager.saveToLocalStorage("dataUserPresets", presets)
+            appConfig.selectedPreset = "other"
+            console.log(presets)
+        }
+
+        if (customFilterData.length > 0) {
+            let filters = $defaultFilters
+            let importCustomFilter = []
+            for (const row of customFilterData) {
+                for (capability of Object.values(row)) {
+                    importCustomFilter.push(capability)
+                }
+            }
+            filters["Custom Filter"] = importCustomFilter
+            dataManager.saveToLocalStorage("dataUserFilters", filters)
+        }
+
         location.reload()
     }
 

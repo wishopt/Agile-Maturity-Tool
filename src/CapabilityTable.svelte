@@ -50,6 +50,8 @@
 		presets = $defaultPresets
 	}
 
+	console.log(presets)
+
 	let filters
 
 	try {
@@ -92,10 +94,8 @@
 
 	function initFilter() {
 		let newFilter = []
-
 		for (filter in appConfig.checkedFilters) {
 			let idArray = filters[filter]
-
 			if (appConfig.checkedFilters[filter]) {
 				for (id of idArray) {
 					newFilter.push(id)
@@ -198,7 +198,6 @@
 
 		selectedSnapshot = name
 		snapshots[selectedSnapshot] = userInput
-		console.log(snapshots)
 		dataManager.saveToLocalStorage("dataUserSnapshots", snapshots)
 		location.reload()
 	}
